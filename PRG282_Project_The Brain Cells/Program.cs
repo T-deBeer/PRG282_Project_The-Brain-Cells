@@ -16,7 +16,7 @@ namespace PRG282_Project_The_Brain_Cells
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Application.Run(new SplashScreen());
         }
     }
 }
