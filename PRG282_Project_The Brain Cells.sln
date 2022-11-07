@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRG282_Project_The Brain Cells", "PRG282_Project_The Brain Cells\PRG282_Project_The Brain Cells.csproj", "{B820B644-927C-41CE-94BC-4B62417F9BD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B820B644-927C-41CE-94BC-4B62417F9BD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B820B644-927C-41CE-94BC-4B62417F9BD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B820B644-927C-41CE-94BC-4B62417F9BD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B820B644-927C-41CE-94BC-4B62417F9BD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CE8AABC-977E-4C2A-960F-5359A87CAABA}
+	EndGlobalSection
+EndGlobal
