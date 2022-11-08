@@ -17,5 +17,39 @@ namespace PRG282_Project_The_Brain_Cells
         {
             InitializeComponent();
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            if (txtPassword.UseSystemPasswordChar)
+            {
+                txtPassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                txtPassword.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            DataBaseHandler dh = new DataBaseHandler();
+            if (dh.CheckCredential(txtUsername.Text,txtPassword.Text))
+            {
+                Dashboard form = new Dashboard();
+                form.ShowDialog();
+                this.Hide();
+            }
+            else
+            {
+                MetroSetMessageBox.Show(this,"Your username or password is incorrect.","ERROR",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                txtPassword.Text = null;
+                txtUsername.Text = null;
+            }
+        }
     }
 }

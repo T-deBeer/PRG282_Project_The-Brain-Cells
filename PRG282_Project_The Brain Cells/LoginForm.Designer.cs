@@ -118,6 +118,7 @@
             this.btnExit.Text = "Exit";
             this.btnExit.ThemeAuthor = "Narwin";
             this.btnExit.ThemeName = "MetroDark";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnLogin
             // 
@@ -144,6 +145,7 @@
             this.btnLogin.Text = "Login";
             this.btnLogin.ThemeAuthor = "Narwin";
             this.btnLogin.ThemeName = "MetroDark";
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnView
             // 
@@ -170,6 +172,7 @@
             this.btnView.Text = "View";
             this.btnView.ThemeAuthor = "Narwin";
             this.btnView.ThemeName = "MetroDark";
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // LoginForm
             // 
