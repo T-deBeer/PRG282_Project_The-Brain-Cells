@@ -92,6 +92,8 @@
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="DataBaseHandler.cs" />
+    <Compile Include="DataHandler.cs" />
+    <Compile Include="FileHandler.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +170,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\TestText.txt" />
     <Content Include="SystemDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

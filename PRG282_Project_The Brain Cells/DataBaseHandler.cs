@@ -28,7 +28,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             SqlConnection con = new SqlConnection(dataSource);
 
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM ModuleTable", con);
+            SqlDataAdapter adapter = new SqlDataAdapter("Exec SelectAllModules", con);
 
             adapter.Fill(dataSet);
 
@@ -54,7 +54,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             SqlConnection con = new SqlConnection(dataSource);
 
-            SqlDataAdapter adapter = adapter = new SqlDataAdapter("SELECT * FROM StudentTable", con);
+            SqlDataAdapter adapter = adapter = new SqlDataAdapter("Exec SelectAllStudents", con);
 
             adapter.Fill(dataSet);
 
@@ -84,7 +84,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             SqlConnection con = new SqlConnection(dataSource);
 
-            SqlDataAdapter adapter = adapter = new SqlDataAdapter("SELECT * FROM CompositeTable", con);
+            SqlDataAdapter adapter = adapter = new SqlDataAdapter("Exec SelectAllComposites", con);
 
             adapter.Fill(dataSet);
 
@@ -107,7 +107,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             SqlConnection con = new SqlConnection(dataSource);
 
-            SqlDataAdapter adapter = adapter = new SqlDataAdapter("SELECT * FROM CredentialTable", con);
+            SqlDataAdapter adapter = adapter = new SqlDataAdapter("Exec SelectAllCredentials", con);
 
             adapter.Fill(dataSet);
 
@@ -131,7 +131,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             SqlConnection con = new SqlConnection(dataSource);
 
-            SqlDataAdapter adapter = adapter = new SqlDataAdapter("SELECT * FROM CredentialTable", con);
+            SqlDataAdapter adapter = adapter = new SqlDataAdapter("Exec SelectAllCredentials", con);
 
             adapter.Fill(dataSet);
 
@@ -230,8 +230,7 @@ namespace PRG282_Project_The_Brain_Cells
             try
             {
                 con.Open();
-                var sql = "INSERT INTO ModuleTable (Module_Code, Module_Name, Module_Description, Module_Link)" +
-                    " VALUES (@Code, @Name, @Desc, @Link)";
+                var sql = "EXEC ModuleInsert @Code, @Name,@Desc,@Link";
 
                 using (var cmd = new SqlCommand(sql, con))
                 {
@@ -264,8 +263,7 @@ namespace PRG282_Project_The_Brain_Cells
             try
             {
                 con.Open();
-                var sql = "INSERT INTO StudentTable (Student_Name, Student_Surname, Student_Image, Student_DOB, Student_Gender, Student_Phone, Student_Address)" +
-                    " VALUES (@Name, @Surname, @Img, @DOB, @Gender, @Phone, @Address)";
+                var sql = "Exec InsertStudent @Name, @Surname, @Img, @DOB, @Gender, @Phone, @Address";
 
                 using (var cmd = new SqlCommand(sql, con))
                 {
@@ -290,9 +288,41 @@ namespace PRG282_Project_The_Brain_Cells
             }
         }
 
-        public void UpdateStudent(string StudentNumber, Student student, List<Composite> modulesAssigned)
+        public void UpdateStudent(string StudentNumber, Student stud, List<Composite> modulesAssigned)
         {
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
 
+            SqlConnection con = new SqlConnection(dataSource);
+
+            try
+            {
+                con.Open();
+                var sql = "Exec InsertStudent @Num, @Name, @Surname, @Img, @DOB, @Gender, @Phone, @Address";
+
+                using (var cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddWithValue("@Num", StudentNumber);
+                    cmd.Parameters.AddWithValue("@Name", stud.StudentName);
+                    cmd.Parameters.AddWithValue("@Surname", stud.StudentSurname);
+                    cmd.Parameters.AddWithValue("@Img", stud.StudentImage);
+                    cmd.Parameters.AddWithValue("@DOB", stud.StudentDOB);
+                    cmd.Parameters.AddWithValue("@Gender", stud.StudentGender);
+                    cmd.Parameters.AddWithValue("@Phone", stud.StudentPhone);
+                    cmd.Parameters.AddWithValue("@Address", stud.StudentAddress);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "CRITICAL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public void UpdateModule(Module mod, string code)
@@ -306,11 +336,11 @@ namespace PRG282_Project_The_Brain_Cells
             try
             {
                 con.Open();
-                var sql = $"UPDATE ModuleTable SET Module_Name = @Name, Module_Description = @Desc, Module_Link = @Link " +
-                    $"WHERE Module_Code = {code}";
+                var sql = "Exec ModuleUpdate @Code,@Name,@Desc,@Link";
 
                 using (var cmd = new SqlCommand(sql, con))
                 {
+                    cmd.Parameters.AddWithValue("@Code", code);
                     cmd.Parameters.AddWithValue("@Name", mod.ModuleName);
                     cmd.Parameters.AddWithValue("@Desc", mod.ModuleDescription);
                     cmd.Parameters.AddWithValue("@Link", mod.ModuleResource);

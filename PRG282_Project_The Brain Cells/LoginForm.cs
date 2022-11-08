@@ -37,6 +37,32 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            string UsernameToCheck = txtUsername.Text;
+            string PasswordToCheck = txtPassword.Text;
+            bool Login = false;
+            DataHandler dataHandler = new DataHandler();
+            string[] TextLines = dataHandler.ReadTextFile();
+
+            for (int i = 0; i < TextLines.Length; i++)
+            {
+                string[] SplitLines = TextLines[i].Split(',');
+                if (SplitLines[0] == UsernameToCheck && SplitLines[1] == PasswordToCheck)
+                {
+                    Login = true;
+                }
+            }
+            if (Login == false)
+            {
+                MessageBox.Show("Your password or username did not match", "Login Failed");
+            }
+            else if (Login == true)
+            {
+                MessageBox.Show("You Have logged in successfully", "Login Successfull");
+                Dashboard form = new Dashboard();
+                form.ShowDialog();
+                this.Hide();
+            }
+            /**
             DataBaseHandler dh = new DataBaseHandler();
             if (dh.CheckCredential(txtUsername.Text,txtPassword.Text))
             {
@@ -50,6 +76,7 @@ namespace PRG282_Project_The_Brain_Cells
                 txtPassword.Text = null;
                 txtUsername.Text = null;
             }
+            **/
         }
     }
 }
