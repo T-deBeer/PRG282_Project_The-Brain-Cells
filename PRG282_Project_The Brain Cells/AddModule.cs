@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,13 +15,14 @@ namespace PRG282_Project_The_Brain_Cells
     public partial class AddModule : MetroSetForm
     {
         DataBaseHandler dh = new DataBaseHandler();
-
-        List<Module> modules = new List<Module>();
+      
+        /*List<Module> modules = new List<Module>();*/
         List<Module> modulesToAdd = new List<Module>();
 
         public AddModule()
         {
             InitializeComponent();
+            DataSet modules= new DataSet();
             modules = dh.GetModules();
         }
 
@@ -42,15 +44,30 @@ namespace PRG282_Project_The_Brain_Cells
 
         private bool ValidateInput()
         {
-            foreach (var item in modules)
+            DataSet modules = new DataSet();
+            DataTable table = new DataTable();
+            table = modules.Tables[0];
+            for (int i = 0; i < table.Rows.Count; i++)
             {
-                if (item.ModuleCode == txtModuleCode.Text || item.ModuleName == txtModuleName.Text)
+                if (table.Rows[i]["ModuleCode"].ToString() == txtModuleCode.Text || table.Rows[i]["ModuleName"].ToString() == txtModuleName.Text)
                 {
                     return false;
                 }
             }
+            /*
+            foreach (DataTable table in modules.Tables)
+            {
+                foreach (var row in table.Rows)
+                {
+                   if (["ModuleCode"].ToString() == txtModuleCode.Text || ["ModuleName"].ToString() == txtModuleName.Text)
+                {
+                    return false;
+                }
+                }
+               
+            }*/
 
-            if (txtModuleCode.Text == "" || txtModuleCode.Text == " " || txtModuleName.Text == "" || txtModuleName.Text == " ")
+            if ( String.IsNullOrWhiteSpace(txtModuleCode.Text) || String.IsNullOrWhiteSpace(txtModuleName.Text) )
             {
                 return false;
             }

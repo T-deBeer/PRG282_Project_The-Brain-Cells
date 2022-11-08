@@ -10,37 +10,51 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PRG282_Project_The_Brain_Cells
-{
+{ 
+    
+
     public partial class Dashboard : MetroSetForm
     {
-        DataBaseHandler dh = new DataBaseHandler();
+           DataBaseHandler DH = new DataBaseHandler();
+      
 
         List<string> tables = new List<string>();
-        List<Module> modules = new List<Module>();
-        List<Student> students = new List<Student>();
-        List<Composite> composite = new List<Composite>();
-        List<Credential> creds = new List<Credential>();
+        /*List<Module> modules = new List<Module>();*/
+       /* List<Student> students = new List<Student>();*/
+       /* List<Composite> composite = new List<Composite>();*/
+        /*List<Credential> creds = new List<Credential>();*/
 
         public Dashboard()
         {
             InitializeComponent();
 
-            tables = dh.GetTables();
+            tables = DH.GetTables();
+        
+            DataSet data = new DataSet();
+            DataTable dt = new DataTable();
+            /*
             modules = dh.GetModules();
             students = dh.GetStudents();
-            composite = dh.GetComposite();
-            creds = dh.GetCreds();
-
+            composite = dh.GetComposite();*/
+            data = DH.GetCreds();
+            dt = data.Tables[0];
             cmbTableSelect.DataSource = tables;
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
         }
 
         public void LoadDataView(string tableName)
         {
+
+            DataSet data = new DataSet();
+            DataTable dt = new DataTable();
+
             if (tableName == "ModuleTable")
             {
+              
                 dgvDataBaseView.DataSource = null;
-                dgvDataBaseView.DataSource = modules;
+                data = DH.GetModules();
+                dt = data.Tables[0];
+                dgvDataBaseView.DataSource = dt;
 
                 btnAdd.Enabled = true;
                 btnRemove.Enabled = true;
@@ -49,7 +63,8 @@ namespace PRG282_Project_The_Brain_Cells
             else if (tableName == "StudentTable")
             {
                 dgvDataBaseView.DataSource = null;
-                dgvDataBaseView.DataSource = students;
+                data = DH.GetStudents();
+                dt = data.Tables[0];
 
                 btnAdd.Enabled = true;
                 btnRemove.Enabled = true;
@@ -58,7 +73,8 @@ namespace PRG282_Project_The_Brain_Cells
             else if (tableName == "CompositeTable")
             {
                 dgvDataBaseView.DataSource = null;
-                dgvDataBaseView.DataSource = composite;
+                data = DH.GetComposite();
+                dt = data.Tables[0];
 
                 btnAdd.Enabled = false;
                 btnRemove.Enabled = false;
@@ -67,12 +83,15 @@ namespace PRG282_Project_The_Brain_Cells
             else if (tableName == "CredentialTable")
             {
                 dgvDataBaseView.DataSource = null;
-                dgvDataBaseView.DataSource = creds;
+                data = DH.GetCreds();
+                dt = data.Tables[0];
+             
 
                 btnAdd.Enabled = true;
                 btnRemove.Enabled = true;
                 btnUpdate.Enabled = false;
             }
+            dgvDataBaseView.DataSource = dt;
         }
 
         private void cmbTableSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -133,7 +152,8 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void dgvDataBaseView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvDataBaseView.DataSource == creds)
+           
+            if (dgvDataBaseView.Columns[0].Name.ToString() == "Username")
             {
                 if (e.ColumnIndex == 1 && e.Value != null)
                 {
