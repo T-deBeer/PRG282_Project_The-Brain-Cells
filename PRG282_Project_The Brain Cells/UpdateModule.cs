@@ -15,25 +15,45 @@ namespace PRG282_Project_The_Brain_Cells
     {
         DataBaseHandler dh = new DataBaseHandler();
 
-        List<Module> modules = new List<Module>();
-        List<string> moduleCodes = new List<string>();
+       
+       // List<string> moduleCodes = new List<string>();
         public Update()
         {
             InitializeComponent();
-
+            DataSet modules = new DataSet();
+           List<Module> modulesList = new List<Module>();
             modules = dh.GetModules();
-            foreach (var mod in modules)
+            DataTable table = new DataTable();
+            table = modules.Tables[0];
+
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                modulesList.Add(new Module(table.Rows[i]["Module_Code"].ToString(), table.Rows[i]["Module_Name"].ToString(),
+                                                                table.Rows[i]["Module_Description"].ToString(), table.Rows[i]["Module_Link"].ToString()));
+            }
+            /*foreach (var mod in modules)
             {
                 moduleCodes.Add(mod.ModuleCode);
-            }
+            }*/
 
-            cmbCodeSelect.DataSource = moduleCodes;
+            cmbCodeSelect.DataSource = modulesList;
             LoadInformation(cmbCodeSelect.SelectedItem.ToString());
         }
 
         private void LoadInformation(string code)
         {
-            foreach (var mod in modules)
+            DataSet modules = dh.GetModules();
+            DataTable dataTable = modules.Tables[0];
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            {
+                if (dataTable.Rows[i]["Module_Code"].ToString() == code)
+                {
+                    txtModuleName.Text = dataTable.Rows[i]["Module_Name"].ToString();
+                    txtResource.Text = dataTable.Rows[i]["Module_Resource"].ToString(); 
+                    txtModuleDescription.Text = dataTable.Rows[i]["Module_Description"].ToString(); 
+                }
+            }
+          /*  foreach (var mod in modules)
             {
                 if (mod.ModuleCode == code)
                 {
@@ -41,7 +61,7 @@ namespace PRG282_Project_The_Brain_Cells
                     txtResource.Text = mod.ModuleResource;
                     txtModuleDescription.Text = mod.ModuleDescription;
                 }
-            }
+            }*/
         }
 
         private void cmbCodeSelect_SelectedIndexChanged(object sender, EventArgs e)
