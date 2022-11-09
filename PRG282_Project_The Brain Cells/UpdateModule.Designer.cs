@@ -1,6 +1,6 @@
 ﻿namespace PRG282_Project_The_Brain_Cells
 {
-    partial class Update
+    partial class UpdateModule
     {
         /// <summary>
         /// Required designer variable.
@@ -280,7 +280,7 @@
             this.btnCancel.ThemeName = "MetroDark";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // Update
+            // UpdateModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -296,10 +296,10 @@
             this.Controls.Add(this.txtModuleName);
             this.Controls.Add(this.cmbCodeSelect);
             this.Controls.Add(this.lblSelect);
-            this.Name = "Update";
+            this.Name = "UpdateModule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;
-            this.Text = "UpdateModule";
+            this.Text = "UPDATE MODULE INFORMATION";
             this.TextColor = System.Drawing.Color.White;
             this.ThemeName = "MetroDark";
             this.ResumeLayout(false);

@@ -11,13 +11,13 @@ using System.Windows.Forms;
 
 namespace PRG282_Project_The_Brain_Cells
 {
-    public partial class Update : MetroSetForm
+    public partial class UpdateModule : MetroSetForm
     {
         DataBaseHandler dh = new DataBaseHandler();
 
         List<Module> modules = new List<Module>();
         List<string> moduleCodes = new List<string>();
-        public Update()
+        public UpdateModule()
         {
             InitializeComponent();
 

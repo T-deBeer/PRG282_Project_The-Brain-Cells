@@ -13,13 +13,9 @@ namespace PRG282_Project_The_Brain_Cells
 {
     internal class DataBaseHandler
     {
-        public List<Module> modules = new List<Module>();
-        public List<Student> students = new List<Student>();
-        public List<Composite> composite = new List<Composite>();
-        public List<Credential> creds = new List<Credential>();
-
         public List<Module> GetModules()
         {
+            List<Module> modules = new List<Module>();
             DataSet dataSet = new DataSet();
 
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
@@ -46,6 +42,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public List<Student> GetStudents()
         {
+            List<Student> students = new List<Student>();
             DataSet dataSet = new DataSet();
 
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
@@ -76,6 +73,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public List<Composite> GetComposite()
         {
+            List<Composite> composite = new List<Composite>();
             DataSet dataSet = new DataSet();
 
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
@@ -99,6 +97,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public List<Credential> GetCreds()
         {
+            List<Credential> creds = new List<Credential>();
             DataSet dataSet = new DataSet();
 
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))

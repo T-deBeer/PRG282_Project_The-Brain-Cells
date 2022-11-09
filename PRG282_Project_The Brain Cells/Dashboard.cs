@@ -147,7 +147,7 @@ namespace PRG282_Project_The_Brain_Cells
             string tableName = cmbTableSelect.SelectedItem.ToString();
             if (tableName == "ModuleTable")
             {
-                Update update = new Update();
+                UpdateModule update = new UpdateModule();
                 update.ShowDialog();
                 this.Hide();
             }
