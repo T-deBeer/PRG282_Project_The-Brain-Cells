@@ -8,13 +8,7 @@ namespace PRG282_Project_The_Brain_Cells
 {
     internal class Credential
     {
-        public string Username;
-        public string Password;
-
-        public Credential(string username, string password)
-        {
-            Username = username;
-            Password = password;
-        }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

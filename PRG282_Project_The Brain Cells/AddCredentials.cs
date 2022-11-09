@@ -15,14 +15,14 @@ namespace PRG282_Project_The_Brain_Cells
     {
         DataBaseHandler dh = new DataBaseHandler();
 
-        /*List<Credential> creds = new List<Credential>();*/
-        /*List<Credential> currentCreds = new List<Credential>();*/
+        List<Credential> creds = new List<Credential>();
+        List<Credential> currentCreds = new List<Credential>();
 
         public AddCredentials()
         {
             InitializeComponent();
 
-       
+            currentCreds = dh.GetCreds();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -42,18 +42,12 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            DataSet data = new DataSet();
-             data =   dh.GetCreds();
-            DataTable dt = new DataTable();
-            dt = data.Tables[0];
-            DataHandler handler = new DataHandler();
-            if (txtPassword.Text == txtConfirmPassword.Text && !String.IsNullOrWhiteSpace(txtPassword.Text) 
-                && !String.IsNullOrWhiteSpace(txtUsername.Text))
+            if (txtPassword.Text == txtConfirmPassword.Text && txtPassword.Text != " " || txtPassword.Text != "" 
+                && txtUsername.Text != " " || txtUsername.Text != "")
             {
-                if (!exists(handler.CredentialsToList(dt)))
+                if (!exists())
                 {
-                    Credential newCred = new Credential(txtUsername.Text, txtPassword.Text);
-                   
+                    creds.Add(new Credential { Username = txtUsername.Text, Password = txtPassword.Text });
                     lbxToAdd.Items.Add(txtUsername.Text);
                 }
                 else
@@ -67,24 +61,16 @@ namespace PRG282_Project_The_Brain_Cells
             }
         }
 
-        private bool exists(List<Credential> currentCreds)
+        private bool exists()
         {
-           
-            string username;
-            string password;
-            foreach (var cred in currentCreds)
+            foreach (var credential in currentCreds)
             {
-
-                
-                username = cred.Username;
-                password = cred.Password;
-              
-                if (  dh.CheckCredential(username, password))
+                if (credential.Username == txtUsername.Text)
                 {
-                  return true;
+                    return false;
                 }
             }
-                 return false;
+            return true;
         }
 
         private void btnView_Click(object sender, EventArgs e)
@@ -113,7 +99,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
-          /*  if (creds.Count >= 1)
+            if (creds.Count >= 1)
             {
                 foreach (var cred in creds)
                 {
@@ -124,7 +110,7 @@ namespace PRG282_Project_The_Brain_Cells
             {
                 MetroSetMessageBox.Show(this, "Enter the details for new login credentials before writing to database."
                     , "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }*/
+            }
         }
     }
 }

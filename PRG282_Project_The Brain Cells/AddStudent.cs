@@ -15,13 +15,12 @@ namespace PRG282_Project_The_Brain_Cells
     {
         DataBaseHandler dh = new DataBaseHandler();
 
-       /* List<Student> students = new List<Student>();*/
+        List<Student> students = new List<Student>();
         List<Student> studentsToAdd = new List<Student>();
         public AddStudent()
         {
-           
             InitializeComponent();
-           
+            students = dh.GetStudents();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -44,27 +43,17 @@ namespace PRG282_Project_The_Brain_Cells
 
         private bool ValidateInpute()
         {
-            DataSet students = new DataSet();
-            students = dh.GetStudents();
-            DataTable table = new DataTable();
-            table =students.Tables[0];
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                if (table.Rows[i]["StudentNumber"].ToString() == txtStdNum.Text )
-                {
-                    return false;
-                }
-            }
-           /* foreach (var student in students)
+            foreach (var student in students)
             {
                 if (student.StudentNumber == int.Parse(txtStdNum.Text))
                 {
                     return false;
                 }
-            }*/
+            }
 
-            if (String.IsNullOrWhiteSpace(txtStdNum.Text)|| String.IsNullOrWhiteSpace(txtStudSurname.Text)
-                ||String.IsNullOrWhiteSpace(txtAddress.Text)|| txtDOB.Text == null || String.IsNullOrEmpty(cmbGender.SelectedItem.ToString()))
+            if (txtStdNum.Text == "" || txtStdNum.Text == " " || txtStudName.Text == "" || txtStudName.Text == " "
+                || txtStudSurname.Text == "" || txtStudSurname.Text == " " || txtAddress.Text == "" || txtAddress.Text == " "
+                || txtDOB.Text == null || cmbGender.SelectedItem.ToString() == "")
             {
                 return false;
             }
@@ -83,7 +72,7 @@ namespace PRG282_Project_The_Brain_Cells
             {
                 Student stud = new Student();
 
-              /*  stud.StudentNumber = students.Count+1;*/
+                stud.StudentNumber = students.Count+1;
                 stud.StudentName = txtStudName.Text;
                 stud.StudentSurname = txtStudSurname.Text;
                 stud.StudentPhone = txtStudPhone.Text;

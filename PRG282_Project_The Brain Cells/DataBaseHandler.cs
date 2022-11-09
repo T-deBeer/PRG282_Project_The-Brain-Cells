@@ -13,12 +13,12 @@ namespace PRG282_Project_The_Brain_Cells
 {
     internal class DataBaseHandler
     {
-       /* public List<Module> modules = new List<Module>();*/
-     /*   public List<Student> students = new List<Student>();*/
-      /*  public List<Composite> composite = new List<Composite>();*/
-      /*  public */
+        public List<Module> modules = new List<Module>();
+        public List<Student> students = new List<Student>();
+        public List<Composite> composite = new List<Composite>();
+        public List<Credential> creds = new List<Credential>();
 
-        public DataSet GetModules()
+        public List<Module> GetModules()
         {
             DataSet dataSet = new DataSet();
 
@@ -32,19 +32,19 @@ namespace PRG282_Project_The_Brain_Cells
 
             adapter.Fill(dataSet);
 
-           /* modules = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Module
+            modules = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Module
             {
                 ModuleCode = dataRow.Field<string>("Module_Code"),
                 ModuleDescription = dataRow.Field<string>("Module_Description"),
                 ModuleName = dataRow.Field<string>("Module_Name"),
                 ModuleResource = dataRow.Field<string>("Module_Link")
-            }).ToList();*/
+            }).ToList();
 
-            return dataSet;
+            return modules;
 
         }
 
-        public DataSet GetStudents()
+        public List<Student> GetStudents()
         {
             DataSet dataSet = new DataSet();
 
@@ -58,7 +58,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             adapter.Fill(dataSet);
 
-            /*students = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Student
+            students = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Student
             {
                 StudentNumber = dataRow.Field<int>("Student_Number"),
                 StudentName = dataRow.Field<string>("Student_Name"),
@@ -69,12 +69,12 @@ namespace PRG282_Project_The_Brain_Cells
                 StudentPhone = dataRow.Field<string>("Student_Phone"),
                 StudentAddress = dataRow.Field<string>("Student_Address")
 
-            }).ToList();*/
+            }).ToList();
 
-            return dataSet;
+            return students;
         }
 
-        public DataSet GetComposite()
+        public List<Composite> GetComposite()
         {
             DataSet dataSet = new DataSet();
 
@@ -88,16 +88,16 @@ namespace PRG282_Project_The_Brain_Cells
 
             adapter.Fill(dataSet);
 
-            /*composite = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Composite
+            composite = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Composite
             {
                 StudentNumber = dataRow.Field<int>("Student_Number"),
                 ModuleCode = dataRow.Field<string>("Module_Code")
             }).ToList();
-                */
-            return dataSet;
+
+            return composite;
         }
 
-        public DataSet GetCreds()
+        public List<Credential> GetCreds()
         {
             DataSet dataSet = new DataSet();
 
@@ -111,14 +111,14 @@ namespace PRG282_Project_The_Brain_Cells
 
             adapter.Fill(dataSet);
 
-            /*creds = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Credential
+            creds = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Credential
             {
                 Username = dataRow.Field<string>("Username"),
                 Password = dataRow.Field<string>("Password")
 
-            }).ToList();*/
+            }).ToList();
 
-            return dataSet;
+            return creds;
         }
 
         public bool CheckCredential(string Username, string Password)
@@ -131,18 +131,18 @@ namespace PRG282_Project_The_Brain_Cells
 
             SqlConnection con = new SqlConnection(dataSource);
 
-            SqlDataAdapter adapter =  new SqlDataAdapter("Exec SelectAllCredentials", con);
+            SqlDataAdapter adapter = adapter = new SqlDataAdapter("Exec SelectAllCredentials", con);
 
             adapter.Fill(dataSet);
 
-            List<Credential> creds = new List<Credential>();
-            for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+            List<Credential> credentials = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Credential
             {
-                Credential newCred = new Credential(dataSet.Tables[0].Rows[i]["Username"].ToString(), dataSet.Tables[0].Rows[i]["Password"].ToString());
-                creds.Add(newCred);
-            }
-     
-            foreach (var cred in creds)
+                Username = dataRow.Field<string>("Username"),
+                Password = dataRow.Field<string>("Password")
+
+            }).ToList();
+
+            foreach (var cred in credentials)
             {
                 if(cred.Username == Username)
                 {

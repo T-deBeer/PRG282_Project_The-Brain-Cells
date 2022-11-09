@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,20 +12,6 @@ namespace PRG282_Project_The_Brain_Cells
     {
         string TextPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\TestText.txt";
-
-
-        public List<Credential> CredentialsToList(DataTable data)
-        {
-            List<Credential> list = new List<Credential>();
-            for (int i = 0; i < data.Rows.Count; i++)
-            {
-                list.Add(new Credential(data.Rows[i]["Username"].ToString(), data.Rows[i]["Password"].ToString()));
-            }
-            return list;
-        }
-
-
-
         public string[] ReadTextFile()
         {
             string[] fileContent = { null };
