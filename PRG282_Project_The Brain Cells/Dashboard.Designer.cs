@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblSelect = new MetroSet_UI.Controls.MetroSetLabel();
             this.cmbTableSelect = new MetroSet_UI.Controls.MetroSetComboBox();
             this.btnExit = new MetroSet_UI.Controls.MetroSetButton();
@@ -43,6 +43,7 @@
             this.lblSearch = new MetroSet_UI.Controls.MetroSetLabel();
             this.btnSearch = new MetroSet_UI.Controls.MetroSetButton();
             this.txtSearch = new MetroSet_UI.Controls.MetroSetTextBox();
+            this.cmbSortBy = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataBaseView)).BeginInit();
             this.SuspendLayout();
@@ -128,7 +129,7 @@
             this.btnAdd.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnAdd.HoverTextColor = System.Drawing.Color.White;
             this.btnAdd.IsDerivedStyle = true;
-            this.btnAdd.Location = new System.Drawing.Point(206, 515);
+            this.btnAdd.Location = new System.Drawing.Point(208, 541);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnAdd.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
@@ -186,7 +187,7 @@
             this.btnRemove.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnRemove.HoverTextColor = System.Drawing.Color.White;
             this.btnRemove.IsDerivedStyle = true;
-            this.btnRemove.Location = new System.Drawing.Point(386, 515);
+            this.btnRemove.Location = new System.Drawing.Point(392, 541);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnRemove.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
@@ -207,14 +208,14 @@
             this.dgvDataBaseView.AllowUserToAddRows = false;
             this.dgvDataBaseView.AllowUserToDeleteRows = false;
             this.dgvDataBaseView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDataBaseView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDataBaseView.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDataBaseView.Location = new System.Drawing.Point(15, 148);
             this.dgvDataBaseView.MultiSelect = false;
             this.dgvDataBaseView.Name = "dgvDataBaseView";
@@ -223,6 +224,7 @@
             this.dgvDataBaseView.Size = new System.Drawing.Size(913, 344);
             this.dgvDataBaseView.TabIndex = 12;
             this.dgvDataBaseView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDataBaseView_CellFormatting);
+            this.dgvDataBaseView.SelectionChanged += new System.EventHandler(this.dgvDataBaseView_SelectionChanged);
             // 
             // btnPrevious
             // 
@@ -288,7 +290,7 @@
             this.btnUpdate.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnUpdate.HoverTextColor = System.Drawing.Color.White;
             this.btnUpdate.IsDerivedStyle = true;
-            this.btnUpdate.Location = new System.Drawing.Point(573, 515);
+            this.btnUpdate.Location = new System.Drawing.Point(577, 541);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnUpdate.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
@@ -375,12 +377,24 @@
             this.txtSearch.UseSystemPasswordChar = false;
             this.txtSearch.WatermarkText = "";
             // 
+            // cmbSortBy
+            // 
+            this.cmbSortBy.CausesValidation = false;
+            this.cmbSortBy.Cursor = System.Windows.Forms.Cursors.Default;
+            this.cmbSortBy.FormattingEnabled = true;
+            this.cmbSortBy.Location = new System.Drawing.Point(305, 496);
+            this.cmbSortBy.Name = "cmbSortBy";
+            this.cmbSortBy.Size = new System.Drawing.Size(337, 28);
+            this.cmbSortBy.TabIndex = 21;
+            this.cmbSortBy.SelectedIndexChanged += new System.EventHandler(this.cmbSortBy_SelectedIndexChanged);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1280, 687);
+            this.Controls.Add(this.cmbSortBy);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.lblSearch);
@@ -422,5 +436,6 @@
         private MetroSet_UI.Controls.MetroSetLabel lblSearch;
         private MetroSet_UI.Controls.MetroSetButton btnSearch;
         private MetroSet_UI.Controls.MetroSetTextBox txtSearch;
+        private System.Windows.Forms.ComboBox cmbSortBy;
     }
 }

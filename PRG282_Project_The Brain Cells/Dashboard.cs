@@ -23,6 +23,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public Dashboard()
         {
+            int SortByHold;
             InitializeComponent();
 
             tables = dh.GetTables();
@@ -32,7 +33,10 @@ namespace PRG282_Project_The_Brain_Cells
             creds = dh.GetCreds();
 
             cmbTableSelect.DataSource = tables;
+            SortByHold = cmbTableSelect.SelectedIndex;
+         
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
+            cmbSortByUpdate(SortByHold);
         }
 
         public void LoadDataView(string tableName)
@@ -77,7 +81,9 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbTableSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
+            cmbSortByUpdate(cmbTableSelect.SelectedIndex);
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -142,6 +148,47 @@ namespace PRG282_Project_The_Brain_Cells
             }
         }
 
+
+
+        public void cmbSortByUpdate(int tableSelected)
+        {
+          List<string>  cmbOptions = new List<string>();
+            switch (tableSelected)
+            {
+                case 0:
+                    {
+                        cmbOptions.Add("Sort by Module Code");
+                        cmbOptions.Add("Sort by Module Name");
+                        break;
+                    }
+                case 1:
+                    {
+                        cmbOptions.Add("Sort by Student Number");
+                        cmbOptions.Add("Sort by Module Code");
+
+                        break;
+                    }
+                case 2:
+                    {
+                        cmbOptions.Add("Sort by Username");
+                        cmbOptions.Add("Unsort");
+
+                        break;
+                    }
+                case 3:
+                    {
+                        cmbOptions.Add("Sort by Student Number");
+                        cmbOptions.Add("Sort by Student Name");
+
+                        break;
+                    }
+                default:
+                    break;
+            }
+            cmbSortBy.DataSource = cmbOptions;
+        }
+
+
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string tableName = cmbTableSelect.SelectedItem.ToString();
@@ -157,6 +204,71 @@ namespace PRG282_Project_The_Brain_Cells
                 updateStudent.ShowDialog();
                 this.Hide();
             }
+        }
+
+        private void cmbSortBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*
+               List<Module> modules = new List<Module>();
+                 List<Composite> composite = new List<Composite>();
+ List<Credential> creds = new List<Credential>();
+        List<Student> students = new List<Student>();
+            */
+            int tableIndex = cmbTableSelect.SelectedIndex;
+            dgvDataBaseView.DataSource = null;
+
+            switch (tableIndex)
+            {
+                case 0:
+                    {
+                        if (cmbSortBy.SelectedIndex == 0)
+                       modules.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
+                        else
+                        modules.Sort((a, b) => a.ModuleName.CompareTo(b.ModuleName));
+                        dgvDataBaseView.DataSource = modules;
+                        break;
+                    }
+                case 1:
+                    {
+                        if (cmbSortBy.SelectedIndex == 0)
+                            composite.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
+                       
+                        else
+                                    composite.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
+                      
+                        dgvDataBaseView.DataSource = composite;
+                        break;
+                    }
+                case 2:
+                    {
+                        if (cmbSortBy.SelectedIndex == 0)
+                            creds.Sort((a, b) => a.Username.CompareTo(b.Username));
+                        else
+                            creds.Sort((a, b) => a.Password.CompareTo(b.Password));
+                        dgvDataBaseView.DataSource = creds;
+                        break;
+                    }
+                case 3:
+                    {
+                        if (cmbSortBy.SelectedIndex == 0)
+                            students.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
+                        else
+                            students.Sort((a, b) => a.StudentName.CompareTo(b.StudentName));
+                        dgvDataBaseView.DataSource = students;
+                        break;
+                    }
+
+
+
+
+                default:
+                    break;
+            }
+        }
+
+        private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
+        {
+        
         }
     }
 }
