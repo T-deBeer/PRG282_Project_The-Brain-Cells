@@ -63,6 +63,7 @@
             this.btnConfirmView.Text = "View";
             this.btnConfirmView.ThemeAuthor = "Narwin";
             this.btnConfirmView.ThemeName = "MetroDark";
+            this.btnConfirmView.Click += new System.EventHandler(this.btnConfirmView_Click);
             // 
             // txtConfirmPassword
             // 
@@ -118,6 +119,7 @@
             this.btnView.Text = "View";
             this.btnView.ThemeAuthor = "Narwin";
             this.btnView.ThemeName = "MetroDark";
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
             // txtPassword
             // 
@@ -202,6 +204,7 @@
             this.btnSignUp.Text = "SignUp";
             this.btnSignUp.ThemeAuthor = "Narwin";
             this.btnSignUp.ThemeName = "MetroDark";
+            this.btnSignUp.Click += new System.EventHandler(this.btnSignUp_Click);
             // 
             // btnCancel
             // 
@@ -228,6 +231,7 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.ThemeAuthor = "Narwin";
             this.btnCancel.ThemeName = "MetroDark";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // llblGotAnAcconunt
             // 

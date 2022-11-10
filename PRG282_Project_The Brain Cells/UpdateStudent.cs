@@ -18,6 +18,7 @@ namespace PRG282_Project_The_Brain_Cells
         List<int> studentNumber = new List<int>();
         List<Module> modules = new List<Module>();
         List<Module> StudentModuleList = new List<Module>();
+        List<Composite> composites = new List<Composite>();
         public UpdateStudent()
         {
             InitializeComponent();
@@ -71,6 +72,45 @@ namespace PRG282_Project_The_Brain_Cells
         private void cmbNumSelect_SelectedValueChanged(object sender, EventArgs e)
         {
             LoadStudentInfo(Convert.ToInt32(cmbNumSelect.SelectedItem));
+        }
+
+        private void lbxToAdd_SelectedIndexChanged(object sender)
+        {
+            string StringToSplit = lbxToAdd.SelectedIndex.ToString();
+            string[] SplitString = StringToSplit.Split(' ');
+            string ModuleCodeToAdd = SplitString[0];
+            Composite Comp = new Composite();
+            Comp.StudentNumber = Convert.ToInt32(cmbNumSelect.SelectedItem);
+            Comp.ModuleCode = ModuleCodeToAdd;
+            composites.Add(Comp);
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to update this student?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                string StudentNumberToUpdate = cmbNumSelect.SelectedItem.ToString();
+                string StudentNameToUpdate = txtStudName.Text;
+                string StudentSurnameToUpdate = txtStudSurname.Text;
+                string StudentPhoneToUpdate = txtStudPhone.Text;
+                string StudentDOBToUpdate = DateStudDOB.Text;
+                string StudentGenderToUpdate = cmbGender.SelectedItem.ToString();
+                string StudentAdressToUpdate = txtAddress.Text;
+
+                Student student = new Student();
+                student.StudentNumber = Convert.ToInt32(StudentNumberToUpdate);
+                student.StudentName = StudentNameToUpdate;
+                student.StudentSurname = StudentSurnameToUpdate;
+                student.StudentPhone = StudentPhoneToUpdate;
+                student.StudentGender = StudentGenderToUpdate;
+
+                student.StudentDOB = Convert.ToDateTime(StudentDOBToUpdate);
+                student.StudentAddress = StudentAdressToUpdate;
+
+
+                dh.UpdateStudent(StudentNumberToUpdate,student,composites);
+            }
+            
         }
     }
 }

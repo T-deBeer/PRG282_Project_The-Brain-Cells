@@ -270,5 +270,10 @@ namespace PRG282_Project_The_Brain_Cells
         {
 
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

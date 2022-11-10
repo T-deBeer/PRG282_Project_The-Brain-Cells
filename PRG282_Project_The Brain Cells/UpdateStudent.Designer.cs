@@ -399,6 +399,7 @@
             this.lbxToAdd.TabIndex = 67;
             this.lbxToAdd.ThemeAuthor = "Narwin";
             this.lbxToAdd.ThemeName = "MetroDark";
+            this.lbxToAdd.SelectedIndexChanged += new MetroSet_UI.Controls.MetroSetListBox.SelectedIndexChangedEventHandler(this.lbxToAdd_SelectedIndexChanged);
             // 
             // lblAdded
             // 
@@ -469,6 +470,7 @@
             this.btnUpdate.Text = "Update";
             this.btnUpdate.ThemeAuthor = "Narwin";
             this.btnUpdate.ThemeName = "MetroDark";
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnCancel
             // 

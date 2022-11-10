@@ -322,7 +322,7 @@ namespace PRG282_Project_The_Brain_Cells
             try
             {
                 con.Open();
-                var sql = "Exec InsertStudent @Num, @Name, @Surname, @Img, @DOB, @Gender, @Phone, @Address";
+                var sql = "Exec StudentUpdate @Num, @Name, @Surname, @Img, @DOB, @Gender, @Phone, @Address";
 
                 using (var cmd = new SqlCommand(sql, con))
                 {
@@ -334,6 +334,19 @@ namespace PRG282_Project_The_Brain_Cells
                     cmd.Parameters.AddWithValue("@Gender", stud.StudentGender);
                     cmd.Parameters.AddWithValue("@Phone", stud.StudentPhone);
                     cmd.Parameters.AddWithValue("@Address", stud.StudentAddress);
+
+                    cmd.ExecuteNonQuery();
+                }
+                var compSql = "Exec CompositeInsert @StudentNum,@ModuleCode";
+                using (var cmd = new SqlCommand(compSql, con))
+                {
+
+                    foreach (var comp in modulesAssigned)
+                    {
+                        cmd.Parameters.AddWithValue("@StudentNum", comp.StudentNumber);
+                        cmd.Parameters.AddWithValue("@ModuleCode", comp.ModuleCode);
+                    }
+                    
 
                     cmd.ExecuteNonQuery();
                 }

@@ -66,7 +66,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to update this module.", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to update this module?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 Module mod = new Module();
                 mod.ModuleCode = cmbCodeSelect.SelectedItem.ToString();

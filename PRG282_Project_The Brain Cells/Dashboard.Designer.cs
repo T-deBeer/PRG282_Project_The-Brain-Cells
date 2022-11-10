@@ -347,6 +347,7 @@
             this.btnSearch.Text = "Search";
             this.btnSearch.ThemeAuthor = "Narwin";
             this.btnSearch.ThemeName = "MetroDark";
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
