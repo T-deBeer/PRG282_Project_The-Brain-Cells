@@ -48,6 +48,8 @@
             this.lbxCurrent = new MetroSet_UI.Controls.MetroSetListBox();
             this.btnUpdate = new MetroSet_UI.Controls.MetroSetButton();
             this.btnCancel = new MetroSet_UI.Controls.MetroSetButton();
+            this.lblImage = new MetroSet_UI.Controls.MetroSetLabel();
+            this.txtImage = new MetroSet_UI.Controls.MetroSetTextBox();
             this.SuspendLayout();
             // 
             // DateStudDOB
@@ -360,7 +362,7 @@
             // 
             this.lblToAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lblToAdd.IsDerivedStyle = true;
-            this.lblToAdd.Location = new System.Drawing.Point(115, 357);
+            this.lblToAdd.Location = new System.Drawing.Point(115, 429);
             this.lblToAdd.Name = "lblToAdd";
             this.lblToAdd.Size = new System.Drawing.Size(217, 23);
             this.lblToAdd.Style = MetroSet_UI.Enums.Style.Dark;
@@ -382,7 +384,7 @@
             this.lbxToAdd.HoveredItemColor = System.Drawing.Color.DimGray;
             this.lbxToAdd.IsDerivedStyle = true;
             this.lbxToAdd.ItemHeight = 30;
-            this.lbxToAdd.Location = new System.Drawing.Point(115, 383);
+            this.lbxToAdd.Location = new System.Drawing.Point(115, 455);
             this.lbxToAdd.MultiSelect = false;
             this.lbxToAdd.Name = "lbxToAdd";
             this.lbxToAdd.SelectedIndex = -1;
@@ -405,7 +407,7 @@
             // 
             this.lblAdded.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lblAdded.IsDerivedStyle = true;
-            this.lblAdded.Location = new System.Drawing.Point(465, 357);
+            this.lblAdded.Location = new System.Drawing.Point(465, 429);
             this.lblAdded.Name = "lblAdded";
             this.lblAdded.Size = new System.Drawing.Size(217, 23);
             this.lblAdded.Style = MetroSet_UI.Enums.Style.Dark;
@@ -427,7 +429,7 @@
             this.lbxCurrent.HoveredItemColor = System.Drawing.Color.DimGray;
             this.lbxCurrent.IsDerivedStyle = true;
             this.lbxCurrent.ItemHeight = 30;
-            this.lbxCurrent.Location = new System.Drawing.Point(465, 383);
+            this.lbxCurrent.Location = new System.Drawing.Point(465, 455);
             this.lbxCurrent.MultiSelect = false;
             this.lbxCurrent.Name = "lbxCurrent";
             this.lbxCurrent.SelectedIndex = -1;
@@ -455,7 +457,7 @@
             this.btnUpdate.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnUpdate.HoverTextColor = System.Drawing.Color.White;
             this.btnUpdate.IsDerivedStyle = true;
-            this.btnUpdate.Location = new System.Drawing.Point(512, 658);
+            this.btnUpdate.Location = new System.Drawing.Point(496, 678);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnUpdate.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
@@ -482,7 +484,7 @@
             this.btnCancel.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnCancel.HoverTextColor = System.Drawing.Color.White;
             this.btnCancel.IsDerivedStyle = true;
-            this.btnCancel.Location = new System.Drawing.Point(148, 658);
+            this.btnCancel.Location = new System.Drawing.Point(150, 678);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnCancel.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
@@ -499,12 +501,60 @@
             this.btnCancel.ThemeName = "MetroDark";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lblImage
+            // 
+            this.lblImage.AutoSize = true;
+            this.lblImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblImage.IsDerivedStyle = true;
+            this.lblImage.Location = new System.Drawing.Point(292, 350);
+            this.lblImage.Name = "lblImage";
+            this.lblImage.Size = new System.Drawing.Size(49, 17);
+            this.lblImage.Style = MetroSet_UI.Enums.Style.Dark;
+            this.lblImage.StyleManager = null;
+            this.lblImage.TabIndex = 73;
+            this.lblImage.Text = "Name:";
+            this.lblImage.ThemeAuthor = "Narwin";
+            this.lblImage.ThemeName = "MetroDark";
+            // 
+            // txtImage
+            // 
+            this.txtImage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtImage.AutoCompleteCustomSource = null;
+            this.txtImage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtImage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtImage.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(110)))), ((int)(((byte)(110)))));
+            this.txtImage.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.txtImage.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtImage.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.txtImage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtImage.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.txtImage.Image = null;
+            this.txtImage.IsDerivedStyle = true;
+            this.txtImage.Lines = null;
+            this.txtImage.Location = new System.Drawing.Point(292, 370);
+            this.txtImage.MaxLength = 32767;
+            this.txtImage.Multiline = false;
+            this.txtImage.Name = "txtImage";
+            this.txtImage.ReadOnly = false;
+            this.txtImage.Size = new System.Drawing.Size(217, 26);
+            this.txtImage.Style = MetroSet_UI.Enums.Style.Dark;
+            this.txtImage.StyleManager = null;
+            this.txtImage.TabIndex = 72;
+            this.txtImage.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtImage.ThemeAuthor = "Narwin";
+            this.txtImage.ThemeName = "MetroDark";
+            this.txtImage.UseSystemPasswordChar = false;
+            this.txtImage.WatermarkText = "Enter link student\'s photo";
+            // 
             // UpdateStudent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(800, 726);
+            this.ClientSize = new System.Drawing.Size(800, 746);
+            this.Controls.Add(this.lblImage);
+            this.Controls.Add(this.txtImage);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lbxCurrent);
@@ -558,5 +608,7 @@
         private MetroSet_UI.Controls.MetroSetListBox lbxCurrent;
         private MetroSet_UI.Controls.MetroSetButton btnUpdate;
         private MetroSet_UI.Controls.MetroSetButton btnCancel;
+        private MetroSet_UI.Controls.MetroSetLabel lblImage;
+        private MetroSet_UI.Controls.MetroSetTextBox txtImage;
     }
 }

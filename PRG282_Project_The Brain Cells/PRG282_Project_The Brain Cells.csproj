@@ -94,11 +94,23 @@
     <Compile Include="DataBaseHandler.cs" />
     <Compile Include="DataHandler.cs" />
     <Compile Include="FileHandler.cs" />
+    <Compile Include="LogFileViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogFileViewer.Designer.cs">
+      <DependentUpon>LogFileViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menu.Designer.cs">
+      <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
     <Compile Include="Module.cs" />
     <Compile Include="Program.cs" />
@@ -140,8 +152,14 @@
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogFileViewer.resx">
+      <DependentUpon>LogFileViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menu.resx">
+      <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -181,10 +199,10 @@
   <ItemGroup>
     <Content Include="bin\Debug\TestText.txt" />
     <Content Include="SystemDatabase.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="SystemDatabase_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>SystemDatabase.mdf</DependentUpon>
     </Content>
   </ItemGroup>

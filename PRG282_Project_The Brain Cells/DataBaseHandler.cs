@@ -326,7 +326,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                 using (var cmd = new SqlCommand(sql, con))
                 {
-                    cmd.Parameters.AddWithValue("@Num", StudentNumber);
+                    cmd.Parameters.AddWithValue("@Num", int.Parse(StudentNumber));
                     cmd.Parameters.AddWithValue("@Name", stud.StudentName);
                     cmd.Parameters.AddWithValue("@Surname", stud.StudentSurname);
                     cmd.Parameters.AddWithValue("@Img", stud.StudentImage);
@@ -345,10 +345,9 @@ namespace PRG282_Project_The_Brain_Cells
                     {
                         cmd.Parameters.AddWithValue("@StudentNum", comp.StudentNumber);
                         cmd.Parameters.AddWithValue("@ModuleCode", comp.ModuleCode);
-                    }
-                    
 
-                    cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
             catch (Exception ex)

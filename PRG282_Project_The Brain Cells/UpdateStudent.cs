@@ -36,9 +36,16 @@ namespace PRG282_Project_The_Brain_Cells
         }
         private void LoadStudentInfo(int StudentNum)
         {
+            lbxToAdd.SelectedIndex = -1;
+            students = dh.GetStudents();
+            modules = dh.GetModules();
+            composites = new List<Composite>();
+
             lbxToAdd.Items.Clear();
             lbxCurrent.Items.Clear();
+
             StudentModuleList = dh.GetStudentModules(StudentNum);
+
             foreach (var mod in modules)
             {
                 lbxToAdd.Items.Add(mod.ModuleCode + " " + mod.ModuleName);
@@ -56,6 +63,7 @@ namespace PRG282_Project_The_Brain_Cells
                     txtStudPhone.Text = student.StudentPhone;
                     string formattedDate = student.StudentDOB.ToString("dd/MM/yyyy");
                     DateStudDOB.Text = formattedDate;
+                    txtImage.Text = student.StudentImage;
                     cmbGender.SelectedItem = student.StudentGender;
                     txtAddress.Text = student.StudentAddress;
                 }
@@ -76,12 +84,14 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void lbxToAdd_SelectedIndexChanged(object sender)
         {
-            string StringToSplit = lbxToAdd.SelectedIndex.ToString();
+            string StringToSplit = lbxToAdd.SelectedItem.ToString();
             string[] SplitString = StringToSplit.Split(' ');
             string ModuleCodeToAdd = SplitString[0];
+
             Composite Comp = new Composite();
             Comp.StudentNumber = Convert.ToInt32(cmbNumSelect.SelectedItem);
             Comp.ModuleCode = ModuleCodeToAdd;
+
             composites.Add(Comp);
         }
 
@@ -96,6 +106,7 @@ namespace PRG282_Project_The_Brain_Cells
                 string StudentDOBToUpdate = DateStudDOB.Text;
                 string StudentGenderToUpdate = cmbGender.SelectedItem.ToString();
                 string StudentAdressToUpdate = txtAddress.Text;
+                string StudentImageToUpdate = txtImage.Text;
 
                 Student student = new Student();
                 student.StudentNumber = Convert.ToInt32(StudentNumberToUpdate);
@@ -103,14 +114,13 @@ namespace PRG282_Project_The_Brain_Cells
                 student.StudentSurname = StudentSurnameToUpdate;
                 student.StudentPhone = StudentPhoneToUpdate;
                 student.StudentGender = StudentGenderToUpdate;
-
-                student.StudentDOB = Convert.ToDateTime(StudentDOBToUpdate);
+                student.StudentDOB = DateTime.ParseExact(StudentDOBToUpdate,"dd/MM/yyyy",null);
+                student.StudentImage = StudentImageToUpdate;
                 student.StudentAddress = StudentAdressToUpdate;
 
-
                 dh.UpdateStudent(StudentNumberToUpdate,student,composites);
+                LoadStudentInfo(Convert.ToInt32(cmbNumSelect.SelectedItem));
             }
-            
         }
     }
 }
