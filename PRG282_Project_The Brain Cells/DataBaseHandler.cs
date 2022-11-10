@@ -37,7 +37,31 @@ namespace PRG282_Project_The_Brain_Cells
             }).ToList();
 
             return modules;
+        }
+        public List<Module> GetStudentModules(int Num)
+        {
+            List<Module> modules = new List<Module>();
+            DataSet dataSet = new DataSet();
 
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(dataSource);
+
+            SqlDataAdapter adapter = new SqlDataAdapter($"EXEC SelectModuleInfoByStudentNum @StudentNum = {Num}", con);
+
+            adapter.Fill(dataSet);
+
+            modules = dataSet.Tables[0].AsEnumerable().Select(dataRow => new Module
+            {
+                ModuleCode = dataRow.Field<string>("Module_Code"),
+                ModuleDescription = dataRow.Field<string>("Module_Description"),
+                ModuleName = dataRow.Field<string>("Module_Name"),
+                ModuleResource = dataRow.Field<string>("Module_Link")
+            }).ToList();
+
+            return modules;
         }
 
         public List<Student> GetStudents()

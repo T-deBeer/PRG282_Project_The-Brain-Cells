@@ -16,6 +16,8 @@ namespace PRG282_Project_The_Brain_Cells
         public LoginForm()
         {
             InitializeComponent();
+            DataHandler handler = new DataHandler();
+            handler.WriteLogin();
         }
 
         private void btnExit_Click(object sender, EventArgs e)

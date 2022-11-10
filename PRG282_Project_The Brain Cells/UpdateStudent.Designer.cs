@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.DateStudDOB = new System.Windows.Forms.MaskedTextBox();
             this.cmbGender = new MetroSet_UI.Controls.MetroSetComboBox();
             this.txtAddress = new MetroSet_UI.Controls.MetroSetTextBox();
             this.txtStudPhone = new MetroSet_UI.Controls.MetroSetTextBox();
@@ -50,17 +50,17 @@
             this.btnCancel = new MetroSet_UI.Controls.MetroSetButton();
             this.SuspendLayout();
             // 
-            // maskedTextBox1
+            // DateStudDOB
             // 
-            this.maskedTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.maskedTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.maskedTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.maskedTextBox1.Location = new System.Drawing.Point(115, 248);
-            this.maskedTextBox1.Mask = "00/00/0000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(217, 20);
-            this.maskedTextBox1.TabIndex = 56;
-            this.maskedTextBox1.ValidatingType = typeof(System.DateTime);
+            this.DateStudDOB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.DateStudDOB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DateStudDOB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.DateStudDOB.Location = new System.Drawing.Point(115, 248);
+            this.DateStudDOB.Mask = "00/00/0000";
+            this.DateStudDOB.Name = "DateStudDOB";
+            this.DateStudDOB.Size = new System.Drawing.Size(217, 20);
+            this.DateStudDOB.TabIndex = 56;
+            this.DateStudDOB.ValidatingType = typeof(System.DateTime);
             // 
             // cmbGender
             // 
@@ -81,7 +81,8 @@
             this.cmbGender.ItemHeight = 20;
             this.cmbGender.Items.AddRange(new object[] {
             "Male",
-            "Female"});
+            "Female",
+            "Other"});
             this.cmbGender.Location = new System.Drawing.Point(465, 242);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
@@ -121,7 +122,7 @@
             this.txtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtAddress.ThemeAuthor = "Narwin";
             this.txtAddress.ThemeName = "MetroDark";
-            this.txtAddress.UseSystemPasswordChar = true;
+            this.txtAddress.UseSystemPasswordChar = false;
             this.txtAddress.WatermarkText = "Enter student\'s Address";
             // 
             // txtStudPhone
@@ -152,7 +153,7 @@
             this.txtStudPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtStudPhone.ThemeAuthor = "Narwin";
             this.txtStudPhone.ThemeName = "MetroDark";
-            this.txtStudPhone.UseSystemPasswordChar = true;
+            this.txtStudPhone.UseSystemPasswordChar = false;
             this.txtStudPhone.WatermarkText = "Enter student\'s phone number";
             // 
             // txtStudSurname
@@ -183,7 +184,7 @@
             this.txtStudSurname.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtStudSurname.ThemeAuthor = "Narwin";
             this.txtStudSurname.ThemeName = "MetroDark";
-            this.txtStudSurname.UseSystemPasswordChar = true;
+            this.txtStudSurname.UseSystemPasswordChar = false;
             this.txtStudSurname.WatermarkText = "Enter student\'s surname";
             // 
             // txtStudName
@@ -246,6 +247,7 @@
             this.cmbNumSelect.TabIndex = 58;
             this.cmbNumSelect.ThemeAuthor = "Narwin";
             this.cmbNumSelect.ThemeName = "MetroDark";
+            this.cmbNumSelect.SelectedValueChanged += new System.EventHandler(this.cmbNumSelect_SelectedValueChanged);
             // 
             // lblSelect
             // 
@@ -286,11 +288,11 @@
             this.lblNum.IsDerivedStyle = true;
             this.lblNum.Location = new System.Drawing.Point(465, 169);
             this.lblNum.Name = "lblNum";
-            this.lblNum.Size = new System.Drawing.Size(115, 17);
+            this.lblNum.Size = new System.Drawing.Size(122, 17);
             this.lblNum.Style = MetroSet_UI.Enums.Style.Dark;
             this.lblNum.StyleManager = null;
             this.lblNum.TabIndex = 61;
-            this.lblNum.Text = "Student Number:";
+            this.lblNum.Text = "Student Surname:";
             this.lblNum.ThemeAuthor = "Narwin";
             this.lblNum.ThemeName = "MetroDark";
             // 
@@ -493,6 +495,7 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.ThemeAuthor = "Narwin";
             this.btnCancel.ThemeName = "MetroDark";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // UpdateStudent
             // 
@@ -514,7 +517,7 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.cmbNumSelect);
             this.Controls.Add(this.lblSelect);
-            this.Controls.Add(this.maskedTextBox1);
+            this.Controls.Add(this.DateStudDOB);
             this.Controls.Add(this.cmbGender);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtStudPhone);
@@ -532,7 +535,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox DateStudDOB;
         private MetroSet_UI.Controls.MetroSetComboBox cmbGender;
         private MetroSet_UI.Controls.MetroSetTextBox txtAddress;
         private MetroSet_UI.Controls.MetroSetTextBox txtStudPhone;

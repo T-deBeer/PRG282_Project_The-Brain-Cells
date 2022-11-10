@@ -12,6 +12,28 @@ namespace PRG282_Project_The_Brain_Cells
     {
         string TextPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\TestText.txt";
+        public void WriteLogin()
+        {
+            if (File.Exists(TextPath))
+            {
+                File.Delete(TextPath);
+                //FileHandler createText = new FileHandler();
+                //createText.CreateTextFile(TextPath);
+            }
+
+           
+
+            List<Credential> lines = new List<Credential>();
+            DataBaseHandler data = new DataBaseHandler();
+            lines = data.GetCreds();
+            using (TextWriter writer = new StreamWriter(TextPath))
+            {
+                foreach (var cred in lines)
+                {
+                    writer.WriteLine(cred.Username +","+cred.Password);
+                }
+            }
+        }
         public string[] ReadTextFile()
         {
             string[] fileContent = { null };
@@ -21,9 +43,7 @@ namespace PRG282_Project_The_Brain_Cells
             }
             catch
             {
-                FileHandler createText = new FileHandler();
-                createText.CreateTextFile(TextPath);
-                fileContent = File.ReadAllLines(TextPath);
+                
             }
 
             if (!(fileContent.Length == 0))
