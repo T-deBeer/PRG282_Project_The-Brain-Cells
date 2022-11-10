@@ -524,6 +524,7 @@
             this.Controls.Add(this.txtStudSurname);
             this.Controls.Add(this.txtStudName);
             this.Name = "UpdateStudent";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;
             this.Text = "UPDATE STUDENT DETAILS";
             this.TextColor = System.Drawing.Color.White;

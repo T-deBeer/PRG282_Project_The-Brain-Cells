@@ -34,7 +34,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             cmbTableSelect.DataSource = tables;
             SortByHold = cmbTableSelect.SelectedIndex;
-         
+
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
             cmbSortByUpdate(SortByHold);
         }
@@ -152,7 +152,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void cmbSortByUpdate(int tableSelected)
         {
-          List<string>  cmbOptions = new List<string>();
+            List<string> cmbOptions = new List<string>();
             switch (tableSelected)
             {
                 case 0:
@@ -222,9 +222,9 @@ namespace PRG282_Project_The_Brain_Cells
                 case 0:
                     {
                         if (cmbSortBy.SelectedIndex == 0)
-                       modules.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
+                            modules.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
                         else
-                        modules.Sort((a, b) => a.ModuleName.CompareTo(b.ModuleName));
+                            modules.Sort((a, b) => a.ModuleName.CompareTo(b.ModuleName));
                         dgvDataBaseView.DataSource = modules;
                         break;
                     }
@@ -232,10 +232,10 @@ namespace PRG282_Project_The_Brain_Cells
                     {
                         if (cmbSortBy.SelectedIndex == 0)
                             composite.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
-                       
+
                         else
-                                    composite.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
-                      
+                            composite.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
+
                         dgvDataBaseView.DataSource = composite;
                         break;
                     }
@@ -268,7 +268,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
         {
-        
+
         }
     }
 }

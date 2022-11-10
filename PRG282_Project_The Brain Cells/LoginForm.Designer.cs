@@ -33,6 +33,7 @@
             this.btnExit = new MetroSet_UI.Controls.MetroSetButton();
             this.btnLogin = new MetroSet_UI.Controls.MetroSetButton();
             this.btnView = new MetroSet_UI.Controls.MetroSetButton();
+            this.llblCreateAcconunt = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // txtUsername
@@ -103,7 +104,7 @@
             this.btnExit.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnExit.HoverTextColor = System.Drawing.Color.White;
             this.btnExit.IsDerivedStyle = true;
-            this.btnExit.Location = new System.Drawing.Point(231, 285);
+            this.btnExit.Location = new System.Drawing.Point(231, 337);
             this.btnExit.Name = "btnExit";
             this.btnExit.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btnExit.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
@@ -130,7 +131,7 @@
             this.btnLogin.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnLogin.HoverTextColor = System.Drawing.Color.White;
             this.btnLogin.IsDerivedStyle = true;
-            this.btnLogin.Location = new System.Drawing.Point(421, 285);
+            this.btnLogin.Location = new System.Drawing.Point(421, 337);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnLogin.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
@@ -174,12 +175,28 @@
             this.btnView.ThemeName = "MetroDark";
             this.btnView.Click += new System.EventHandler(this.btnView_Click);
             // 
+            // llblCreateAcconunt
+            // 
+            this.llblCreateAcconunt.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.llblCreateAcconunt.AutoSize = true;
+            this.llblCreateAcconunt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.llblCreateAcconunt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.llblCreateAcconunt.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.llblCreateAcconunt.Location = new System.Drawing.Point(228, 261);
+            this.llblCreateAcconunt.Name = "llblCreateAcconunt";
+            this.llblCreateAcconunt.Size = new System.Drawing.Size(131, 15);
+            this.llblCreateAcconunt.TabIndex = 76;
+            this.llblCreateAcconunt.TabStop = true;
+            this.llblCreateAcconunt.Text = "Sign Up for an account";
+            this.llblCreateAcconunt.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llblCreateAcconunt_LinkClicked);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(800, 460);
+            this.Controls.Add(this.llblCreateAcconunt);
             this.Controls.Add(this.btnView);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btnExit);
@@ -192,6 +209,7 @@
             this.TextColor = System.Drawing.Color.White;
             this.ThemeName = "MetroDark";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -202,6 +220,7 @@
         private MetroSet_UI.Controls.MetroSetButton btnExit;
         private MetroSet_UI.Controls.MetroSetButton btnLogin;
         private MetroSet_UI.Controls.MetroSetButton btnView;
+        private System.Windows.Forms.LinkLabel llblCreateAcconunt;
     }
 }
 

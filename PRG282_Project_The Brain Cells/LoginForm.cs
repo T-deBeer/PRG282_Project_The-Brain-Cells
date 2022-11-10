@@ -80,5 +80,12 @@ namespace PRG282_Project_The_Brain_Cells
             }
             **/
         }
+
+        private void llblCreateAcconunt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SignUpForm form = new SignUpForm();
+            form.Show();
+            this.Hide();
+        }
     }
 }
