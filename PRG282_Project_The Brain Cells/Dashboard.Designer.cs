@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblSelect = new MetroSet_UI.Controls.MetroSetLabel();
             this.cmbTableSelect = new MetroSet_UI.Controls.MetroSetComboBox();
             this.btnExit = new MetroSet_UI.Controls.MetroSetButton();
@@ -176,6 +176,7 @@
             this.pbImage.Size = new System.Drawing.Size(162, 170);
             this.pbImage.TabIndex = 6;
             this.pbImage.TabStop = false;
+            this.pbImage.Visible = false;
             // 
             // btnRemove
             // 
@@ -208,14 +209,14 @@
             this.dgvDataBaseView.AllowUserToAddRows = false;
             this.dgvDataBaseView.AllowUserToDeleteRows = false;
             this.dgvDataBaseView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDataBaseView.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDataBaseView.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDataBaseView.Location = new System.Drawing.Point(15, 148);
             this.dgvDataBaseView.MultiSelect = false;
             this.dgvDataBaseView.Name = "dgvDataBaseView";
@@ -224,7 +225,9 @@
             this.dgvDataBaseView.Size = new System.Drawing.Size(913, 344);
             this.dgvDataBaseView.TabIndex = 12;
             this.dgvDataBaseView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDataBaseView_CellFormatting);
+           
             this.dgvDataBaseView.SelectionChanged += new System.EventHandler(this.dgvDataBaseView_SelectionChanged);
+      
             // 
             // btnPrevious
             // 

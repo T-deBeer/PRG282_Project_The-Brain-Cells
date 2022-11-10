@@ -37,11 +37,12 @@
             // 
             this.pbPic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.pbPic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbPic.Image = ((System.Drawing.Image)(resources.GetObject("pbPic.Image")));
             this.pbPic.InitialImage = ((System.Drawing.Image)(resources.GetObject("pbPic.InitialImage")));
             this.pbPic.Location = new System.Drawing.Point(12, 70);
             this.pbPic.Name = "pbPic";
-            this.pbPic.Size = new System.Drawing.Size(776, 378);
-            this.pbPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pbPic.Size = new System.Drawing.Size(776, 389);
+            this.pbPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPic.TabIndex = 0;
             this.pbPic.TabStop = false;
             // 
@@ -50,7 +51,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.ClientSize = new System.Drawing.Size(800, 460);
+            this.ClientSize = new System.Drawing.Size(800, 471);
             this.Controls.Add(this.pbPic);
             this.Name = "SplashScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -59,7 +60,6 @@
             this.ThemeName = "MetroDark";
             ((System.ComponentModel.ISupportInitialize)(this.pbPic)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
