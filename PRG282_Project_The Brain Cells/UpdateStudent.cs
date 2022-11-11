@@ -14,58 +14,95 @@ namespace PRG282_Project_The_Brain_Cells
     public partial class UpdateStudent : MetroSetForm
     {
         DataBaseHandler dh = new DataBaseHandler();
-        List<Student> students = new List<Student>();
-        List<int> studentNumber = new List<int>();
-        List<Module> modules = new List<Module>();
-        List<Module> StudentModuleList = new List<Module>();
-        List<Composite> composites = new List<Composite>();
+
+        List<string> studNumbers = new List<string>();
+  
+        List<Student> allStudents = new List<Student>();
+        List<Module> allModules = new List<Module>();
+
+        List<Composite> allComposites = new List<Composite>();
+        List<Composite> compositesToAdd = new List<Composite>();
+        List<Composite> compositesToRemove = new List<Composite>();
+        List<string> studModules = new List<string>();
         public UpdateStudent()
         {
             InitializeComponent();
-            students = dh.GetStudents();
-            modules = dh.GetModules();
-            lbxToAdd.Items.Clear();
-            lbxCurrent.Items.Clear();
 
-            foreach (var student in students)
+            allStudents = dh.GetStudents();
+            allModules = dh.GetModules();
+            allComposites = dh.GetComposite();
+
+            foreach (var stud in allStudents)
             {
-                studentNumber.Add(student.StudentNumber);
+                studNumbers.Add(stud.StudentNumber.ToString());
             }
-            cmbNumSelect.DataSource = studentNumber;
-            LoadStudentInfo(Convert.ToInt32(cmbNumSelect.SelectedItem));
+
+            cmbNumSelect.DataSource = studNumbers;
+            LoadStudentInfo(int.Parse(cmbNumSelect.SelectedItem.ToString()));
         }
         private void LoadStudentInfo(int StudentNum)
         {
-            lbxToAdd.SelectedIndex = -1;
-            students = dh.GetStudents();
-            modules = dh.GetModules();
-            composites = new List<Composite>();
+            lbxCurrent.Items.Clear();
+            lbxCurrent.SelectedIndex = -1;
 
             lbxToAdd.Items.Clear();
-            lbxCurrent.Items.Clear();
+            lbxToAdd.SelectedIndex= -1;
 
-            StudentModuleList = dh.GetStudentModules(StudentNum);
+            allStudents = dh.GetStudents();
+            allModules = dh.GetModules();
+            allComposites = dh.GetComposite();
 
-            foreach (var mod in modules)
+            foreach (var stud in allStudents)
             {
-                lbxToAdd.Items.Add(mod.ModuleCode + " " + mod.ModuleName);
-            }
-            foreach (var StudMod in StudentModuleList)
-            {
-                lbxCurrent.Items.Add(StudMod.ModuleCode + " " + StudMod.ModuleName);
-            }
-            foreach (var student in students)
-            {
-                if (student.StudentNumber == StudentNum)
+                if (stud.StudentNumber == StudentNum)
                 {
-                    txtStudName.Text = student.StudentName;
-                    txtStudSurname.Text = student.StudentSurname;
-                    txtStudPhone.Text = student.StudentPhone;
-                    string formattedDate = student.StudentDOB.ToString("dd/MM/yyyy");
-                    DateStudDOB.Text = formattedDate;
-                    txtImage.Text = student.StudentImage;
-                    cmbGender.SelectedItem = student.StudentGender;
-                    txtAddress.Text = student.StudentAddress;
+                    txtStudName.Text = stud.StudentName;
+                    txtStudSurname.Text = stud.StudentSurname;
+                    txtStudPhone.Text = stud.StudentPhone;
+                    DateStudDOB.Text = stud.StudentDOB.ToString("dd/MM/yyyy"); ;
+                    txtImage.Text = stud.StudentImage;
+                    cmbGender.SelectedItem = stud.StudentGender;
+                    txtAddress.Text = stud.StudentAddress;
+                }
+            }
+
+            foreach (var comp in allComposites)
+            {
+                if (comp.StudentNumber == StudentNum)
+                {
+                    studModules.Add(comp.ModuleCode);
+                }
+            }
+
+            foreach (var comp in compositesToAdd)
+            {
+                if (comp.StudentNumber == StudentNum)
+                {
+                    studModules.Add(comp.ModuleCode);
+                }
+            }
+
+            foreach (var comp in compositesToRemove)
+            {
+                if (studModules.Contains(comp.ModuleCode))
+                {
+                    studModules.Remove(comp.ModuleCode);
+                }
+                if (compositesToAdd.Contains(comp))
+                {
+                    compositesToAdd.Remove(comp);
+                }
+            }
+
+            foreach (var mod in allModules)
+            {
+                if (studModules.Contains(mod.ModuleCode))
+                {
+                    lbxCurrent.Items.Add($"{mod.ModuleCode} {mod.ModuleName}");
+                }
+                else
+                {
+                    lbxToAdd.Items.Add($"{mod.ModuleCode} {mod.ModuleName}");
                 }
             }
         }
@@ -79,48 +116,86 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbNumSelect_SelectedValueChanged(object sender, EventArgs e)
         {
+            compositesToAdd.Clear();
+            compositesToRemove.Clear();
+            studModules.Clear();
             LoadStudentInfo(Convert.ToInt32(cmbNumSelect.SelectedItem));
         }
 
         private void lbxToAdd_SelectedIndexChanged(object sender)
         {
-            string StringToSplit = lbxToAdd.SelectedItem.ToString();
-            string[] SplitString = StringToSplit.Split(' ');
-            string ModuleCodeToAdd = SplitString[0];
+            string selectedModCode = lbxToAdd.SelectedItem.ToString().Split(' ')[0];
 
-            Composite Comp = new Composite();
-            Comp.StudentNumber = Convert.ToInt32(cmbNumSelect.SelectedItem);
-            Comp.ModuleCode = ModuleCodeToAdd;
+            foreach (var mod in allModules)
+            {
+                if (mod.ModuleCode == selectedModCode)
+                {
+                    Composite composite = new Composite();
+                    composite.ModuleCode = selectedModCode;
+                    composite.StudentNumber = int.Parse(cmbNumSelect.SelectedItem.ToString());
 
-            composites.Add(Comp);
+                    compositesToAdd.Add(composite);
+                }
+            }
+            LoadStudentInfo(int.Parse(cmbNumSelect.SelectedItem.ToString()));
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to update this student?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to update this student's information?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                string StudentNumberToUpdate = cmbNumSelect.SelectedItem.ToString();
-                string StudentNameToUpdate = txtStudName.Text;
-                string StudentSurnameToUpdate = txtStudSurname.Text;
-                string StudentPhoneToUpdate = txtStudPhone.Text;
-                string StudentDOBToUpdate = DateStudDOB.Text;
-                string StudentGenderToUpdate = cmbGender.SelectedItem.ToString();
-                string StudentAdressToUpdate = txtAddress.Text;
-                string StudentImageToUpdate = txtImage.Text;
-
                 Student student = new Student();
-                student.StudentNumber = Convert.ToInt32(StudentNumberToUpdate);
-                student.StudentName = StudentNameToUpdate;
-                student.StudentSurname = StudentSurnameToUpdate;
-                student.StudentPhone = StudentPhoneToUpdate;
-                student.StudentGender = StudentGenderToUpdate;
-                student.StudentDOB = DateTime.ParseExact(StudentDOBToUpdate,"dd/MM/yyyy",null);
-                student.StudentImage = StudentImageToUpdate;
-                student.StudentAddress = StudentAdressToUpdate;
 
-                dh.UpdateStudent(StudentNumberToUpdate,student,composites);
-                LoadStudentInfo(Convert.ToInt32(cmbNumSelect.SelectedItem));
+                student.StudentNumber = int.Parse(cmbNumSelect.SelectedItem.ToString());
+                student.StudentName = txtStudName.Text;
+                student.StudentSurname = txtStudSurname.Text;
+                student.StudentPhone = txtStudPhone.Text;
+                student.StudentGender = cmbGender.SelectedItem.ToString();
+                student.StudentDOB = DateTime.ParseExact(DateStudDOB.Text, "dd/MM/yyyy", null);
+                student.StudentImage = txtImage.Text;
+                student.StudentAddress = txtAddress.Text;
+
+                dh.UpdateStudent(student);
+
+                foreach (var comp in allComposites.Where(x => x.StudentNumber == int.Parse(cmbNumSelect.SelectedItem.ToString())))
+                {
+                    if (!studModules.Contains(comp.ModuleCode))
+                    {
+                        dh.RemoveComposite(comp);
+                    }
+                }
+                foreach (var code in studModules.Distinct().ToList())
+                {
+                    Composite comp = new Composite();
+                    comp.ModuleCode = code;
+                    comp.StudentNumber = int.Parse(cmbNumSelect.SelectedItem.ToString());
+
+                    dh.InsertComposite(comp);
+                }
+
+                compositesToAdd.Clear();
+                compositesToRemove.Clear();
+                studModules.Clear();
+                LoadStudentInfo(int.Parse(cmbNumSelect.SelectedItem.ToString()));
             }
+        }
+
+        private void lbxCurrent_SelectedIndexChanged(object sender)
+        {
+            string selectedModCode = lbxCurrent.SelectedItem.ToString().Split(' ')[0];
+
+            foreach (var mod in allModules)
+            {
+                if (mod.ModuleCode == selectedModCode)
+                {
+                    Composite composite = new Composite();
+                    composite.ModuleCode = selectedModCode;
+                    composite.StudentNumber = int.Parse(cmbNumSelect.SelectedItem.ToString());
+
+                    compositesToRemove.Add(composite);
+                }
+            }
+            LoadStudentInfo(int.Parse(cmbNumSelect.SelectedItem.ToString()));
         }
     }
 }

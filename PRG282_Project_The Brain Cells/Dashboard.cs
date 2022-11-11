@@ -27,13 +27,6 @@ namespace PRG282_Project_The_Brain_Cells
 
         public Dashboard()
         {
-
-
-
-
-
-
-
             int SortByHold;
             InitializeComponent();
 
@@ -88,7 +81,7 @@ namespace PRG282_Project_The_Brain_Cells
                 btnRemove.Enabled = true;
                 btnUpdate.Enabled = false;
             }
-           
+
         }
 
         private void cmbTableSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,10 +217,10 @@ namespace PRG282_Project_The_Brain_Cells
         private void cmbSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             /*
-               List<Module> modules = new List<Module>();
-                 List<Composite> composite = new List<Composite>();
- List<Credential> creds = new List<Credential>();
-        List<Student> students = new List<Student>();
+                List<Module> modules = new List<Module>();
+                List<Composite> composite = new List<Composite>();
+                List<Credential> creds = new List<Credential>();
+                List<Student> students = new List<Student>();
             */
             int tableIndex = cmbTableSelect.SelectedIndex;
             dgvDataBaseView.DataSource = null;
@@ -240,6 +233,7 @@ namespace PRG282_Project_The_Brain_Cells
                             modules.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
                         else
                             modules.Sort((a, b) => a.ModuleName.CompareTo(b.ModuleName));
+
                         dgvDataBaseView.DataSource = modules;
                         break;
                     }
@@ -260,6 +254,7 @@ namespace PRG282_Project_The_Brain_Cells
                             creds.Sort((a, b) => a.Username.CompareTo(b.Username));
                         else
                             creds.Sort((a, b) => a.Password.CompareTo(b.Password));
+
                         dgvDataBaseView.DataSource = creds;
                         break;
                     }
@@ -269,18 +264,14 @@ namespace PRG282_Project_The_Brain_Cells
                             students.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
                         else
                             students.Sort((a, b) => a.StudentName.CompareTo(b.StudentName));
+
+
                         dgvDataBaseView.DataSource = students;
-                      
                         break;
                     }
-
-
-
-
                 default:
                     break;
             }
-         
         }
 
 
@@ -295,13 +286,22 @@ namespace PRG282_Project_The_Brain_Cells
             int selectedIndex;
             int selectedTable;
             rtbEdit.ResetText();
-            selectedIndex = dgvDataBaseView.CurrentRow.Index;
+
             selectedTable = cmbTableSelect.SelectedIndex;
 
             switch (selectedTable)
             {
                 case 0:
                     {
+                        if (dgvDataBaseView.CurrentRow.Index > modules.Count)
+                        {
+                            selectedIndex = 0;
+                        }
+                        else
+                        {
+                            selectedIndex = dgvDataBaseView.CurrentRow.Index;
+                        }
+
                         rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
                         rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleName + "\n\n";
                         rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
@@ -373,6 +373,15 @@ namespace PRG282_Project_The_Brain_Cells
                     }
                 case 3:
                     {
+                        if (dgvDataBaseView.CurrentRow.Index > students.Count)
+                        {
+                            selectedIndex = 0;
+                        }
+                        else
+                        {
+                            selectedIndex = dgvDataBaseView.CurrentRow.Index;
+                        }
+
                         rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
                         rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentNumber + "\n\n";
                         rtbEdit.Text = rtbEdit.Text + "NAME: \n";

@@ -208,6 +208,7 @@
             this.Text = "LOG INTO YOUR ACCOUNT";
             this.TextColor = System.Drawing.Color.White;
             this.ThemeName = "MetroDark";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

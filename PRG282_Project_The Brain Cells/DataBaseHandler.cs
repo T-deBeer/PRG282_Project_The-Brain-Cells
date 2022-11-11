@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -167,7 +168,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             foreach (var cred in credentials)
             {
-                if(cred.Username == Username)
+                if (cred.Username == Username)
                 {
                     if (cred.Password == Password)
                     {
@@ -224,10 +225,10 @@ namespace PRG282_Project_The_Brain_Cells
                 con.Open();
                 var sql = "INSERT INTO CredentialTable (Username, Password) VALUES (@Username, @Password)";
 
-                using(var cmd = new SqlCommand(sql, con))
+                using (var cmd = new SqlCommand(sql, con))
                 {
-                    cmd.Parameters.AddWithValue("@Username",cred.Username);
-                    cmd.Parameters.AddWithValue("@Password",cred.Password);
+                    cmd.Parameters.AddWithValue("@Username", cred.Username);
+                    cmd.Parameters.AddWithValue("@Password", cred.Password);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -311,7 +312,7 @@ namespace PRG282_Project_The_Brain_Cells
             }
         }
 
-        public void UpdateStudent(string StudentNumber, Student stud, List<Composite> modulesAssigned)
+        public void UpdateStudent(Student stud)
         {
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
@@ -326,7 +327,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                 using (var cmd = new SqlCommand(sql, con))
                 {
-                    cmd.Parameters.AddWithValue("@Num", int.Parse(StudentNumber));
+                    cmd.Parameters.AddWithValue("@Num", stud.StudentNumber);
                     cmd.Parameters.AddWithValue("@Name", stud.StudentName);
                     cmd.Parameters.AddWithValue("@Surname", stud.StudentSurname);
                     cmd.Parameters.AddWithValue("@Img", stud.StudentImage);
@@ -336,18 +337,6 @@ namespace PRG282_Project_The_Brain_Cells
                     cmd.Parameters.AddWithValue("@Address", stud.StudentAddress);
 
                     cmd.ExecuteNonQuery();
-                }
-                var compSql = "Exec CompositeInsert @StudentNum,@ModuleCode";
-                using (var cmd = new SqlCommand(compSql, con))
-                {
-
-                    foreach (var comp in modulesAssigned)
-                    {
-                        cmd.Parameters.AddWithValue("@StudentNum", comp.StudentNumber);
-                        cmd.Parameters.AddWithValue("@ModuleCode", comp.ModuleCode);
-
-                        cmd.ExecuteNonQuery();
-                    }
                 }
             }
             catch (Exception ex)
@@ -360,7 +349,72 @@ namespace PRG282_Project_The_Brain_Cells
             }
         }
 
-        public void UpdateModule(Module mod, string code)
+        public void InsertComposite(Composite comp)
+        {
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(dataSource);
+
+            try
+            {
+                con.Open();
+
+                var compSql = "Exec CompositeInsert @StudentNum,@ModuleCode";
+                using (var cmd = new SqlCommand(compSql, con))
+                {
+
+                    cmd.Parameters.AddWithValue("@StudentNum", comp.StudentNumber);
+                    cmd.Parameters.AddWithValue("@ModuleCode", comp.ModuleCode);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "CRITICAL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+
+        }
+
+        public void RemoveComposite(Composite comp)
+        {
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(dataSource);
+
+            try
+            {
+                con.Open();
+
+                var compSql = "Exec CompositeDelete @StudentNum,@ModuleCode";
+                using (var cmd = new SqlCommand(compSql, con))
+                {
+
+                    cmd.Parameters.AddWithValue("@StudentNum", comp.StudentNumber);
+                    cmd.Parameters.AddWithValue("@ModuleCode", comp.ModuleCode);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "CRITICAL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void UpdateModule(Module mod)
         {
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
@@ -375,7 +429,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                 using (var cmd = new SqlCommand(sql, con))
                 {
-                    cmd.Parameters.AddWithValue("@Code", code);
+                    cmd.Parameters.AddWithValue("@Code", mod.ModuleCode);
                     cmd.Parameters.AddWithValue("@Name", mod.ModuleName);
                     cmd.Parameters.AddWithValue("@Desc", mod.ModuleDescription);
                     cmd.Parameters.AddWithValue("@Link", mod.ModuleResource);

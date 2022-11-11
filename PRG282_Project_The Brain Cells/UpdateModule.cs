@@ -73,6 +73,8 @@ namespace PRG282_Project_The_Brain_Cells
                 mod.ModuleDescription = txtModuleDescription.Text;
                 mod.ModuleName = txtModuleName.Text;
                 mod.ModuleResource = txtResource.Text;
+
+                dh.UpdateModule(mod);
             }
         }
     }

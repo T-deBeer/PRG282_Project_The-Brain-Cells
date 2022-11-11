@@ -377,8 +377,8 @@
             // 
             this.lbxToAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
             this.lbxToAdd.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbxToAdd.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lbxToAdd.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.lbxToAdd.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.lbxToAdd.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
             this.lbxToAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lbxToAdd.HoveredItemBackColor = System.Drawing.Color.LightGray;
             this.lbxToAdd.HoveredItemColor = System.Drawing.Color.DimGray;
@@ -400,7 +400,7 @@
             this.lbxToAdd.StyleManager = null;
             this.lbxToAdd.TabIndex = 67;
             this.lbxToAdd.ThemeAuthor = "Narwin";
-            this.lbxToAdd.ThemeName = "MetroDark";
+            this.lbxToAdd.ThemeName = "MetroLite";
             this.lbxToAdd.SelectedIndexChanged += new MetroSet_UI.Controls.MetroSetListBox.SelectedIndexChangedEventHandler(this.lbxToAdd_SelectedIndexChanged);
             // 
             // lblAdded
@@ -446,6 +446,7 @@
             this.lbxCurrent.TabIndex = 69;
             this.lbxCurrent.ThemeAuthor = "Narwin";
             this.lbxCurrent.ThemeName = "MetroDark";
+            this.lbxCurrent.SelectedIndexChanged += new MetroSet_UI.Controls.MetroSetListBox.SelectedIndexChangedEventHandler(this.lbxCurrent_SelectedIndexChanged);
             // 
             // btnUpdate
             // 
@@ -508,11 +509,11 @@
             this.lblImage.IsDerivedStyle = true;
             this.lblImage.Location = new System.Drawing.Point(292, 350);
             this.lblImage.Name = "lblImage";
-            this.lblImage.Size = new System.Drawing.Size(49, 17);
+            this.lblImage.Size = new System.Drawing.Size(96, 17);
             this.lblImage.Style = MetroSet_UI.Enums.Style.Dark;
             this.lblImage.StyleManager = null;
             this.lblImage.TabIndex = 73;
-            this.lblImage.Text = "Name:";
+            this.lblImage.Text = "Link to Image:";
             this.lblImage.ThemeAuthor = "Narwin";
             this.lblImage.ThemeName = "MetroDark";
             // 
