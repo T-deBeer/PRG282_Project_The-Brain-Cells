@@ -17,5 +17,59 @@ namespace PRG282_Project_The_Brain_Cells
         {
             InitializeComponent();
         }
+
+        private void btnLogFile_Click(object sender, EventArgs e)
+        {
+            LogFileViewer log = new LogFileViewer();
+            log.Show();
+            this.Hide();
+        }
+
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            Dashboard dashboard = new Dashboard();
+            dashboard.Show();
+            this.Hide();
+        }
+
+        private void btnAddStudent_Click(object sender, EventArgs e)
+        {
+            AddStudent student = new AddStudent();
+            student.Show();
+            this.Hide();
+        }
+
+        private void btnUpdateStudent_Click(object sender, EventArgs e)
+        {
+            UpdateStudent student = new UpdateStudent();
+            student.Show();
+            this.Hide();
+        }
+
+        private void metroSetButton2_Click(object sender, EventArgs e)
+        {
+            AddCredentials credentials = new AddCredentials();
+            credentials.Show();
+            this.Hide();
+        }
+
+        private void btnAddModule_Click(object sender, EventArgs e)
+        {
+            AddModule module = new AddModule();
+            module.Show();
+            this.Hide();
+        }
+
+        private void btnUpdateModule_Click(object sender, EventArgs e)
+        {
+            UpdateModule module = new UpdateModule();
+            module.Show();
+            this.Hide();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

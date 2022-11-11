@@ -60,9 +60,12 @@ namespace PRG282_Project_The_Brain_Cells
             else if (Login == true)
             {
                 MessageBox.Show("You Have logged in successfully", "Login Successfull");
-                Dashboard form = new Dashboard();
-                form.ShowDialog();
+                Menu mainMenu = new Menu();
+                mainMenu.Show();
                 this.Hide();
+                DataHandler data = new DataHandler();
+                data.LogData = data.GetLog();
+                data.LogData.Add("Login from: " + UsernameToCheck);
             }
             /**
             DataBaseHandler dh = new DataBaseHandler();

@@ -63,6 +63,7 @@
             this.btnUpdateStudent.Text = "Update a Student";
             this.btnUpdateStudent.ThemeAuthor = "Narwin";
             this.btnUpdateStudent.ThemeName = "MetroDark";
+            this.btnUpdateStudent.Click += new System.EventHandler(this.btnUpdateStudent_Click);
             // 
             // btnExit
             // 
@@ -89,6 +90,7 @@
             this.btnExit.Text = "Exit Program";
             this.btnExit.ThemeAuthor = "Narwin";
             this.btnExit.ThemeName = "MetroDark";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnUpdateModule
             // 
@@ -115,6 +117,7 @@
             this.btnUpdateModule.Text = "Update a Module";
             this.btnUpdateModule.ThemeAuthor = "Narwin";
             this.btnUpdateModule.ThemeName = "MetroDark";
+            this.btnUpdateModule.Click += new System.EventHandler(this.btnUpdateModule_Click);
             // 
             // btnAddStudent
             // 
@@ -141,6 +144,7 @@
             this.btnAddStudent.Text = "Add a Student";
             this.btnAddStudent.ThemeAuthor = "Narwin";
             this.btnAddStudent.ThemeName = "MetroDark";
+            this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
             // 
             // btnAddModule
             // 
@@ -167,6 +171,7 @@
             this.btnAddModule.Text = "Add a Module";
             this.btnAddModule.ThemeAuthor = "Narwin";
             this.btnAddModule.ThemeName = "MetroDark";
+            this.btnAddModule.Click += new System.EventHandler(this.btnAddModule_Click);
             // 
             // btnDashboard
             // 
@@ -193,6 +198,7 @@
             this.btnDashboard.Text = "Go to Dashboard";
             this.btnDashboard.ThemeAuthor = "Narwin";
             this.btnDashboard.ThemeName = "MetroDark";
+            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // metroSetButton2
             // 
@@ -219,6 +225,7 @@
             this.metroSetButton2.Text = "Add new Login Credentials";
             this.metroSetButton2.ThemeAuthor = "Narwin";
             this.metroSetButton2.ThemeName = "MetroDark";
+            this.metroSetButton2.Click += new System.EventHandler(this.metroSetButton2_Click);
             // 
             // btnLogFile
             // 
@@ -245,6 +252,7 @@
             this.btnLogFile.Text = "View Log File";
             this.btnLogFile.ThemeAuthor = "Narwin";
             this.btnLogFile.ThemeName = "MetroDark";
+            this.btnLogFile.Click += new System.EventHandler(this.btnLogFile_Click);
             // 
             // Menu
             // 
