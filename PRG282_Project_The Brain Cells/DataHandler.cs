@@ -12,19 +12,19 @@ namespace PRG282_Project_The_Brain_Cells
     {
         string TextPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\TestText.txt";
+        string LogFilePath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\LogFile.txt";
+        public List<string> LogData = new List<string>();
         public void WriteLogin()
         {
             if (File.Exists(TextPath))
             {
                 File.Delete(TextPath);
-                //FileHandler createText = new FileHandler();
-                //createText.CreateTextFile(TextPath);
             }
-
-           
 
             List<Credential> lines = new List<Credential>();
             DataBaseHandler data = new DataBaseHandler();
+
             lines = data.GetCreds();
             using (TextWriter writer = new StreamWriter(TextPath))
             {
@@ -33,6 +33,43 @@ namespace PRG282_Project_The_Brain_Cells
                     writer.WriteLine(cred.Username +","+cred.Password);
                 }
             }
+        }
+        public void WriteLogFile()
+        {
+            if (File.Exists(LogFilePath))
+            {
+                File.Delete(LogFilePath);
+            }
+
+            using (TextWriter writer = new StreamWriter(LogFilePath))
+            {
+                for (int i = 0; i < LogData.Count; i++)
+                {
+                    writer.WriteLine(LogData[i]);
+                }
+            }
+        }
+        public void AddToLog(string String)
+        {
+            LogData.Add(String);
+        }
+        public List<string> GetLog()
+        {
+            
+            try
+            {
+                LogData = File.ReadAllLines(LogFilePath).ToList();
+            }
+            catch
+            {
+                MessageBox.Show("There was an error retrieving the log file");
+            }
+
+            if (!(LogData.Count == 0))
+            {
+                return LogData;
+            }
+            return LogData;
         }
         public string[] ReadTextFile()
         {

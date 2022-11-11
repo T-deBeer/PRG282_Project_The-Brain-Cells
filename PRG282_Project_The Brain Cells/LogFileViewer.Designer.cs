@@ -151,6 +151,7 @@
             this.Text = "LOG FILE VIEWER";
             this.TextColor = System.Drawing.Color.White;
             this.ThemeName = "MetroDark";
+            this.Load += new System.EventHandler(this.LogFileViewer_Load);
             this.ResumeLayout(false);
 
         }
