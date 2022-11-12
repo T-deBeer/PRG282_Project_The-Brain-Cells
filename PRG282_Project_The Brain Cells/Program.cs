@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,11 +17,17 @@ namespace PRG282_Project_The_Brain_Cells
         [STAThread]
         static void Main()
         {
+            string soundLocation =Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SplashSound.wav";
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Thread t = new Thread(StartSplash);
             t.Start();
-            Thread.Sleep(8000);
+            using (var soundPlayer = new SoundPlayer(@""+soundLocation))
+            {
+                soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+            }
+            Thread.Sleep(5000);
             t.Abort();
             Application.Run(new LoginForm());
 

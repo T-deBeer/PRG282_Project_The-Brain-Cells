@@ -18,5 +18,10 @@ namespace PRG282_Project_The_Brain_Cells
         {
             InitializeComponent();
         }
+
+        private void pbPic_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

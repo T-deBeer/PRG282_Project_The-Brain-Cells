@@ -197,6 +197,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\SplashSound.wav" />
     <Content Include="bin\Debug\TestText.txt" />
     <Content Include="SystemDatabase.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

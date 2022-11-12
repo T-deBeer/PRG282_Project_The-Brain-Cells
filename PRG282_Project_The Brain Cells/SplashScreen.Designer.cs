@@ -45,6 +45,7 @@
             this.pbPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPic.TabIndex = 0;
             this.pbPic.TabStop = false;
+            this.pbPic.Click += new System.EventHandler(this.pbPic_Click);
             // 
             // SplashScreen
             // 
