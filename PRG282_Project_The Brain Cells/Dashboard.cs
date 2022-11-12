@@ -412,5 +412,54 @@ namespace PRG282_Project_The_Brain_Cells
         {
             updateRTB();
         }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            string tableName = cmbTableSelect.SelectedItem.ToString();
+            int selectedIndex = dgvDataBaseView.CurrentRow.Index;
+
+            if (tableName == "ModuleTable")
+            {
+                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    dh.RemoveCompModule(modules[selectedIndex].ModuleCode);
+                    foreach (var mod in modules.Where(x => x.ModuleCode == modules[selectedIndex].ModuleCode))
+                    {
+                        dh.RemoveModule(mod);
+                    }  
+                }
+            }
+            else if (tableName == "StudentTable")
+            {
+                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    dh.RemoveCompStudent(students[selectedIndex].StudentNumber);
+                    foreach (var stud in students.Where(x => x.StudentNumber == students[selectedIndex].StudentNumber))
+                    {
+                        dh.RemoveStudent(stud);
+                    }
+                }
+            }
+            else if (tableName == "CredentialTable")
+            {
+                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    foreach (var cred in creds.Where(x => x.Username == creds[selectedIndex].Username))
+                    {
+                        dh.RemoveCredential(cred);
+                    }
+                }
+            }
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+            this.Hide();
+        }
     }
 }

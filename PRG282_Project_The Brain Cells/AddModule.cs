@@ -86,18 +86,22 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            if (modulesToAdd.Count>=1)
+            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to add this module's information?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                foreach (var mod in modulesToAdd)
+                if (modulesToAdd.Count >= 1)
                 {
-                    dh.AddModule(mod);
+                    foreach (var mod in modulesToAdd)
+                    {
+                        dh.AddModule(mod);
+                    }
+                }
+                else
+                {
+                    MetroSetMessageBox.Show(this, "Enter the details of a new module before writing to database."
+                        , "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-            else
-            {
-                MetroSetMessageBox.Show(this, "Enter the details of a new module before writing to database."
-                    , "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            ClearFields();
         }
     }
 }

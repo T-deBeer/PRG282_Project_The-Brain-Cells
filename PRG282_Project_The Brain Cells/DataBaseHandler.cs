@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -447,6 +448,161 @@ namespace PRG282_Project_The_Brain_Cells
                     cmd.ExecuteNonQuery();
                 }
                 data.AddToLogFile("Module update: " + mod.ModuleCode);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "CRITICAL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void RemoveModule(Module mod)
+        {
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(dataSource);
+
+            try
+            {
+                con.Open();
+                var sql = "Exec ModuleDelete @Code";
+
+                using (var cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddWithValue("@Code", mod.ModuleCode);
+
+                    cmd.ExecuteNonQuery();
+                }
+                data.AddToLogFile("Module removed: " + mod.ModuleCode);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "CRITICAL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void RemoveCompModule(string ModuleCode)
+        {
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(dataSource);
+
+            try
+            {
+                con.Open();
+                var sql = "Exec CompDelMod @Code";
+
+                using (var cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddWithValue("@Code", ModuleCode);
+
+                    cmd.ExecuteNonQuery();
+                }
+                data.AddToLogFile("Composite module removed: " + ModuleCode);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "CRITICAL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void RemoveStudent(Student student)
+        {
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(dataSource);
+
+            try
+            {
+                con.Open();
+                var sql = "Exec StudentDelete @StudNum";
+
+                using (var cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddWithValue("@StudNum", student.StudentNumber);
+
+                    cmd.ExecuteNonQuery();
+                }
+                data.AddToLogFile("Student removed: " + student.StudentNumber);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "CRITICAL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void RemoveCompStudent(int StudentNumber)
+        {
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(dataSource);
+
+            try
+            {
+                con.Open();
+                var sql = "Exec CompDelStud @StudNum";
+
+                using (var cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddWithValue("@StudNum", StudentNumber);
+
+                    cmd.ExecuteNonQuery();
+                }
+                data.AddToLogFile("Composite student removed: " + StudentNumber.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "CRITICAL ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void RemoveCredential(Credential cred)
+        {
+            string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\SystemDatabase.mdf";
+            string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
+
+            SqlConnection con = new SqlConnection(dataSource);
+
+            try
+            {
+                con.Open();
+                var sql = "Exec CredentialDelete @Username";
+
+                using (var cmd = new SqlCommand(sql, con))
+                {
+                    cmd.Parameters.AddWithValue("@Username", cred.Username);
+
+                    cmd.ExecuteNonQuery();
+                }
+                data.AddToLogFile("Credential removed: " + cred.Username);
             }
             catch (Exception ex)
             {

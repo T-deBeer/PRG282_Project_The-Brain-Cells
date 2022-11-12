@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogFileViewer));
             this.mrtbLogFile = new MetroSet_UI.Controls.MetroSetRichTextBox();
             this.btnSave = new MetroSet_UI.Controls.MetroSetButton();
             this.btnBack = new MetroSet_UI.Controls.MetroSetButton();
@@ -48,7 +49,7 @@
             this.mrtbLogFile.Location = new System.Drawing.Point(15, 99);
             this.mrtbLogFile.MaxLength = 32767;
             this.mrtbLogFile.Name = "mrtbLogFile";
-            this.mrtbLogFile.ReadOnly = false;
+            this.mrtbLogFile.ReadOnly = true;
             this.mrtbLogFile.Size = new System.Drawing.Size(770, 345);
             this.mrtbLogFile.Style = MetroSet_UI.Enums.Style.Dark;
             this.mrtbLogFile.StyleManager = null;
@@ -82,6 +83,7 @@
             this.btnSave.Text = "Save File";
             this.btnSave.ThemeAuthor = "Narwin";
             this.btnSave.ThemeName = "MetroDark";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnBack
             // 
@@ -135,6 +137,7 @@
             this.btnSend.Text = "Send Log via Email";
             this.btnSend.ThemeAuthor = "Narwin";
             this.btnSend.ThemeName = "MetroDark";
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // LogFileViewer
             // 
@@ -146,7 +149,9 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.mrtbLogFile);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LogFileViewer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;
             this.Text = "LOG FILE VIEWER";
             this.TextColor = System.Drawing.Color.White;

@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
             this.lblSelect = new MetroSet_UI.Controls.MetroSetLabel();
             this.cmbTableSelect = new MetroSet_UI.Controls.MetroSetComboBox();
             this.btnExit = new MetroSet_UI.Controls.MetroSetButton();
@@ -44,6 +45,7 @@
             this.btnSearch = new MetroSet_UI.Controls.MetroSetButton();
             this.txtSearch = new MetroSet_UI.Controls.MetroSetTextBox();
             this.cmbSortBy = new System.Windows.Forms.ComboBox();
+            this.btnBack = new MetroSet_UI.Controls.MetroSetButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataBaseView)).BeginInit();
             this.SuspendLayout();
@@ -203,20 +205,21 @@
             this.btnRemove.Text = "Remove";
             this.btnRemove.ThemeAuthor = "Narwin";
             this.btnRemove.ThemeName = "MetroDark";
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // dgvDataBaseView
             // 
             this.dgvDataBaseView.AllowUserToAddRows = false;
             this.dgvDataBaseView.AllowUserToDeleteRows = false;
             this.dgvDataBaseView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDataBaseView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDataBaseView.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDataBaseView.Location = new System.Drawing.Point(15, 148);
             this.dgvDataBaseView.MultiSelect = false;
             this.dgvDataBaseView.Name = "dgvDataBaseView";
@@ -225,9 +228,7 @@
             this.dgvDataBaseView.Size = new System.Drawing.Size(913, 344);
             this.dgvDataBaseView.TabIndex = 12;
             this.dgvDataBaseView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvDataBaseView_CellFormatting);
-           
             this.dgvDataBaseView.SelectionChanged += new System.EventHandler(this.dgvDataBaseView_SelectionChanged);
-      
             // 
             // btnPrevious
             // 
@@ -392,12 +393,40 @@
             this.cmbSortBy.TabIndex = 21;
             this.cmbSortBy.SelectedIndexChanged += new System.EventHandler(this.cmbSortBy_SelectedIndexChanged);
             // 
+            // btnBack
+            // 
+            this.btnBack.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnBack.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnBack.DisabledForeColor = System.Drawing.Color.Gray;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnBack.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnBack.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnBack.HoverTextColor = System.Drawing.Color.White;
+            this.btnBack.IsDerivedStyle = true;
+            this.btnBack.Location = new System.Drawing.Point(208, 602);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnBack.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.btnBack.NormalTextColor = System.Drawing.Color.White;
+            this.btnBack.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnBack.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnBack.PressTextColor = System.Drawing.Color.White;
+            this.btnBack.Size = new System.Drawing.Size(145, 53);
+            this.btnBack.Style = MetroSet_UI.Enums.Style.Custom;
+            this.btnBack.StyleManager = null;
+            this.btnBack.TabIndex = 22;
+            this.btnBack.Text = "Back to Menu";
+            this.btnBack.ThemeAuthor = "Narwin";
+            this.btnBack.ThemeName = "MetroDark";
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1280, 687);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.cmbSortBy);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
@@ -413,6 +442,7 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.cmbTableSelect);
             this.Controls.Add(this.lblSelect);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;
@@ -441,5 +471,6 @@
         private MetroSet_UI.Controls.MetroSetButton btnSearch;
         private MetroSet_UI.Controls.MetroSetTextBox txtSearch;
         private System.Windows.Forms.ComboBox cmbSortBy;
+        private MetroSet_UI.Controls.MetroSetButton btnBack;
     }
 }

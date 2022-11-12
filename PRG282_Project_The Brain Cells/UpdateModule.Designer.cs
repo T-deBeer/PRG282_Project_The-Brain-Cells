@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateModule));
             this.cmbCodeSelect = new MetroSet_UI.Controls.MetroSetComboBox();
             this.lblSelect = new MetroSet_UI.Controls.MetroSetLabel();
             this.txtResource = new MetroSet_UI.Controls.MetroSetTextBox();
@@ -296,6 +297,7 @@
             this.Controls.Add(this.txtModuleName);
             this.Controls.Add(this.cmbCodeSelect);
             this.Controls.Add(this.lblSelect);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UpdateModule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;

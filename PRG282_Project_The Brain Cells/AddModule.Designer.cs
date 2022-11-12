@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddModule));
             this.txtResource = new MetroSet_UI.Controls.MetroSetTextBox();
             this.txtModuleDescription = new MetroSet_UI.Controls.MetroSetTextBox();
             this.txtModuleName = new MetroSet_UI.Controls.MetroSetTextBox();
@@ -164,7 +165,7 @@
             // 
             // lbxToAdd
             // 
-            this.lbxToAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.lbxToAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.lbxToAdd.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lbxToAdd.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.lbxToAdd.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -185,7 +186,7 @@
             this.lbxToAdd.ShowBorder = false;
             this.lbxToAdd.ShowScrollBar = false;
             this.lbxToAdd.Size = new System.Drawing.Size(350, 210);
-            this.lbxToAdd.Style = MetroSet_UI.Enums.Style.Custom;
+            this.lbxToAdd.Style = MetroSet_UI.Enums.Style.Dark;
             this.lbxToAdd.StyleManager = null;
             this.lbxToAdd.TabIndex = 55;
             this.lbxToAdd.ThemeAuthor = "Narwin";
@@ -286,6 +287,7 @@
             this.Controls.Add(this.txtModuleDescription);
             this.Controls.Add(this.txtModuleName);
             this.Controls.Add(this.txtModuleCode);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddModule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;

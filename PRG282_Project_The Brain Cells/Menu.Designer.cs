@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Menu));
             this.btnUpdateStudent = new MetroSet_UI.Controls.MetroSetButton();
             this.btnExit = new MetroSet_UI.Controls.MetroSetButton();
             this.btnUpdateModule = new MetroSet_UI.Controls.MetroSetButton();
@@ -268,6 +269,7 @@
             this.Controls.Add(this.btnUpdateModule);
             this.Controls.Add(this.btnUpdateStudent);
             this.Controls.Add(this.btnExit);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Menu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;

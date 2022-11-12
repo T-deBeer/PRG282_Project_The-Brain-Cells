@@ -34,31 +34,23 @@ namespace PRG282_Project_The_Brain_Cells
         private void ClearFields()
         {
             txtAddress.Text = null;
-            txtStdNum.Text = null;
             txtStudName.Text = null;
             txtStudPhone.Text = null;
             txtStudSurname.Text = null;
         }
 
 
-        private bool ValidateInpute()
+        private bool ValidateInput()
         {
-            foreach (var student in students)
-            {
-                if (student.StudentNumber == int.Parse(txtStdNum.Text))
-                {
-                    return false;
-                }
-            }
 
-            if (txtStdNum.Text == "" || txtStdNum.Text == " " || txtStudName.Text == "" || txtStudName.Text == " "
-                || txtStudSurname.Text == "" || txtStudSurname.Text == " " || txtAddress.Text == "" || txtAddress.Text == " "
-                || txtDOB.Text == null || cmbGender.SelectedItem.ToString() == "")
+            if (string.IsNullOrEmpty(txtStudName.Text) || string.IsNullOrEmpty(txtStudSurname.Text)
+                || string.IsNullOrEmpty(txtDOB.Text) || string.IsNullOrEmpty(txtStudPhone.Text) || string.IsNullOrEmpty(txtAddress.Text)
+                || !(cmbGender.SelectedIndex >= 0))
             {
                 return false;
             }
 
-            if (DateTime.Now.Year - DateTime.Parse(txtDOB.Text).Year < 18)
+            if (int.Parse((DateTime.Now.Year - DateTime.ParseExact(txtDOB.Text, "dd/MM/yyyy", null).Year).ToString()) < 18)
             {
                 return false;
             }
@@ -68,43 +60,46 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (ValidateInpute())
+            if (ValidateInput())
             {
                 Student stud = new Student();
-
-                stud.StudentNumber = students.Count+1;
                 stud.StudentName = txtStudName.Text;
                 stud.StudentSurname = txtStudSurname.Text;
                 stud.StudentPhone = txtStudPhone.Text;
+                stud.StudentImage = "";
                 stud.StudentAddress = txtAddress.Text;
                 stud.StudentDOB = DateTime.Parse(txtDOB.Text);
 
                 studentsToAdd.Add(stud);
 
-                lbxToAdd.Items.Add(stud.Display());
-
+                lbxToAdd.Items.Add($"{stud.StudentName} {stud.StudentSurname}");
             }
             else
             {
-                MetroSetMessageBox.Show(this, "One or more problems with input.\nEnsure no fielda are empty and student is older than 18."
+                MetroSetMessageBox.Show(this, "One or more problems with input.\nEnsure no fields are empty and student is older than 18."
                     , "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            if (studentsToAdd.Count >= 1)
+
+            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to add this student's information?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
-                foreach (var stud in studentsToAdd)
+                if (studentsToAdd.Count >= 1)
                 {
-                    dh.AddStudent(stud);
+                    foreach (var stud in studentsToAdd)
+                    {
+                        dh.AddStudent(stud);
+                    }
+                }
+                else
+                {
+                    MetroSetMessageBox.Show(this, "Enter the details of a new student before writing to database."
+                        , "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
-            else
-            {
-                MetroSetMessageBox.Show(this, "Enter the details of a new student before writing to database."
-                    , "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            ClearFields();
         }
     }
 }

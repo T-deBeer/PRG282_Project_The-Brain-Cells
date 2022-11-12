@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtStdNum = new MetroSet_UI.Controls.MetroSetTextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddStudent));
             this.btnAdd = new MetroSet_UI.Controls.MetroSetButton();
             this.btnCancel = new MetroSet_UI.Controls.MetroSetButton();
             this.btnWrite = new MetroSet_UI.Controls.MetroSetButton();
@@ -40,37 +40,6 @@
             this.cmbGender = new MetroSet_UI.Controls.MetroSetComboBox();
             this.txtDOB = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
-            // 
-            // txtStdNum
-            // 
-            this.txtStdNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtStdNum.AutoCompleteCustomSource = null;
-            this.txtStdNum.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtStdNum.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtStdNum.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(110)))), ((int)(((byte)(110)))));
-            this.txtStdNum.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.txtStdNum.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtStdNum.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.txtStdNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtStdNum.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.txtStdNum.Image = null;
-            this.txtStdNum.IsDerivedStyle = true;
-            this.txtStdNum.Lines = null;
-            this.txtStdNum.Location = new System.Drawing.Point(40, 102);
-            this.txtStdNum.MaxLength = 32767;
-            this.txtStdNum.Multiline = false;
-            this.txtStdNum.Name = "txtStdNum";
-            this.txtStdNum.ReadOnly = false;
-            this.txtStdNum.Size = new System.Drawing.Size(217, 26);
-            this.txtStdNum.Style = MetroSet_UI.Enums.Style.Dark;
-            this.txtStdNum.StyleManager = null;
-            this.txtStdNum.TabIndex = 44;
-            this.txtStdNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtStdNum.ThemeAuthor = "Narwin";
-            this.txtStdNum.ThemeName = "MetroDark";
-            this.txtStdNum.UseSystemPasswordChar = false;
-            this.txtStdNum.WatermarkText = "Enter student\'s Student Number";
             // 
             // btnAdd
             // 
@@ -155,7 +124,7 @@
             // 
             // lbxToAdd
             // 
-            this.lbxToAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.lbxToAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.lbxToAdd.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.lbxToAdd.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.lbxToAdd.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -176,7 +145,7 @@
             this.lbxToAdd.ShowBorder = false;
             this.lbxToAdd.ShowScrollBar = false;
             this.lbxToAdd.Size = new System.Drawing.Size(350, 212);
-            this.lbxToAdd.Style = MetroSet_UI.Enums.Style.Custom;
+            this.lbxToAdd.Style = MetroSet_UI.Enums.Style.Dark;
             this.lbxToAdd.StyleManager = null;
             this.lbxToAdd.TabIndex = 54;
             this.lbxToAdd.ThemeAuthor = "Narwin";
@@ -206,7 +175,7 @@
             this.txtStudName.Size = new System.Drawing.Size(217, 26);
             this.txtStudName.Style = MetroSet_UI.Enums.Style.Dark;
             this.txtStudName.StyleManager = null;
-            this.txtStudName.TabIndex = 45;
+            this.txtStudName.TabIndex = 0;
             this.txtStudName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtStudName.ThemeAuthor = "Narwin";
             this.txtStudName.ThemeName = "MetroDark";
@@ -237,7 +206,7 @@
             this.txtStudSurname.Size = new System.Drawing.Size(217, 26);
             this.txtStudSurname.Style = MetroSet_UI.Enums.Style.Dark;
             this.txtStudSurname.StyleManager = null;
-            this.txtStudSurname.TabIndex = 46;
+            this.txtStudSurname.TabIndex = 1;
             this.txtStudSurname.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtStudSurname.ThemeAuthor = "Narwin";
             this.txtStudSurname.ThemeName = "MetroDark";
@@ -268,7 +237,7 @@
             this.txtStudPhone.Size = new System.Drawing.Size(217, 26);
             this.txtStudPhone.Style = MetroSet_UI.Enums.Style.Dark;
             this.txtStudPhone.StyleManager = null;
-            this.txtStudPhone.TabIndex = 47;
+            this.txtStudPhone.TabIndex = 4;
             this.txtStudPhone.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtStudPhone.ThemeAuthor = "Narwin";
             this.txtStudPhone.ThemeName = "MetroDark";
@@ -299,7 +268,7 @@
             this.txtAddress.Size = new System.Drawing.Size(217, 26);
             this.txtAddress.Style = MetroSet_UI.Enums.Style.Dark;
             this.txtAddress.StyleManager = null;
-            this.txtAddress.TabIndex = 48;
+            this.txtAddress.TabIndex = 5;
             this.txtAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtAddress.ThemeAuthor = "Narwin";
             this.txtAddress.ThemeName = "MetroDark";
@@ -312,7 +281,7 @@
             this.cmbGender.ArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(110)))), ((int)(((byte)(110)))));
             this.cmbGender.BackColor = System.Drawing.Color.Transparent;
             this.cmbGender.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.cmbGender.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.cmbGender.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(110)))), ((int)(((byte)(110)))));
             this.cmbGender.CausesValidation = false;
             this.cmbGender.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cmbGender.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -331,9 +300,9 @@
             this.cmbGender.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.cmbGender.SelectedItemForeColor = System.Drawing.Color.White;
             this.cmbGender.Size = new System.Drawing.Size(217, 26);
-            this.cmbGender.Style = MetroSet_UI.Enums.Style.Custom;
+            this.cmbGender.Style = MetroSet_UI.Enums.Style.Dark;
             this.cmbGender.StyleManager = null;
-            this.cmbGender.TabIndex = 49;
+            this.cmbGender.TabIndex = 3;
             this.cmbGender.ThemeAuthor = "Narwin";
             this.cmbGender.ThemeName = "MetroDark";
             // 
@@ -343,10 +312,10 @@
             this.txtDOB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDOB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtDOB.Location = new System.Drawing.Point(40, 198);
-            this.txtDOB.Mask = "00/00/0000";
+            this.txtDOB.Mask = "dd/MM/yyyy";
             this.txtDOB.Name = "txtDOB";
             this.txtDOB.Size = new System.Drawing.Size(217, 20);
-            this.txtDOB.TabIndex = 50;
+            this.txtDOB.TabIndex = 2;
             this.txtDOB.ValidatingType = typeof(System.DateTime);
             // 
             // AddStudent
@@ -365,7 +334,7 @@
             this.Controls.Add(this.txtStudPhone);
             this.Controls.Add(this.txtStudSurname);
             this.Controls.Add(this.txtStudName);
-            this.Controls.Add(this.txtStdNum);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddStudent";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;
@@ -378,8 +347,6 @@
         }
 
         #endregion
-
-        private MetroSet_UI.Controls.MetroSetTextBox txtStdNum;
         private MetroSet_UI.Controls.MetroSetButton btnAdd;
         private MetroSet_UI.Controls.MetroSetButton btnCancel;
         private MetroSet_UI.Controls.MetroSetButton btnWrite;

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SignUpForm));
             this.btnConfirmView = new MetroSet_UI.Controls.MetroSetButton();
             this.txtConfirmPassword = new MetroSet_UI.Controls.MetroSetTextBox();
             this.btnView = new MetroSet_UI.Controls.MetroSetButton();
@@ -262,6 +263,7 @@
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnSignUp);
             this.Controls.Add(this.btnCancel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SignUpForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Style = MetroSet_UI.Enums.Style.Dark;

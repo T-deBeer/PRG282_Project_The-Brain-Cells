@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -45,9 +46,60 @@ namespace PRG282_Project_The_Brain_Cells
                     break;
                 }
             }
-            
-            
-            
+        }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            string LogFilePath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
+                 + "\\LogFile.txt";
+            string bodyText = "";
+
+            DataHandler data = new DataHandler();
+            List<string> lines = data.GetLog();
+
+            foreach (var line in lines)
+            {
+                bodyText += line + "%20%3A%0D%0A";
+            }
+
+            System.Diagnostics.Process.Start($@"mailto:?subject=Log File Transcript from NeuroTix System&body={bodyText}");
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    DataHandler data = new DataHandler();
+                    List<string> lines = data.GetLog();
+
+                    string textFilePath = fbd.SelectedPath+@"\LogFileCopy.txt";
+
+                    if (File.Exists(textFilePath))
+                    {
+                        File.Delete(textFilePath);
+                    }
+
+                    try
+                    {
+                        using (TextWriter writer = new StreamWriter(textFilePath))
+                        {
+                            foreach (var line in lines)
+                            {
+                                writer.WriteLine(line);
+                            }
+                        }
+                        MessageBox.Show($"Copy has been created @{textFilePath}");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
         }
     }
 }
