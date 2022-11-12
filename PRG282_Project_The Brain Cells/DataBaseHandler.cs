@@ -14,8 +14,11 @@ namespace PRG282_Project_The_Brain_Cells
 {
     internal class DataBaseHandler
     {
+        DataHandler data = new DataHandler();
+        
         public List<Module> GetModules()
         {
+            
             List<Module> modules = new List<Module>();
             DataSet dataSet = new DataSet();
 
@@ -214,6 +217,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void AddCredential(Credential cred)
         {
+            
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -232,6 +236,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                     cmd.ExecuteNonQuery();
                 }
+                data.AddToLogFile("Credential Added: " + cred.Username);
             }
             catch (Exception ex)
             {
@@ -265,6 +270,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                     cmd.ExecuteNonQuery();
                 }
+                data.AddToLogFile("Module Added: " + mod.ModuleCode);
             }
             catch (Exception ex)
             {
@@ -301,6 +307,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                     cmd.ExecuteNonQuery();
                 }
+                data.AddToLogFile("Student Added: " + stud.StudentName +" "+ stud.StudentSurname);
             }
             catch (Exception ex)
             {
@@ -338,6 +345,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                     cmd.ExecuteNonQuery();
                 }
+                data.AddToLogFile("Student Updated: " + stud.StudentName + " " + stud.StudentSurname);
             }
             catch (Exception ex)
             {
@@ -370,6 +378,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                     cmd.ExecuteNonQuery();
                 }
+                data.AddToLogFile("Composite Added: " + comp.StudentNumber + " " + comp.ModuleCode);
             }
             catch (Exception ex)
             {
@@ -403,6 +412,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                     cmd.ExecuteNonQuery();
                 }
+                data.AddToLogFile("Composite Removed: " + comp.StudentNumber + " " + comp.ModuleCode);
             }
             catch (Exception ex)
             {
@@ -436,6 +446,7 @@ namespace PRG282_Project_The_Brain_Cells
 
                     cmd.ExecuteNonQuery();
                 }
+                data.AddToLogFile("Module update: " + mod.ModuleCode);
             }
             catch (Exception ex)
             {

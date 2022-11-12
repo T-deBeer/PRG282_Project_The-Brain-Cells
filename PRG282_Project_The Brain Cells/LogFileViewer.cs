@@ -31,18 +31,19 @@ namespace PRG282_Project_The_Brain_Cells
             DataHandler dataHandler = new DataHandler();
             string LogFilePath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\LogFile.txt";
-            try
-            {
-                dataHandler.WriteLogFile();
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
-            for (int i = 0; i < dataHandler.LogData.Count; i++)
+            string[] LastLines = File.ReadAllLines(LogFilePath);
+
+            for (int i = LastLines.Length-1; i > LastLines.Length - 100; i--)
             {
-                mrtbLogFile.Text += dataHandler.LogData[i];
+                if (i >= 0)
+                {
+                    mrtbLogFile.AppendText(LastLines[i] + "\n");
+                }
+                else
+                {
+                    break;
+                }
             }
             
             

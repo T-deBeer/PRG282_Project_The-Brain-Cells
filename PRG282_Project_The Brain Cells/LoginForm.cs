@@ -59,13 +59,13 @@ namespace PRG282_Project_The_Brain_Cells
             }
             else if (Login == true)
             {
+                DataHandler data = new DataHandler();
+                data.AddToLogFile("Login from: " + UsernameToCheck);
                 MessageBox.Show("You Have logged in successfully", "Login Successfull");
                 Menu mainMenu = new Menu();
                 mainMenu.Show();
                 this.Hide();
-                DataHandler data = new DataHandler();
-                data.LogData = data.GetLog();
-                data.LogData.Add("Login from: " + UsernameToCheck);
+                
             }
             /**
             DataBaseHandler dh = new DataBaseHandler();

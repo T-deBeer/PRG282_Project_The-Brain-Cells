@@ -34,25 +34,13 @@ namespace PRG282_Project_The_Brain_Cells
                 }
             }
         }
-        public void WriteLogFile()
+        public void AddToLogFile(string ToAdd)
         {
-            if (File.Exists(LogFilePath))
-            {
-                File.Delete(LogFilePath);
-            }
-
-            using (TextWriter writer = new StreamWriter(LogFilePath))
-            {
-                for (int i = 0; i < LogData.Count; i++)
-                {
-                    writer.WriteLine(LogData[i]);
-                }
-            }
+            
+            File.AppendAllText(LogFilePath,ToAdd +" ----> " +DateTime.Now.ToString() + "\n");
+            
         }
-        public void AddToLog(string String)
-        {
-            LogData.Add(String);
-        }
+        
         public List<string> GetLog()
         {
             

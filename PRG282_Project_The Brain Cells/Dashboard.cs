@@ -16,7 +16,8 @@ namespace PRG282_Project_The_Brain_Cells
   
     public partial class Dashboard : MetroSetForm
     {
-
+        DataHandler data = new DataHandler();
+        
         DataBaseHandler dh = new DataBaseHandler();
 
         List<string> tables = new List<string>();
@@ -47,6 +48,7 @@ namespace PRG282_Project_The_Brain_Cells
         {
             if (tableName == "ModuleTable")
             {
+                data.AddToLogFile("Viewed Module Table");
                 dgvDataBaseView.DataSource = null;
                 dgvDataBaseView.DataSource = modules;
 
@@ -56,6 +58,7 @@ namespace PRG282_Project_The_Brain_Cells
             }
             else if (tableName == "StudentTable")
             {
+                data.AddToLogFile("Viewed Student Table");
                 dgvDataBaseView.DataSource = null;
                 dgvDataBaseView.DataSource = students;
 
@@ -65,6 +68,7 @@ namespace PRG282_Project_The_Brain_Cells
             }
             else if (tableName == "CompositeTable")
             {
+                data.AddToLogFile("Viewed Composite Table");
                 dgvDataBaseView.DataSource = null;
                 dgvDataBaseView.DataSource = composite;
 
@@ -74,6 +78,7 @@ namespace PRG282_Project_The_Brain_Cells
             }
             else if (tableName == "CredentialTable")
             {
+                data.AddToLogFile("Viewed Credential Table");
                 dgvDataBaseView.DataSource = null;
                 dgvDataBaseView.DataSource = creds;
 
