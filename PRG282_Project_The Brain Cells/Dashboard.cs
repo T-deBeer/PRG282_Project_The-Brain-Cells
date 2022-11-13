@@ -286,17 +286,17 @@ namespace PRG282_Project_The_Brain_Cells
             {
                 if (tableName == "ModuleTable")
                 {
-                    string s = txtSearch.Text;
+                    string s = txtSearch.Text.ToLower();
 
                     List<Module> tempMods = new List<Module>();
                     foreach (Module mod in modules)
                     {
-                        if (mod.ModuleCode.Contains(s) || mod.ModuleName.Contains(s) || mod.ModuleDescription.Contains(s) || mod.ModuleResource.Contains(s))
+                        if (mod.ModuleCode.ToLower().Contains(s) || mod.ModuleName.ToLower().Contains(s) || mod.ModuleDescription.ToLower().Contains(s) || mod.ModuleResource.ToLower().Contains(s))
                         {
                           tempMods.Add(mod);    
                         }
             
-                    }
+                    }/*
                     for (int i = 0; i < tempMods.Count; i++)
                     {
                         for (int j = 0;j  < modules.Count;j++)
@@ -310,30 +310,30 @@ namespace PRG282_Project_The_Brain_Cells
                     foreach (var module in tempMods)
                     {
                         modules.Insert(0,module);
-                    }
+                    }*/
                    
                     dgvDataBaseView.DataSource = null;
-                    dgvDataBaseView.DataSource = modules;
+                    dgvDataBaseView.DataSource = tempMods;
                 }
                 else if (tableName == "StudentTable")
                 {
-                    string s = txtSearch.Text;
+                    string s = txtSearch.Text.ToLower();
 
                     List<Student> tempStudents = new List<Student>();
                     foreach (Student student in students)
                     {
-                        if (student.StudentName.Contains(s) || 
-                            student.StudentSurname.Contains(s) || 
-                            student.StudentPhone.Contains(s) || 
-                            student.StudentDOB.ToString().Contains(s)||
-                                Convert.ToString(student.StudentNumber).Contains(s)||
-                                student.StudentGender.Contains(s)||
-                                student.StudentAddress.Contains(s))
+                        if (student.StudentName.ToLower().Contains(s) || 
+                            student.StudentSurname.ToLower().Contains(s) || 
+                            student.StudentPhone.ToLower().Contains(s) || 
+                            student.StudentDOB.ToString().ToLower().Contains(s)||
+                                Convert.ToString(student.StudentNumber).ToLower().Contains(s)||
+                                student.StudentGender.ToLower().Contains(s)||
+                                student.StudentAddress.ToLower().Contains(s))
                         {
                             tempStudents.Add(student);
                         }
 
-                    }
+                    }/*
                     for (int i = 0; i < tempStudents.Count; i++)
                     {
                         for (int j = 0; j < students.Count; j++)
@@ -347,10 +347,10 @@ namespace PRG282_Project_The_Brain_Cells
                     foreach (var stud in tempStudents)
                     {
                         students.Insert(0, stud);
-                    }
+                    }*/
 
                     dgvDataBaseView.DataSource = null;
-                    dgvDataBaseView.DataSource = students;
+                    dgvDataBaseView.DataSource = tempStudents;
 
 
 
@@ -404,55 +404,8 @@ namespace PRG282_Project_The_Brain_Cells
                     case 1:
                         {
                         /*Can be coded, or left, depending on need*/
-                        /*
-                                 Student student = new Student();
-                                 Module module = new Module();
-                                 string modName;
-                                 string modCode;
-                                 int studentNum;
-                                 string studentName;
-                                 modCode = dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[1].Value.ToString();
-                                 studentNum = Convert.ToInt32(dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[0].Value.ToString());
-
-                                 for (int i = 0; i < modules.Count; i++)
-                                 {
-                                     if (modules[i].ModuleCode == dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[1].Value.ToString())
-                                     {
-                                         modName = modules[i].ModuleName;
-                                         modCode = modules[i].ModuleCode;
-                                         break;
-                                     }
-                                 }
-                                 for (int i = 0; i < students.Count; i++)
-                                 {
-                                     if (students[i].StudentNumber == Convert.ToInt32(dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[0].Value.ToString()))
-                                     {
-                                         studentName = students[i].StudentName;
-                                         studentNum = students[i].StudentNumber;
-                                         break;
-                                     }
-                                 }
-
-
-
-                                 modName = module.ModuleName;
-                                 modCode = module.ModuleCode;
-                                 studentName = student.StudentName;
-                                 studentNum = student.StudentNumber;
-
-                                 rtbEdit.Text = rtbEdit.Text + "STUDENT NAME: \n";
-                                 rtbEdit.Text = student.StudentName + "\n\n";
-                                 rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
-                                 rtbEdit.Text = student.StudentNumber.ToString() + "\n\n";
-
-                                 rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
-                                 rtbEdit.Text = module.ModuleName + "\n\n";
-                                 rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
-                                 rtbEdit.Text = module.ModuleCode;
-                                 /*
-                                 cmbOptions.Add("Sort by Student Number");
-                                 cmbOptions.Add("Sort by Module Code");
-                                 */
+                      
+                               
                         break;
                         }
                     case 2:
