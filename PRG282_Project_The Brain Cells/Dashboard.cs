@@ -27,6 +27,13 @@ namespace PRG282_Project_The_Brain_Cells
         List<Composite> composite = new List<Composite>();
         List<Credential> creds = new List<Credential>();
 
+        bool searched = false;
+        List<Module> tempmodules = new List<Module>();
+        List<Student> tempstudents = new List<Student>();
+        List<Composite> tempcomposite = new List<Composite>();
+        List<Credential> tempcreds = new List<Credential>();
+
+
         public Dashboard()
         {
             int SortByHold;
@@ -92,10 +99,10 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbTableSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+ searched = false;
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
             cmbSortByUpdate(cmbTableSelect.SelectedIndex);
-
+           
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -162,8 +169,6 @@ namespace PRG282_Project_The_Brain_Cells
             }
         }
 
-
-
         public void cmbSortByUpdate(int tableSelected)
         {
             List<string> cmbOptions = new List<string>();
@@ -222,7 +227,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            searched = false;
             int tableIndex = cmbTableSelect.SelectedIndex;
             dgvDataBaseView.DataSource = null;
 
@@ -275,51 +280,36 @@ namespace PRG282_Project_The_Brain_Cells
             }
         }
 
-
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string tableName = cmbTableSelect.SelectedItem.ToString();
-          
-            
+
+            searched = false;
             if (!String.IsNullOrWhiteSpace((txtSearch.Text)))
             {
+                searched = true;
                 if (tableName == "ModuleTable")
                 {
                     string s = txtSearch.Text.ToLower();
 
-                    List<Module> tempMods = new List<Module>();
+                     tempmodules = new List<Module>();
                     foreach (Module mod in modules)
                     {
                         if (mod.ModuleCode.ToLower().Contains(s) || mod.ModuleName.ToLower().Contains(s) || mod.ModuleDescription.ToLower().Contains(s) || mod.ModuleResource.ToLower().Contains(s))
                         {
-                          tempMods.Add(mod);    
+                          tempmodules.Add(mod);    
                         }
             
-                    }/*
-                    for (int i = 0; i < tempMods.Count; i++)
-                    {
-                        for (int j = 0;j  < modules.Count;j++)
-                        {
-                            if (modules[j] == tempMods[i])
-                            {
-                                modules.RemoveAt(j);
-                            }
-                        }
                     }
-                    foreach (var module in tempMods)
-                    {
-                        modules.Insert(0,module);
-                    }*/
                    
                     dgvDataBaseView.DataSource = null;
-                    dgvDataBaseView.DataSource = tempMods;
+                    dgvDataBaseView.DataSource = tempmodules;
                 }
                 else if (tableName == "StudentTable")
                 {
                     string s = txtSearch.Text.ToLower();
 
-                    List<Student> tempStudents = new List<Student>();
+                     tempstudents = new List<Student>();
                     foreach (Student student in students)
                     {
                         if (student.StudentName.ToLower().Contains(s) || 
@@ -330,31 +320,12 @@ namespace PRG282_Project_The_Brain_Cells
                                 student.StudentGender.ToLower().Contains(s)||
                                 student.StudentAddress.ToLower().Contains(s))
                         {
-                            tempStudents.Add(student);
+                            tempstudents.Add(student);
                         }
 
-                    }/*
-                    for (int i = 0; i < tempStudents.Count; i++)
-                    {
-                        for (int j = 0; j < students.Count; j++)
-                        {
-                            if (students[j] == tempStudents[i])
-                            {
-                                students.RemoveAt(j);
-                            }
-                        }
                     }
-                    foreach (var stud in tempStudents)
-                    {
-                        students.Insert(0, stud);
-                    }*/
-
                     dgvDataBaseView.DataSource = null;
-                    dgvDataBaseView.DataSource = tempStudents;
-
-
-
-
+                    dgvDataBaseView.DataSource = tempstudents;
 
                 }
                 else if (tableName == "CompositeTable")
@@ -377,6 +348,8 @@ namespace PRG282_Project_The_Brain_Cells
 
                 selectedTable = cmbTableSelect.SelectedIndex;
 
+            if (!searched)
+            {
                 switch (selectedTable)
                 {
                     case 0:
@@ -403,15 +376,15 @@ namespace PRG282_Project_The_Brain_Cells
                         }
                     case 1:
                         {
-                        /*Can be coded, or left, depending on need*/
-                      
-                               
-                        break;
+                            /*Can be coded, or left, depending on need*/
+
+
+                            break;
                         }
                     case 2:
                         {
-                        /*Can be coded, or left, depending on need*/
-                        break;
+                            /*Can be coded, or left, depending on need*/
+                            break;
                         }
                     case 3:
                         {
@@ -442,7 +415,80 @@ namespace PRG282_Project_The_Brain_Cells
                         }
                     default:
                         break;
+                } 
+            }
+            else
+            {
+                switch (selectedTable)
+                {
+                    case 0:
+                        {
+                            if (dgvDataBaseView.CurrentRow.Index > tempmodules.Count)
+                            {
+                                selectedIndex = 0;
+                            }
+                            else
+                            {
+                                selectedIndex = dgvDataBaseView.CurrentRow.Index;
+                            }
+
+                            rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempmodules[selectedIndex].ModuleName + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempmodules[selectedIndex].ModuleCode + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempmodules[selectedIndex].ModuleDescription + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempmodules[selectedIndex].ModuleResource;
+
+                            break;
+                        }
+                    case 1:
+                        {
+                            /*Can be coded, or left, depending on need*/
+
+
+                            break;
+                        }
+                    case 2:
+                        {
+                            /*Can be coded, or left, depending on need*/
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (dgvDataBaseView.CurrentRow.Index > tempstudents.Count)
+                            {
+                                selectedIndex = 0;
+                            }
+                            else
+                            {
+                                selectedIndex = dgvDataBaseView.CurrentRow.Index;
+                            }
+
+                            rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentNumber + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "NAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentName + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentSurname + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentDOB + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentGender + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentPhone + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentAddress + "\n\n";
+                            break;
+                        }
+                    default:
+                        break;
                 }
+                searched = false;
+
+            }
+
             }
 
             private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
