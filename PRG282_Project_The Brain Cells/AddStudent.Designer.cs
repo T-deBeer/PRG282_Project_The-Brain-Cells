@@ -309,13 +309,14 @@
             // txtDOB
             // 
             this.txtDOB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.txtDOB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDOB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDOB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtDOB.Location = new System.Drawing.Point(40, 198);
-            this.txtDOB.Mask = "dd/MM/yyyy";
+            this.txtDOB.Mask = "00/00/0000";
             this.txtDOB.Name = "txtDOB";
-            this.txtDOB.Size = new System.Drawing.Size(217, 20);
+            this.txtDOB.Size = new System.Drawing.Size(217, 27);
             this.txtDOB.TabIndex = 2;
+            this.txtDOB.Tag = "dd/MM/yyyy";
             this.txtDOB.ValidatingType = typeof(System.DateTime);
             // 
             // AddStudent

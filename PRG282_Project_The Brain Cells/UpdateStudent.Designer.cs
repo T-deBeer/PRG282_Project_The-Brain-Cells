@@ -59,7 +59,7 @@
             this.DateStudDOB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DateStudDOB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.DateStudDOB.Location = new System.Drawing.Point(115, 248);
-            this.DateStudDOB.Mask = "dd/MM/yyyy";
+            this.DateStudDOB.Mask = "00/00/0000";
             this.DateStudDOB.Name = "DateStudDOB";
             this.DateStudDOB.Size = new System.Drawing.Size(217, 20);
             this.DateStudDOB.TabIndex = 56;
@@ -306,11 +306,11 @@
             this.lblDOB.IsDerivedStyle = true;
             this.lblDOB.Location = new System.Drawing.Point(115, 228);
             this.lblDOB.Name = "lblDOB";
-            this.lblDOB.Size = new System.Drawing.Size(91, 17);
+            this.lblDOB.Size = new System.Drawing.Size(175, 17);
             this.lblDOB.Style = MetroSet_UI.Enums.Style.Dark;
             this.lblDOB.StyleManager = null;
             this.lblDOB.TabIndex = 62;
-            this.lblDOB.Text = "Date of Birth:";
+            this.lblDOB.Text = "Date of Birth(dd/MM/yyyy):";
             this.lblDOB.ThemeAuthor = "Narwin";
             this.lblDOB.ThemeName = "MetroDark";
             // 

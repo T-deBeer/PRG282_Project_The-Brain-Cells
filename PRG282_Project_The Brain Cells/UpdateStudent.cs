@@ -59,6 +59,7 @@ namespace PRG282_Project_The_Brain_Cells
                     txtStudName.Text = stud.StudentName;
                     txtStudSurname.Text = stud.StudentSurname;
                     txtStudPhone.Text = stud.StudentPhone;
+                    DateStudDOB.Text = null;
                     DateStudDOB.Text = stud.StudentDOB.ToString("dd/MM/yyyy"); ;
                     txtImage.Text = stud.StudentImage;
                     cmbGender.SelectedItem = stud.StudentGender;
