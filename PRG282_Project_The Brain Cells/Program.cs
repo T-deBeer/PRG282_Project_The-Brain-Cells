@@ -30,6 +30,7 @@ namespace PRG282_Project_The_Brain_Cells
             Thread.Sleep(5000);
             t.Abort();
             Application.Run(new LoginForm());
+           
 
         }
 

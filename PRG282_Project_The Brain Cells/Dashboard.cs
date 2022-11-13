@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -13,11 +14,11 @@ using System.Windows.Forms;
 namespace PRG282_Project_The_Brain_Cells
 {
 
-  
+
     public partial class Dashboard : MetroSetForm
     {
         DataHandler data = new DataHandler();
-        
+
         DataBaseHandler dh = new DataBaseHandler();
 
         List<string> tables = new List<string>();
@@ -94,7 +95,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
             cmbSortByUpdate(cmbTableSelect.SelectedIndex);
-         
+
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -106,7 +107,7 @@ namespace PRG282_Project_The_Brain_Cells
                 dgvDataBaseView.Rows[selectedRow - 1].Selected = true;
                 dgvDataBaseView.CurrentCell = dgvDataBaseView[0, selectedRow - 1];
             }
-           
+
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -118,7 +119,7 @@ namespace PRG282_Project_The_Brain_Cells
                 dgvDataBaseView.Rows[selectedRow + 1].Selected = true;
                 dgvDataBaseView.CurrentCell = dgvDataBaseView[0, selectedRow + 1];
             }
-          
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -221,12 +222,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /*
-                List<Module> modules = new List<Module>();
-                List<Composite> composite = new List<Composite>();
-                List<Credential> creds = new List<Credential>();
-                List<Student> students = new List<Student>();
-            */
+
             int tableIndex = cmbTableSelect.SelectedIndex;
             dgvDataBaseView.DataSource = null;
 
@@ -283,183 +279,271 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
-        }
-
-        public void updateRTB()
-        {
-            int selectedIndex;
-            int selectedTable;
-            rtbEdit.ResetText();
-
-            selectedTable = cmbTableSelect.SelectedIndex;
-
-            switch (selectedTable)
-            {
-                case 0:
-                    {
-                        if (dgvDataBaseView.CurrentRow.Index > modules.Count)
-                        {
-                            selectedIndex = 0;
-                        }
-                        else
-                        {
-                            selectedIndex = dgvDataBaseView.CurrentRow.Index;
-                        }
-
-                        rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
-                        rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleName + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
-                        rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleCode + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
-                        rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleDescription + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
-                        rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleResource;
-
-                        break;
-                    }
-                case 1:
-                    {
-               /*
-                        Student student = new Student();
-                        Module module = new Module();
-                        string modName;
-                        string modCode;
-                        int studentNum;
-                        string studentName;
-                        modCode = dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[1].Value.ToString();
-                        studentNum = Convert.ToInt32(dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[0].Value.ToString());
-
-                        for (int i = 0; i < modules.Count; i++)
-                        {
-                            if (modules[i].ModuleCode == dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[1].Value.ToString())
-                            {
-                                modName = modules[i].ModuleName;
-                                modCode = modules[i].ModuleCode;
-                                break;
-                            }
-                        }
-                        for (int i = 0; i < students.Count; i++)
-                        {
-                            if (students[i].StudentNumber == Convert.ToInt32(dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[0].Value.ToString()))
-                            {
-                                studentName = students[i].StudentName;
-                                studentNum = students[i].StudentNumber;
-                                break;
-                            }
-                        }
-
-
-
-                        modName = module.ModuleName;
-                        modCode = module.ModuleCode;
-                        studentName = student.StudentName;
-                        studentNum = student.StudentNumber;
-
-                        rtbEdit.Text = rtbEdit.Text + "STUDENT NAME: \n";
-                        rtbEdit.Text = student.StudentName + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
-                        rtbEdit.Text = student.StudentNumber.ToString() + "\n\n";
-
-                        rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
-                        rtbEdit.Text = module.ModuleName + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
-                        rtbEdit.Text = module.ModuleCode;
-                        /*
-                        cmbOptions.Add("Sort by Student Number");
-                        cmbOptions.Add("Sort by Module Code");
-                        */
-                        break;
-                    }
-                case 2:
-                    {
-              
-                        break;
-                    }
-                case 3:
-                    {
-                        if (dgvDataBaseView.CurrentRow.Index > students.Count)
-                        {
-                            selectedIndex = 0;
-                        }
-                        else
-                        {
-                            selectedIndex = dgvDataBaseView.CurrentRow.Index;
-                        }
-
-                        rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
-                        rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentNumber + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "NAME: \n";
-                        rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentName + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
-                        rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentSurname + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
-                        rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentDOB + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
-                        rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentGender + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
-                        rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentPhone + "\n\n";
-                        rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
-                        rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentAddress + "\n\n";
-                        break;
-                    }
-                default:
-                    break;
-            }
-        }
-
-        private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
-        {
-            updateRTB();
-        }
-
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
             string tableName = cmbTableSelect.SelectedItem.ToString();
-            int selectedIndex = dgvDataBaseView.CurrentRow.Index;
-
-            if (tableName == "ModuleTable")
+          
+            
+            if (!String.IsNullOrWhiteSpace((txtSearch.Text)))
             {
-                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                if (tableName == "ModuleTable")
                 {
-                    dh.RemoveCompModule(modules[selectedIndex].ModuleCode);
-                    foreach (var mod in modules.Where(x => x.ModuleCode == modules[selectedIndex].ModuleCode))
+                    string s = txtSearch.Text;
+
+                    List<Module> tempMods = new List<Module>();
+                    foreach (Module mod in modules)
                     {
-                        dh.RemoveModule(mod);
-                    }  
+                        if (mod.ModuleCode.Contains(s) || mod.ModuleName.Contains(s) || mod.ModuleDescription.Contains(s) || mod.ModuleResource.Contains(s))
+                        {
+                          tempMods.Add(mod);    
+                        }
+            
+                    }
+                    for (int i = 0; i < tempMods.Count; i++)
+                    {
+                        for (int j = 0;j  < modules.Count;j++)
+                        {
+                            if (modules[j] == tempMods[i])
+                            {
+                                modules.RemoveAt(j);
+                            }
+                        }
+                    }
+                    foreach (var module in tempMods)
+                    {
+                        modules.Insert(0,module);
+                    }
+                   
+                    dgvDataBaseView.DataSource = null;
+                    dgvDataBaseView.DataSource = modules;
+                }
+                else if (tableName == "StudentTable")
+                {
+                    string s = txtSearch.Text;
+
+                    List<Student> tempStudents = new List<Student>();
+                    foreach (Student student in students)
+                    {
+                        if (student.StudentName.Contains(s) || 
+                            student.StudentSurname.Contains(s) || 
+                            student.StudentPhone.Contains(s) || 
+                            student.StudentDOB.ToString().Contains(s)||
+                                Convert.ToString(student.StudentNumber).Contains(s)||
+                                student.StudentGender.Contains(s)||
+                                student.StudentAddress.Contains(s))
+                        {
+                            tempStudents.Add(student);
+                        }
+
+                    }
+                    for (int i = 0; i < tempStudents.Count; i++)
+                    {
+                        for (int j = 0; j < students.Count; j++)
+                        {
+                            if (students[j] == tempStudents[i])
+                            {
+                                students.RemoveAt(j);
+                            }
+                        }
+                    }
+                    foreach (var stud in tempStudents)
+                    {
+                        students.Insert(0, stud);
+                    }
+
+                    dgvDataBaseView.DataSource = null;
+                    dgvDataBaseView.DataSource = students;
+
+
+
+
+
+                }
+                else if (tableName == "CompositeTable")
+                {
+                 /*Can be coded, or left, depending on need*/
+                }
+                else if (tableName == "CredentialTable")
+                {
+                    /*Can be coded, or left, depending on need*/
                 }
             }
-            else if (tableName == "StudentTable")
+
+            }
+
+            public void updateRTB()
             {
-                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                int selectedIndex;
+                int selectedTable;
+                rtbEdit.ResetText();
+
+                selectedTable = cmbTableSelect.SelectedIndex;
+
+                switch (selectedTable)
                 {
-                    dh.RemoveCompStudent(students[selectedIndex].StudentNumber);
-                    foreach (var stud in students.Where(x => x.StudentNumber == students[selectedIndex].StudentNumber))
+                    case 0:
+                        {
+                            if (dgvDataBaseView.CurrentRow.Index > modules.Count)
+                            {
+                                selectedIndex = 0;
+                            }
+                            else
+                            {
+                                selectedIndex = dgvDataBaseView.CurrentRow.Index;
+                            }
+
+                            rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleName + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                            rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleCode + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
+                            rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleDescription + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
+                            rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleResource;
+
+                            break;
+                        }
+                    case 1:
+                        {
+                        /*Can be coded, or left, depending on need*/
+                        /*
+                                 Student student = new Student();
+                                 Module module = new Module();
+                                 string modName;
+                                 string modCode;
+                                 int studentNum;
+                                 string studentName;
+                                 modCode = dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[1].Value.ToString();
+                                 studentNum = Convert.ToInt32(dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[0].Value.ToString());
+
+                                 for (int i = 0; i < modules.Count; i++)
+                                 {
+                                     if (modules[i].ModuleCode == dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[1].Value.ToString())
+                                     {
+                                         modName = modules[i].ModuleName;
+                                         modCode = modules[i].ModuleCode;
+                                         break;
+                                     }
+                                 }
+                                 for (int i = 0; i < students.Count; i++)
+                                 {
+                                     if (students[i].StudentNumber == Convert.ToInt32(dgvDataBaseView.Rows[dgvDataBaseView.CurrentRow.Index].Cells[0].Value.ToString()))
+                                     {
+                                         studentName = students[i].StudentName;
+                                         studentNum = students[i].StudentNumber;
+                                         break;
+                                     }
+                                 }
+
+
+
+                                 modName = module.ModuleName;
+                                 modCode = module.ModuleCode;
+                                 studentName = student.StudentName;
+                                 studentNum = student.StudentNumber;
+
+                                 rtbEdit.Text = rtbEdit.Text + "STUDENT NAME: \n";
+                                 rtbEdit.Text = student.StudentName + "\n\n";
+                                 rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                                 rtbEdit.Text = student.StudentNumber.ToString() + "\n\n";
+
+                                 rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                                 rtbEdit.Text = module.ModuleName + "\n\n";
+                                 rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                                 rtbEdit.Text = module.ModuleCode;
+                                 /*
+                                 cmbOptions.Add("Sort by Student Number");
+                                 cmbOptions.Add("Sort by Module Code");
+                                 */
+                        break;
+                        }
+                    case 2:
+                        {
+                        /*Can be coded, or left, depending on need*/
+                        break;
+                        }
+                    case 3:
+                        {
+                            if (dgvDataBaseView.CurrentRow.Index > students.Count)
+                            {
+                                selectedIndex = 0;
+                            }
+                            else
+                            {
+                                selectedIndex = dgvDataBaseView.CurrentRow.Index;
+                            }
+
+                            rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentNumber + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "NAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentName + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentSurname + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentDOB + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentGender + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentPhone + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentAddress + "\n\n";
+                            break;
+                        }
+                    default:
+                        break;
+                }
+            }
+
+            private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
+            {
+                updateRTB();
+            }
+
+            private void btnRemove_Click(object sender, EventArgs e)
+            {
+                string tableName = cmbTableSelect.SelectedItem.ToString();
+                int selectedIndex = dgvDataBaseView.CurrentRow.Index;
+
+                if (tableName == "ModuleTable")
+                {
+                    if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                     {
-                        dh.RemoveStudent(stud);
+                        dh.RemoveCompModule(modules[selectedIndex].ModuleCode);
+                        foreach (var mod in modules.Where(x => x.ModuleCode == modules[selectedIndex].ModuleCode))
+                        {
+                            dh.RemoveModule(mod);
+                        }
+                    }
+                }
+                else if (tableName == "StudentTable")
+                {
+                    if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        dh.RemoveCompStudent(students[selectedIndex].StudentNumber);
+                        foreach (var stud in students.Where(x => x.StudentNumber == students[selectedIndex].StudentNumber))
+                        {
+                            dh.RemoveStudent(stud);
+                        }
+                    }
+                }
+                else if (tableName == "CredentialTable")
+                {
+                    if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    {
+                        foreach (var cred in creds.Where(x => x.Username == creds[selectedIndex].Username))
+                        {
+                            dh.RemoveCredential(cred);
+                        }
                     }
                 }
             }
-            else if (tableName == "CredentialTable")
-            {
-                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                {
-                    foreach (var cred in creds.Where(x => x.Username == creds[selectedIndex].Username))
-                    {
-                        dh.RemoveCredential(cred);
-                    }
-                }
-            }
-        }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            Menu menu = new Menu();
-            menu.Show();
-            this.Hide();
+            private void btnBack_Click(object sender, EventArgs e)
+            {
+                Menu menu = new Menu();
+                menu.Show();
+                this.Hide();
+            }
         }
     }
-}
