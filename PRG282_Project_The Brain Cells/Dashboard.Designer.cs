@@ -46,6 +46,7 @@
             this.txtSearch = new MetroSet_UI.Controls.MetroSetTextBox();
             this.cmbSortBy = new System.Windows.Forms.ComboBox();
             this.btnBack = new MetroSet_UI.Controls.MetroSetButton();
+            this.btnReset = new MetroSet_UI.Controls.MetroSetButton();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDataBaseView)).BeginInit();
             this.SuspendLayout();
@@ -267,7 +268,7 @@
             this.btnNext.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnNext.HoverTextColor = System.Drawing.Color.White;
             this.btnNext.IsDerivedStyle = true;
-            this.btnNext.Location = new System.Drawing.Point(796, 498);
+            this.btnNext.Location = new System.Drawing.Point(795, 498);
             this.btnNext.Name = "btnNext";
             this.btnNext.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnNext.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
@@ -420,12 +421,40 @@
             this.btnBack.ThemeName = "MetroDark";
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnReset
+            // 
+            this.btnReset.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnReset.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnReset.DisabledForeColor = System.Drawing.Color.Gray;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnReset.HoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.btnReset.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
+            this.btnReset.HoverTextColor = System.Drawing.Color.White;
+            this.btnReset.IsDerivedStyle = true;
+            this.btnReset.Location = new System.Drawing.Point(934, 498);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.btnReset.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
+            this.btnReset.NormalTextColor = System.Drawing.Color.White;
+            this.btnReset.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnReset.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
+            this.btnReset.PressTextColor = System.Drawing.Color.White;
+            this.btnReset.Size = new System.Drawing.Size(331, 26);
+            this.btnReset.Style = MetroSet_UI.Enums.Style.Custom;
+            this.btnReset.StyleManager = null;
+            this.btnReset.TabIndex = 23;
+            this.btnReset.Text = "Reset table";
+            this.btnReset.ThemeAuthor = "Narwin";
+            this.btnReset.ThemeName = "MetroDark";
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1280, 687);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.cmbSortBy);
             this.Controls.Add(this.btnSearch);
@@ -472,5 +501,6 @@
         private MetroSet_UI.Controls.MetroSetTextBox txtSearch;
         private System.Windows.Forms.ComboBox cmbSortBy;
         private MetroSet_UI.Controls.MetroSetButton btnBack;
+        private MetroSet_UI.Controls.MetroSetButton btnReset;
     }
 }

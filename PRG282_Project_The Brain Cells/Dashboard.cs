@@ -99,10 +99,10 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbTableSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
- searched = false;
+            searched = false;
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
             cmbSortByUpdate(cmbTableSelect.SelectedIndex);
-           
+
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -160,7 +160,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void dgvDataBaseView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvDataBaseView.DataSource == creds)
+            if (dgvDataBaseView.DataSource.GetType() == creds.GetType())
             {
                 if (e.ColumnIndex == 1 && e.Value != null)
                 {
@@ -292,16 +292,16 @@ namespace PRG282_Project_The_Brain_Cells
                 {
                     string s = txtSearch.Text.ToLower();
 
-                     tempmodules = new List<Module>();
+                    tempmodules = new List<Module>();
                     foreach (Module mod in modules)
                     {
                         if (mod.ModuleCode.ToLower().Contains(s) || mod.ModuleName.ToLower().Contains(s) || mod.ModuleDescription.ToLower().Contains(s) || mod.ModuleResource.ToLower().Contains(s))
                         {
-                          tempmodules.Add(mod);    
+                            tempmodules.Add(mod);
                         }
-            
+
                     }
-                   
+
                     dgvDataBaseView.DataSource = null;
                     dgvDataBaseView.DataSource = tempmodules;
                 }
@@ -309,15 +309,15 @@ namespace PRG282_Project_The_Brain_Cells
                 {
                     string s = txtSearch.Text.ToLower();
 
-                     tempstudents = new List<Student>();
+                    tempstudents = new List<Student>();
                     foreach (Student student in students)
                     {
-                        if (student.StudentName.ToLower().Contains(s) || 
-                            student.StudentSurname.ToLower().Contains(s) || 
-                            student.StudentPhone.ToLower().Contains(s) || 
-                            student.StudentDOB.ToString().ToLower().Contains(s)||
-                                Convert.ToString(student.StudentNumber).ToLower().Contains(s)||
-                                student.StudentGender.ToLower().Contains(s)||
+                        if (student.StudentName.ToLower().Contains(s) ||
+                            student.StudentSurname.ToLower().Contains(s) ||
+                            student.StudentPhone.ToLower().Contains(s) ||
+                            student.StudentDOB.ToString().ToLower().Contains(s) ||
+                                Convert.ToString(student.StudentNumber).ToLower().Contains(s) ||
+                                student.StudentGender.ToLower().Contains(s) ||
                                 student.StudentAddress.ToLower().Contains(s))
                         {
                             tempstudents.Add(student);
@@ -330,23 +330,35 @@ namespace PRG282_Project_The_Brain_Cells
                 }
                 else if (tableName == "CompositeTable")
                 {
-                 /*Can be coded, or left, depending on need*/
+                    List<Composite> tempList = new List<Composite>();
+                    foreach (var comp in composite.Where(x => x.StudentNumber.ToString().Contains(txtSearch.Text) || x.ModuleCode.Contains(txtSearch.Text)))
+                    {
+                        tempList.Add(comp);
+                    }
+                    dgvDataBaseView.DataSource = null;
+                    dgvDataBaseView.DataSource = tempList;
                 }
                 else if (tableName == "CredentialTable")
                 {
-                    /*Can be coded, or left, depending on need*/
+                    List<Credential> tempList = new List<Credential>();
+                    foreach (var cred in creds.Where(x => x.Username.ToLower().Contains(txtSearch.Text.ToLower())))
+                    {
+                        tempList.Add(cred);
+                    }
+                    dgvDataBaseView.DataSource = null;
+                    dgvDataBaseView.DataSource = tempList;
                 }
             }
 
-            }
+        }
 
-            public void updateRTB()
-            {
-                int selectedIndex;
-                int selectedTable;
-                rtbEdit.ResetText();
+        public void updateRTB()
+        {
+            int selectedIndex;
+            int selectedTable;
+            rtbEdit.ResetText();
 
-                selectedTable = cmbTableSelect.SelectedIndex;
+            selectedTable = cmbTableSelect.SelectedIndex;
 
             if (!searched)
             {
@@ -415,7 +427,7 @@ namespace PRG282_Project_The_Brain_Cells
                         }
                     default:
                         break;
-                } 
+                }
             }
             else
             {
@@ -489,60 +501,84 @@ namespace PRG282_Project_The_Brain_Cells
 
             }
 
-            }
+        }
 
-            private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
+        private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
+        {
+            updateRTB();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            string tableName = cmbTableSelect.SelectedItem.ToString();
+            int selectedIndex = dgvDataBaseView.CurrentRow.Index;
+
+            if (tableName == "ModuleTable")
             {
-                updateRTB();
-            }
-
-            private void btnRemove_Click(object sender, EventArgs e)
-            {
-                string tableName = cmbTableSelect.SelectedItem.ToString();
-                int selectedIndex = dgvDataBaseView.CurrentRow.Index;
-
-                if (tableName == "ModuleTable")
+                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                    dh.RemoveCompModule(modules[selectedIndex].ModuleCode);
+                    foreach (var mod in modules.Where(x => x.ModuleCode == modules[selectedIndex].ModuleCode))
                     {
-                        dh.RemoveCompModule(modules[selectedIndex].ModuleCode);
-                        foreach (var mod in modules.Where(x => x.ModuleCode == modules[selectedIndex].ModuleCode))
-                        {
-                            dh.RemoveModule(mod);
-                        }
-                    }
-                }
-                else if (tableName == "StudentTable")
-                {
-                    if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        dh.RemoveCompStudent(students[selectedIndex].StudentNumber);
-                        foreach (var stud in students.Where(x => x.StudentNumber == students[selectedIndex].StudentNumber))
-                        {
-                            dh.RemoveStudent(stud);
-                        }
-                    }
-                }
-                else if (tableName == "CredentialTable")
-                {
-                    if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
-                    {
-                        foreach (var cred in creds.Where(x => x.Username == creds[selectedIndex].Username))
-                        {
-                            dh.RemoveCredential(cred);
-                        }
+                        dh.RemoveModule(mod);
                     }
                 }
             }
-
-            private void btnBack_Click(object sender, EventArgs e)
+            else if (tableName == "StudentTable")
             {
-                Menu menu = new Menu();
-                menu.Show();
-                this.Hide();
+                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    dh.RemoveCompStudent(students[selectedIndex].StudentNumber);
+                    foreach (var stud in students.Where(x => x.StudentNumber == students[selectedIndex].StudentNumber))
+                    {
+                        dh.RemoveStudent(stud);
+                    }
+                }
+            }
+            else if (tableName == "CredentialTable")
+            {
+                if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+                {
+                    foreach (var cred in creds.Where(x => x.Username == creds[selectedIndex].Username))
+                    {
+                        dh.RemoveCredential(cred);
+                    }
+                }
             }
         }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            Menu menu = new Menu();
+            menu.Show();
+            this.Hide();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            
+            string tableName = cmbTableSelect.SelectedItem.ToString();
+            if (tableName == "ModuleTable")
+            {
+                dgvDataBaseView.DataSource = modules;
+            }
+            else if (tableName == "CompositeTable")
+            {
+                dgvDataBaseView.DataSource = composite;
+            }
+            else if (tableName == "CredentialTable")
+            {
+                dgvDataBaseView.DataSource = creds;
+            }
+            else if (tableName == "StudentTable")
+            {
+                dgvDataBaseView.DataSource = students;
+            }
+
+            txtSearch.Text = null;
+        }
     }
+}
