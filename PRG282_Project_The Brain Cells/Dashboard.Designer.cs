@@ -225,6 +225,7 @@
             this.dgvDataBaseView.MultiSelect = false;
             this.dgvDataBaseView.Name = "dgvDataBaseView";
             this.dgvDataBaseView.ReadOnly = true;
+            this.dgvDataBaseView.RowHeadersWidth = 62;
             this.dgvDataBaseView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDataBaseView.Size = new System.Drawing.Size(913, 344);
             this.dgvDataBaseView.TabIndex = 12;
@@ -390,7 +391,7 @@
             this.cmbSortBy.FormattingEnabled = true;
             this.cmbSortBy.Location = new System.Drawing.Point(305, 496);
             this.cmbSortBy.Name = "cmbSortBy";
-            this.cmbSortBy.Size = new System.Drawing.Size(337, 28);
+            this.cmbSortBy.Size = new System.Drawing.Size(337, 38);
             this.cmbSortBy.TabIndex = 21;
             this.cmbSortBy.SelectedIndexChanged += new System.EventHandler(this.cmbSortBy_SelectedIndexChanged);
             // 
@@ -431,7 +432,7 @@
             this.btnReset.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(207)))), ((int)(((byte)(255)))));
             this.btnReset.HoverTextColor = System.Drawing.Color.White;
             this.btnReset.IsDerivedStyle = true;
-            this.btnReset.Location = new System.Drawing.Point(934, 498);
+            this.btnReset.Location = new System.Drawing.Point(755, 109);
             this.btnReset.Name = "btnReset";
             this.btnReset.NormalBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.btnReset.NormalColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
@@ -439,18 +440,18 @@
             this.btnReset.PressBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.btnReset.PressColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(147)))), ((int)(((byte)(195)))));
             this.btnReset.PressTextColor = System.Drawing.Color.White;
-            this.btnReset.Size = new System.Drawing.Size(331, 26);
+            this.btnReset.Size = new System.Drawing.Size(154, 26);
             this.btnReset.Style = MetroSet_UI.Enums.Style.Custom;
             this.btnReset.StyleManager = null;
             this.btnReset.TabIndex = 23;
-            this.btnReset.Text = "Reset table";
+            this.btnReset.Text = "Reset Search";
             this.btnReset.ThemeAuthor = "Narwin";
             this.btnReset.ThemeName = "MetroDark";
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // Dashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1280, 687);

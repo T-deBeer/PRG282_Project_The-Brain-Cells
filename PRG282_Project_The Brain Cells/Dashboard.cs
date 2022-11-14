@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,8 +19,7 @@ namespace PRG282_Project_The_Brain_Cells
     public partial class Dashboard : MetroSetForm
     {
         DataHandler data = new DataHandler();
-
-        DataBaseHandler dh = new DataBaseHandler();
+        DataBaseHandler dbh = new DataBaseHandler();
 
         List<string> tables = new List<string>();
         List<Module> modules = new List<Module>();
@@ -39,17 +39,22 @@ namespace PRG282_Project_The_Brain_Cells
             int SortByHold;
             InitializeComponent();
 
-            tables = dh.GetTables();
-            modules = dh.GetModules();
-            students = dh.GetStudents();
-            composite = dh.GetComposite();
-            creds = dh.GetCreds();
-
+            tables = dbh.GetTables();
+            modules = dbh.GetModules();
+            students = dbh.GetStudents();
+            composite = dbh.GetComposite();
+            creds = dbh.GetCreds();
+            tempmodules = modules;
+            tempstudents = students;
+            tempcomposite = composite;
+            tempcreds = creds;
             cmbTableSelect.DataSource = tables;
-            SortByHold = cmbTableSelect.SelectedIndex;
+
+                  SortByHold = cmbTableSelect.SelectedIndex;
 
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
             cmbSortByUpdate(SortByHold);
+            updateRTBInit();
         }
 
         public void LoadDataView(string tableName)
@@ -96,10 +101,47 @@ namespace PRG282_Project_The_Brain_Cells
             }
 
         }
+        public void cmbSortByUpdate(int tableSelected)
+        {
+            List<string> cmbOptions = new List<string>();
+            switch (tableSelected)
+            {
+                case 0:
+                    {
+                        cmbOptions.Add("Sort by Module Code");
+                        cmbOptions.Add("Sort by Module Name");
+                        break;
+                    }
+                case 1:
+                    {
+                        cmbOptions.Add("Sort by Student Number");
+                        cmbOptions.Add("Sort by Module Code");
+
+                        break;
+                    }
+                case 2:
+                    {
+                        cmbOptions.Add("Sort by Username");
+                        cmbOptions.Add("Unsort");
+
+                        break;
+                    }
+                case 3:
+                    {
+                        cmbOptions.Add("Sort by Student Number");
+                        cmbOptions.Add("Sort by Student Name");
+
+                        break;
+                    }
+                default:
+                    break;
+            }
+            cmbSortBy.DataSource = cmbOptions;
+        }
 
         private void cmbTableSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            searched = false;
+           
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
             cmbSortByUpdate(cmbTableSelect.SelectedIndex);
 
@@ -169,45 +211,6 @@ namespace PRG282_Project_The_Brain_Cells
             }
         }
 
-        public void cmbSortByUpdate(int tableSelected)
-        {
-            List<string> cmbOptions = new List<string>();
-            switch (tableSelected)
-            {
-                case 0:
-                    {
-                        cmbOptions.Add("Sort by Module Code");
-                        cmbOptions.Add("Sort by Module Name");
-                        break;
-                    }
-                case 1:
-                    {
-                        cmbOptions.Add("Sort by Student Number");
-                        cmbOptions.Add("Sort by Module Code");
-
-                        break;
-                    }
-                case 2:
-                    {
-                        cmbOptions.Add("Sort by Username");
-                        cmbOptions.Add("Unsort");
-
-                        break;
-                    }
-                case 3:
-                    {
-                        cmbOptions.Add("Sort by Student Number");
-                        cmbOptions.Add("Sort by Student Name");
-
-                        break;
-                    }
-                default:
-                    break;
-            }
-            cmbSortBy.DataSource = cmbOptions;
-        }
-
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             string tableName = cmbTableSelect.SelectedItem.ToString();
@@ -227,61 +230,146 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            searched = false;
             int tableIndex = cmbTableSelect.SelectedIndex;
             dgvDataBaseView.DataSource = null;
-
-            switch (tableIndex)
+            if (searched)
             {
-                case 0:
-                    {
-                        if (cmbSortBy.SelectedIndex == 0)
-                            modules.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
-                        else
-                            modules.Sort((a, b) => a.ModuleName.CompareTo(b.ModuleName));
 
-                        dgvDataBaseView.DataSource = modules;
+
+
+
+
+
+
+
+
+
+
+
+
+                switch (tableIndex)
+                {
+                    case 0:
+                        {
+                            if (cmbSortBy.SelectedIndex == 0)
+                                tempmodules.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
+                            else
+                                tempmodules.Sort((a, b) => a.ModuleName.CompareTo(b.ModuleName));
+
+                            dgvDataBaseView.DataSource = tempmodules;
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (cmbSortBy.SelectedIndex == 0)
+                                tempcomposite.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
+
+                            else
+                                tempcomposite.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
+
+                            dgvDataBaseView.DataSource = tempcomposite;
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (cmbSortBy.SelectedIndex == 0)
+                                tempcreds.Sort((a, b) => a.Username.CompareTo(b.Username));
+                            else
+                                tempcreds.Sort((a, b) => a.Password.CompareTo(b.Password));
+
+                            dgvDataBaseView.DataSource = tempcreds;
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (cmbSortBy.SelectedIndex == 0)
+                                tempstudents.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
+                            else
+                                tempstudents.Sort((a, b) => a.StudentName.CompareTo(b.StudentName));
+
+
+                            dgvDataBaseView.DataSource = tempstudents;
+                            break;
+                        }
+                    default:
                         break;
-                    }
-                case 1:
-                    {
-                        if (cmbSortBy.SelectedIndex == 0)
-                            composite.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
+                }
 
-                        else
-                            composite.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
 
-                        dgvDataBaseView.DataSource = composite;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            }
+            else
+            {
+                switch (tableIndex)
+                {
+                    case 0:
+                        {
+                            if (cmbSortBy.SelectedIndex == 0)
+                                modules.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
+                            else
+                                modules.Sort((a, b) => a.ModuleName.CompareTo(b.ModuleName));
+
+                            dgvDataBaseView.DataSource = modules;
+                            break;
+                        }
+                    case 1:
+                        {
+                            if (cmbSortBy.SelectedIndex == 0)
+                                composite.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
+
+                            else
+                                composite.Sort((a, b) => a.ModuleCode.CompareTo(b.ModuleCode));
+
+                            dgvDataBaseView.DataSource = composite;
+                            break;
+                        }
+                    case 2:
+                        {
+                            if (cmbSortBy.SelectedIndex == 0)
+                                creds.Sort((a, b) => a.Username.CompareTo(b.Username));
+                            else
+                                creds.Sort((a, b) => a.Password.CompareTo(b.Password));
+
+                            dgvDataBaseView.DataSource = creds;
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (cmbSortBy.SelectedIndex == 0)
+                                students.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
+                            else
+                                students.Sort((a, b) => a.StudentName.CompareTo(b.StudentName));
+
+
+                            dgvDataBaseView.DataSource = students;
+                            break;
+                        }
+                    default:
                         break;
-                    }
-                case 2:
-                    {
-                        if (cmbSortBy.SelectedIndex == 0)
-                            creds.Sort((a, b) => a.Username.CompareTo(b.Username));
-                        else
-                            creds.Sort((a, b) => a.Password.CompareTo(b.Password));
-
-                        dgvDataBaseView.DataSource = creds;
-                        break;
-                    }
-                case 3:
-                    {
-                        if (cmbSortBy.SelectedIndex == 0)
-                            students.Sort((a, b) => a.StudentNumber.CompareTo(b.StudentNumber));
-                        else
-                            students.Sort((a, b) => a.StudentName.CompareTo(b.StudentName));
-
-
-                        dgvDataBaseView.DataSource = students;
-                        break;
-                    }
-                default:
-                    break;
+                }
+ 
             }
         }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            searched = true;
             string tableName = cmbTableSelect.SelectedItem.ToString();
 
             searched = false;
@@ -349,163 +437,202 @@ namespace PRG282_Project_The_Brain_Cells
                     dgvDataBaseView.DataSource = tempList;
                 }
             }
+           
+        }
 
+        public void updateRTBInit()
+        {
+
+            rtbEdit.Text = "";
+            switch (dgvDataBaseView.DataSource.GetType().ToString())
+            {
+                case "System.Collections.Generic.List`1[PRG282_Project_The_Brain_Cells.Student]":
+                {
+                        if (searched)
+                        {
+
+                            rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentNumber + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "NAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentName + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentSurname + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentDOB + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentGender + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentPhone + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentAddress + "\n\n";
+                            break;
+                        }
+                        else
+                        {
+
+                            rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[0].StudentNumber + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "NAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[0].StudentName + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[0].StudentSurname + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[0].StudentDOB + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[0].StudentGender + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[0].StudentPhone + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
+                            rtbEdit.Text = rtbEdit.Text + students[0].StudentAddress + "\n\n";
+                            break;
+                        }
+                       
+                }
+                case "System.Collections.Generic.List`1[PRG282_Project_The_Brain_Cells.Module]":
+                    {
+                        if (searched)
+                        {
+
+                            rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleName + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleCode + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleDescription + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
+                            rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleResource;
+                            break;
+                        }
+                        else
+                        {
+
+                            rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                            rtbEdit.Text = rtbEdit.Text + modules[0].ModuleName + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                            rtbEdit.Text = rtbEdit.Text + modules[0].ModuleCode + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
+                            rtbEdit.Text = rtbEdit.Text + modules[0].ModuleDescription + "\n\n";
+                            rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
+                            rtbEdit.Text = rtbEdit.Text + modules[0].ModuleResource;
+                            break;
+                        }
+                    }
+                case "Composite":
+                    {
+                        break;
+                    }
+                case "Credential":
+                    {
+                        break;
+                    }
+                default:
+                    break;
+            }
         }
 
         public void updateRTB()
         {
-            int selectedIndex;
-            int selectedTable;
-            rtbEdit.ResetText();
-
-            selectedTable = cmbTableSelect.SelectedIndex;
-
-            if (!searched)
+            try
             {
-                switch (selectedTable)
+                int index = dgvDataBaseView.CurrentCell.RowIndex;
+                rtbEdit.Text = "";
+                switch (dgvDataBaseView.DataSource.GetType().ToString())
                 {
-                    case 0:
+                    case "System.Collections.Generic.List`1[PRG282_Project_The_Brain_Cells.Student]":
                         {
-                            if (dgvDataBaseView.CurrentRow.Index > modules.Count)
+                            if (searched)
                             {
-                                selectedIndex = 0;
+
+                                rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[index].StudentNumber + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "NAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[index].StudentName + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[index].StudentSurname + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[index].StudentDOB + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[index].StudentGender + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[index].StudentPhone + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[index].StudentAddress + "\n\n";
+                                break;
                             }
                             else
                             {
-                                selectedIndex = dgvDataBaseView.CurrentRow.Index;
+
+                                rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[index].StudentNumber + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "NAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[index].StudentName + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[index].StudentSurname + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[index].StudentDOB + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[index].StudentGender + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[index].StudentPhone + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[index].StudentAddress + "\n\n";
+                                break;
                             }
 
-                            rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleName + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
-                            rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleCode + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
-                            rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleDescription + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
-                            rtbEdit.Text = rtbEdit.Text + modules[selectedIndex].ModuleResource;
-
-                            break;
                         }
-                    case 1:
+                    case "System.Collections.Generic.List`1[PRG282_Project_The_Brain_Cells.Module]":
                         {
-                            /*Can be coded, or left, depending on need*/
-
-
-                            break;
-                        }
-                    case 2:
-                        {
-                            /*Can be coded, or left, depending on need*/
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (dgvDataBaseView.CurrentRow.Index > students.Count)
+                            if (searched)
                             {
-                                selectedIndex = 0;
+
+                                rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempmodules[index].ModuleName + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempmodules[index].ModuleCode + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempmodules[index].ModuleDescription + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempmodules[index].ModuleResource;
+                                break;
                             }
                             else
                             {
-                                selectedIndex = dgvDataBaseView.CurrentRow.Index;
-                            }
 
-                            rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentNumber + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "NAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentName + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentSurname + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentDOB + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentGender + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentPhone + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[selectedIndex].StudentAddress + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + modules[index].ModuleName + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                                rtbEdit.Text = rtbEdit.Text + modules[index].ModuleCode + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
+                                rtbEdit.Text = rtbEdit.Text + modules[index].ModuleDescription + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
+                                rtbEdit.Text = rtbEdit.Text + modules[index].ModuleResource;
+                                break;
+                            }
+                        }
+                    case "Composite":
+                        {
+                            break;
+                        }
+                    case "Credential":
+                        {
                             break;
                         }
                     default:
                         break;
                 }
             }
-            else
+            catch
             {
-                switch (selectedTable)
-                {
-                    case 0:
-                        {
-                            if (dgvDataBaseView.CurrentRow.Index > tempmodules.Count)
-                            {
-                                selectedIndex = 0;
-                            }
-                            else
-                            {
-                                selectedIndex = dgvDataBaseView.CurrentRow.Index;
-                            }
-
-                            rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempmodules[selectedIndex].ModuleName + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempmodules[selectedIndex].ModuleCode + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempmodules[selectedIndex].ModuleDescription + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempmodules[selectedIndex].ModuleResource;
-
-                            break;
-                        }
-                    case 1:
-                        {
-                            /*Can be coded, or left, depending on need*/
-
-
-                            break;
-                        }
-                    case 2:
-                        {
-                            /*Can be coded, or left, depending on need*/
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (dgvDataBaseView.CurrentRow.Index > tempstudents.Count)
-                            {
-                                selectedIndex = 0;
-                            }
-                            else
-                            {
-                                selectedIndex = dgvDataBaseView.CurrentRow.Index;
-                            }
-
-                            rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentNumber + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "NAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentName + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentSurname + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentDOB + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentGender + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentPhone + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[selectedIndex].StudentAddress + "\n\n";
-                            break;
-                        }
-                    default:
-                        break;
-                }
-                searched = false;
-
+                updateRTBInit();
             }
+        
 
+         
         }
 
         private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
         {
-            updateRTB();
+          updateRTB();
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -518,10 +645,10 @@ namespace PRG282_Project_The_Brain_Cells
                 if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    dh.RemoveCompModule(modules[selectedIndex].ModuleCode);
+                    dbh.RemoveCompModule(modules[selectedIndex].ModuleCode);
                     foreach (var mod in modules.Where(x => x.ModuleCode == modules[selectedIndex].ModuleCode))
                     {
-                        dh.RemoveModule(mod);
+                        dbh.RemoveModule(mod);
                     }
                 }
             }
@@ -530,10 +657,10 @@ namespace PRG282_Project_The_Brain_Cells
                 if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to remove this record?", "ARE YOU SURE?",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
-                    dh.RemoveCompStudent(students[selectedIndex].StudentNumber);
+                    dbh.RemoveCompStudent(students[selectedIndex].StudentNumber);
                     foreach (var stud in students.Where(x => x.StudentNumber == students[selectedIndex].StudentNumber))
                     {
-                        dh.RemoveStudent(stud);
+                        dbh.RemoveStudent(stud);
                     }
                 }
             }
@@ -544,7 +671,7 @@ namespace PRG282_Project_The_Brain_Cells
                 {
                     foreach (var cred in creds.Where(x => x.Username == creds[selectedIndex].Username))
                     {
-                        dh.RemoveCredential(cred);
+                        dbh.RemoveCredential(cred);
                     }
                 }
             }
@@ -559,7 +686,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            
+            searched = false;
             string tableName = cmbTableSelect.SelectedItem.ToString();
             if (tableName == "ModuleTable")
             {
