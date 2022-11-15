@@ -235,18 +235,6 @@ namespace PRG282_Project_The_Brain_Cells
             if (searched)
             {
 
-
-
-
-
-
-
-
-
-
-
-
-
                 switch (tableIndex)
                 {
                     case 0:
@@ -294,25 +282,6 @@ namespace PRG282_Project_The_Brain_Cells
                     default:
                         break;
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             }
             else
@@ -412,6 +381,7 @@ namespace PRG282_Project_The_Brain_Cells
                         }
 
                     }
+                    int checkint = tempstudents.Count;
                     dgvDataBaseView.DataSource = null;
                     dgvDataBaseView.DataSource = tempstudents;
 
@@ -442,92 +412,118 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void updateRTBInit()
         {
+         /*   string studname = "NONE";
+             string  studsurname = "NONE";
+            string     studimage = "NONE";
+            string     studgender = "NONE";
+            string   studphone = "NONE";
+            string   studaddress = "NONE";
+            string  modname = "NONE";
+            string  modcode = "NONE";
+            string moddesc = "NONE";
+            string  modresource = "NONE";*/
 
+           /*DateTime studbirth = new DateTime();
+            int studnumber = 0;*/
             rtbEdit.Text = "";
-            switch (dgvDataBaseView.DataSource.GetType().ToString())
+            try
             {
-                case "System.Collections.Generic.List`1[PRG282_Project_The_Brain_Cells.Student]":
+                switch (dgvDataBaseView.DataSource.GetType().ToString())
                 {
-                        if (searched)
+                    case "System.Collections.Generic.List`1[PRG282_Project_The_Brain_Cells.Student]":
                         {
+                            if (searched)
+                            {
 
-                            rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentNumber + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "NAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentName + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentSurname + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentDOB + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentGender + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentPhone + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentAddress + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentNumber + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "NAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentName + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentSurname + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentDOB + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentGender + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentPhone + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempstudents[0].StudentAddress + "\n\n";
+                                break;
+                            }
+                            else
+                            {
+
+                                rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[0].StudentNumber + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "NAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[0].StudentName + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[0].StudentSurname + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[0].StudentDOB + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[0].StudentGender + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[0].StudentPhone + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
+                                rtbEdit.Text = rtbEdit.Text + students[0].StudentAddress + "\n\n";
+                                break;
+                            }
+
+                        }
+                    case "System.Collections.Generic.List`1[PRG282_Project_The_Brain_Cells.Module]":
+                        {
+                            if (searched)
+                            {
+
+                                rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleName + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleCode + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleDescription + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
+                                rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleResource;
+                                break;
+                            }
+                            else
+                            {
+
+                                rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
+                                rtbEdit.Text = rtbEdit.Text + modules[0].ModuleName + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
+                                rtbEdit.Text = rtbEdit.Text + modules[0].ModuleCode + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
+                                rtbEdit.Text = rtbEdit.Text + modules[0].ModuleDescription + "\n\n";
+                                rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
+                                rtbEdit.Text = rtbEdit.Text + modules[0].ModuleResource;
+                                break;
+                            }
+                        }
+                    case "Composite":
+                        {
                             break;
                         }
-                        else
+                    case "Credential":
                         {
-
-                            rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[0].StudentNumber + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "NAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[0].StudentName + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "SURNAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[0].StudentSurname + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "DATE OF BIRTH: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[0].StudentDOB + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "GENDER: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[0].StudentGender + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "PHONE NUMBER: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[0].StudentPhone + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "HOME ADDRESS: \n";
-                            rtbEdit.Text = rtbEdit.Text + students[0].StudentAddress + "\n\n";
                             break;
                         }
-                       
+                    default:
+                        break;
                 }
-                case "System.Collections.Generic.List`1[PRG282_Project_The_Brain_Cells.Module]":
-                    {
-                        if (searched)
-                        {
 
-                            rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleName + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleCode + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleDescription + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
-                            rtbEdit.Text = rtbEdit.Text + tempmodules[0].ModuleResource;
-                            break;
-                        }
-                        else
-                        {
-
-                            rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
-                            rtbEdit.Text = rtbEdit.Text + modules[0].ModuleName + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE CODE: \n";
-                            rtbEdit.Text = rtbEdit.Text + modules[0].ModuleCode + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE DESCRIPTION: \n";
-                            rtbEdit.Text = rtbEdit.Text + modules[0].ModuleDescription + "\n\n";
-                            rtbEdit.Text = rtbEdit.Text + "MODULE RESOURCE: \n";
-                            rtbEdit.Text = rtbEdit.Text + modules[0].ModuleResource;
-                            break;
-                        }
-                    }
-                case "Composite":
-                    {
-                        break;
-                    }
-                case "Credential":
-                    {
-                        break;
-                    }
-                default:
-                    break;
             }
+            catch
+            {
+             /*   Student nostudent = new Student(studnumber, studname, studsurname, studimage, studbirth, studgender, studphone, studaddress);
+                Module nomodule = new Module(modcode, modname, moddesc, modresource);
+                tempstudents.Add(nostudent);
+                tempmodules.Add(nomodule);
+                updateRTB();*/
+            }
+
+
         }
 
         public void updateRTB()
