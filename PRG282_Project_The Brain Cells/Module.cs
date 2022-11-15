@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PRG282_Project_The_Brain_Cells
 {
-    internal class Module
+    public class Module
     {
         public Module()
         {

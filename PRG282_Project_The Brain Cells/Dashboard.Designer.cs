@@ -163,7 +163,7 @@
             this.rtbEdit.Location = new System.Drawing.Point(934, 148);
             this.rtbEdit.MaxLength = 32767;
             this.rtbEdit.Name = "rtbEdit";
-            this.rtbEdit.ReadOnly = false;
+            this.rtbEdit.ReadOnly = true;
             this.rtbEdit.Size = new System.Drawing.Size(331, 345);
             this.rtbEdit.Style = MetroSet_UI.Enums.Style.Dark;
             this.rtbEdit.StyleManager = null;
@@ -391,7 +391,7 @@
             this.cmbSortBy.FormattingEnabled = true;
             this.cmbSortBy.Location = new System.Drawing.Point(305, 496);
             this.cmbSortBy.Name = "cmbSortBy";
-            this.cmbSortBy.Size = new System.Drawing.Size(337, 38);
+            this.cmbSortBy.Size = new System.Drawing.Size(337, 28);
             this.cmbSortBy.TabIndex = 21;
             this.cmbSortBy.SelectedIndexChanged += new System.EventHandler(this.cmbSortBy_SelectedIndexChanged);
             // 
@@ -451,7 +451,7 @@
             // 
             // Dashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 30F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
             this.ClientSize = new System.Drawing.Size(1280, 687);
