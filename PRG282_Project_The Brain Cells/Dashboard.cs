@@ -504,6 +504,13 @@ namespace PRG282_Project_The_Brain_Cells
                     }
                 }
             }
+
+            tables = dbh.GetTables();
+            modules = dbh.GetModules();
+            students = dbh.GetStudents();
+            composite = dbh.GetComposite();
+            creds = dbh.GetCreds();
+            LoadDataView(cmbTableSelect.SelectedItem.ToString());
         }
 
         private void btnBack_Click(object sender, EventArgs e)

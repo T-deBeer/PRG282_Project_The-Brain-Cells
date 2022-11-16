@@ -38,6 +38,8 @@ namespace PRG282_Project_The_Brain_Cells
             txtConfirmPassword.Text = null;
             txtPassword.Text = null;
             txtUsername.Text = null;
+            creds.Clear();
+            lbxToAdd.Clear();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -67,10 +69,10 @@ namespace PRG282_Project_The_Brain_Cells
             {
                 if (credential.Username == txtUsername.Text)
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
         private void btnView_Click(object sender, EventArgs e)

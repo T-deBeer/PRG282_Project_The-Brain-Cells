@@ -37,6 +37,10 @@ namespace PRG282_Project_The_Brain_Cells
             txtStudName.Text = null;
             txtStudPhone.Text = null;
             txtStudSurname.Text = null;
+            txtDOB.Text = null;
+            cmbGender.Text = null;
+            studentsToAdd.Clear();
+            lbxToAdd.Clear();
         }
 
 
@@ -67,6 +71,7 @@ namespace PRG282_Project_The_Brain_Cells
                 stud.StudentSurname = txtStudSurname.Text;
                 stud.StudentPhone = txtStudPhone.Text;
                 stud.StudentImage = "";
+                stud.StudentGender = cmbGender.SelectedItem.ToString();
                 stud.StudentAddress = txtAddress.Text;
                 stud.StudentDOB = DateTime.Parse(txtDOB.Text);
 

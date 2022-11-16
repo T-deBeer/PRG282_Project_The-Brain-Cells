@@ -294,7 +294,7 @@ namespace PRG282_Project_The_Brain_Cells
             try
             {
                 con.Open();
-                var sql = "Exec InsertStudent @Name, @Surname, @Img, @DOB, @Gender, @Phone, @Address";
+                var sql = "Exec StudentInsert @Name, @Surname, @Img, @DOB, @Gender, @Phone, @Address";
 
                 using (var cmd = new SqlCommand(sql, con))
                 {

@@ -38,6 +38,8 @@ namespace PRG282_Project_The_Brain_Cells
             txtModuleDescription.Text = null;
             txtModuleName.Text = null;
             txtResource.Text = null;
+            modulesToAdd.Clear();
+            lbxToAdd.Clear();
         }
 
         private bool ValidateInput()
