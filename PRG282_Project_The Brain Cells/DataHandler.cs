@@ -10,6 +10,7 @@ namespace PRG282_Project_The_Brain_Cells
 {
     internal class DataHandler
     {
+        //Declaration of global variables
         string TextPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\TestText.txt";
         string LogFilePath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
@@ -17,6 +18,7 @@ namespace PRG282_Project_The_Brain_Cells
         public List<string> LogData = new List<string>();
         public void WriteLogin()
         {
+            //Writes login details to a textfile from the database
             if (File.Exists(TextPath))
             {
                 File.Delete(TextPath);
@@ -36,14 +38,14 @@ namespace PRG282_Project_The_Brain_Cells
         }
         public void AddToLogFile(string ToAdd)
         {
-            
+            //Writes log details to the log file
             File.AppendAllText(LogFilePath,ToAdd +" ----> " +DateTime.Now.ToString() + "\n");
             
         }
         
         public List<string> GetLog()
         {
-            
+            //returns a list from the logfile
             try
             {
                 LogData = File.ReadAllLines(LogFilePath).ToList();
@@ -61,6 +63,7 @@ namespace PRG282_Project_The_Brain_Cells
         }
         public string[] ReadTextFile()
         {
+            //Reads a text file
             string[] fileContent = { null };
             try
             {
@@ -79,6 +82,7 @@ namespace PRG282_Project_The_Brain_Cells
         }
         public bool WriteTextFile(string userPasswordString)
         {
+            //writes to a text file
             bool success = false;
             try
             {

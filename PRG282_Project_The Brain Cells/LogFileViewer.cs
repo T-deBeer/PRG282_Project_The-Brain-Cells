@@ -22,6 +22,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            //Opens the main menu
            Menu mainMenu= new Menu();
             mainMenu.Show();
             this.Hide();
@@ -29,6 +30,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void LogFileViewer_Load(object sender, EventArgs e)
         {
+            //Adds the data into the rich text box
             DataHandler dataHandler = new DataHandler();
             string LogFilePath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\LogFile.txt";
@@ -50,6 +52,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnSend_Click(object sender, EventArgs e)
         {
+            //Opens an email that contains the log file
             string LogFilePath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\LogFile.txt";
             string bodyText = "";
@@ -67,6 +70,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            //saves the log file on a desired location on users computer
             using (var fbd = new FolderBrowserDialog())
             {
                 DialogResult result = fbd.ShowDialog();

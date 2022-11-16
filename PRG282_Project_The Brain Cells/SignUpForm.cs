@@ -20,6 +20,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void llblGotAnAcconunt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //opens the login form
             LoginForm form= new LoginForm();
             form.Show();
             this.Hide();
@@ -27,13 +28,46 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
+            //Declaration of variables
             string Username = txtUsername.Text;
             string Password = txtPassword.Text;
             string PasswordConfirm = txtConfirmPassword.Text;
+            bool UserExists = false;
+            bool TextFieldNotNull = false;
 
             DataBaseHandler handler = new DataBaseHandler();
-            
-            if (Password == PasswordConfirm && !String.IsNullOrEmpty(Password))
+            DataHandler dh = new DataHandler();
+            //validates the input and creates a user on the database
+            string[] TextLines = dh.ReadTextFile();
+            if (!String.IsNullOrEmpty(Password) && !String.IsNullOrEmpty(Username) && !String.IsNullOrEmpty(PasswordConfirm))
+            {
+                TextFieldNotNull = true;
+            }
+            else if (String.IsNullOrEmpty(Username))
+            {
+                MessageBox.Show("A username is required");
+            }
+            else if (String.IsNullOrEmpty(Password))
+            {
+                MessageBox.Show("A password is required");
+            }
+            else if (String.IsNullOrEmpty(PasswordConfirm))
+            {
+                MessageBox.Show("The confirm password is required");
+            }
+
+            for (int i = 0; i < TextLines.Length; i++)
+            {
+                string[] SplitLines = TextLines[i].Split(',');
+                if (SplitLines[0] == Username)
+                {
+                    UserExists = true;
+                    MessageBox.Show("Username is allready used");
+                    break;
+                }
+            }
+
+            if (UserExists == false && Password == PasswordConfirm && TextFieldNotNull)
             {
                 Credential credential = new Credential
                 {
@@ -45,7 +79,7 @@ namespace PRG282_Project_The_Brain_Cells
                 form.Show();
                 this.Hide();
             }
-            else
+            else if (Password != PasswordConfirm)
             {
                 MessageBox.Show("Passwords did not match");
             }
@@ -53,6 +87,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnView_Click(object sender, EventArgs e)
         {
+            //shows the hidden text in the password text box
             if (txtPassword.UseSystemPasswordChar)
             {
                 txtPassword.UseSystemPasswordChar = false;
@@ -65,6 +100,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnConfirmView_Click(object sender, EventArgs e)
         {
+            //shows the hidden text in the confirm password text box
             if (txtConfirmPassword.UseSystemPasswordChar)
             {
                 txtConfirmPassword.UseSystemPasswordChar = false;
@@ -77,6 +113,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            //opens the login from
             LoginForm form = new LoginForm();
             form.Show();
             this.Hide();

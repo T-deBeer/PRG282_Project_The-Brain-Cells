@@ -11,6 +11,7 @@ namespace PRG282_Project_The_Brain_Cells
     {
         public void CreateTextFile(string filePath)
         {
+            //creates a text file
             File.Create(filePath);
         }
     }

@@ -17,6 +17,7 @@ namespace PRG282_Project_The_Brain_Cells
 {
     public partial class Dashboard : MetroSetForm
     {
+        //Declaration of global variables
         DataHandler data = new DataHandler();
         DataBaseHandler dbh = new DataBaseHandler();
 
@@ -32,7 +33,7 @@ namespace PRG282_Project_The_Brain_Cells
         {
             int SortByHold;
             InitializeComponent();
-
+            //Populates the lists
             tables = dbh.GetTables();
             modules = dbh.GetModules();
             students = dbh.GetStudents();
@@ -49,6 +50,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void LoadDataView(string tableName)
         {
+            //Populates the dataGridView based on selected table in the dropdown
             if (tableName == "ModuleTable")
             {
                 data.AddToLogFile("Viewed Module Table");
@@ -93,6 +95,8 @@ namespace PRG282_Project_The_Brain_Cells
         }
         public void cmbSortByUpdate(int tableSelected)
         {
+            //Case that changes the drop down sort options
+
             List<string> cmbOptions = new List<string>();
             switch (tableSelected)
             {
@@ -131,7 +135,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbTableSelect_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            //Calls methods to populate dataGridView and sort drop down
             LoadDataView(cmbTableSelect.SelectedItem.ToString());
             cmbSortByUpdate(cmbTableSelect.SelectedIndex);
 
@@ -139,6 +143,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
+            //Selects the previous row in dataGridView
             int selectedRow = dgvDataBaseView.CurrentCell.RowIndex;
             if (selectedRow > 0)
             {
@@ -151,6 +156,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            //Selects the next row in dataGridView
             int selectedRow = dgvDataBaseView.CurrentCell.RowIndex;
             if (selectedRow < dgvDataBaseView.Rows.Count - 1)
             {
@@ -163,11 +169,13 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            //Exits the applicataion
             Application.Exit();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            //Opens adding forms based on the selected table
             string tableName = cmbTableSelect.SelectedItem.ToString();
 
             if (tableName == "ModuleTable")
@@ -184,14 +192,15 @@ namespace PRG282_Project_The_Brain_Cells
             }
             else if (tableName == "CredentialTable")
             {
-                AddCredentials addCredentials = new AddCredentials();
-                addCredentials.ShowDialog();
+                SignUpForm signUpForm = new SignUpForm();
+                signUpForm.ShowDialog();
                 this.Hide();
             }
         }
 
         private void dgvDataBaseView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            //Changes the second column in the dataGridView to hide passwords when displaying the credentials
             if (dgvDataBaseView.DataSource.GetType() == creds.GetType())
             {
                 if (e.ColumnIndex == 1 && e.Value != null)
@@ -203,6 +212,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            //Opens update forms based on the selected table
             string tableName = cmbTableSelect.SelectedItem.ToString();
             if (tableName == "ModuleTable")
             {
@@ -221,7 +231,7 @@ namespace PRG282_Project_The_Brain_Cells
         private void cmbSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             int tableIndex = cmbTableSelect.SelectedIndex;
-
+            //changes the sort options based on the selected table
             switch (tableIndex)
             {
                 case 0:
@@ -298,13 +308,14 @@ namespace PRG282_Project_The_Brain_Cells
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            //Declaration of local variables
             List<Module> tempmodules = new List<Module>();
             List<Student> tempstudents = new List<Student>();
             List<Composite> tempcomposite = new List<Composite>();
             List<Credential> tempcreds = new List<Credential>();
 
             string tableName = cmbTableSelect.SelectedItem.ToString();
-
+            //Search based on selected table
             if (!String.IsNullOrWhiteSpace((txtSearch.Text)))
             {
 
@@ -367,6 +378,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void DisplayModuleInfo(Module mod)
         {
+            //Formating and displaying of rich text box
             rtbEdit.Text = null;
             rtbEdit.Text = rtbEdit.Text + "MODULE NAME: \n";
             rtbEdit.Text = rtbEdit.Text + mod.ModuleName + "\n\n";
@@ -379,6 +391,7 @@ namespace PRG282_Project_The_Brain_Cells
         }
         public void DisplayStudentInfo(Student stud)
         {
+            //Formating and displaying of rich text box
             rtbEdit.Text = null;
             rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
             rtbEdit.Text = rtbEdit.Text + stud.StudentNumber + "\n\n";
@@ -397,6 +410,7 @@ namespace PRG282_Project_The_Brain_Cells
         }
         public void DisplayCompositeInfo(Composite comp)
         {
+            //Formating and displaying of rich text box
             rtbEdit.Text = null;
             rtbEdit.Text = rtbEdit.Text + "STUDENT NUMBER: \n";
             rtbEdit.Text = rtbEdit.Text + comp.StudentNumber + "\n\n";
@@ -408,6 +422,7 @@ namespace PRG282_Project_The_Brain_Cells
         }
         public void DisplayCredentialInfo(Credential cred)
         {
+            //Formating and displaying of rich text box
             rtbEdit.Text = null;
             rtbEdit.Text = rtbEdit.Text + "USERNAME: \n";
             rtbEdit.Text = rtbEdit.Text + cred.Username + "\n\n";
@@ -424,6 +439,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void dgvDataBaseView_SelectionChanged(object sender, EventArgs e)
         {
+            //Calls methods to display data in the rich text box
             int index = dgvDataBaseView.CurrentCell.RowIndex;
 
             if (dgvDataBaseView.DataSource.GetType() == modules.GetType())
@@ -466,6 +482,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
+            //Calls methods to remove based on the selected table
             string tableName = cmbTableSelect.SelectedItem.ToString();
             int selectedIndex = dgvDataBaseView.CurrentRow.Index;
 
@@ -515,6 +532,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            //Opens the main menu
             Menu menu = new Menu();
             menu.Show();
             this.Hide();
@@ -522,6 +540,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            //Populates the dataGridView based on selected tables when reset button is clicked
             string tableName = cmbTableSelect.SelectedItem.ToString();
             if (tableName == "ModuleTable")
             {

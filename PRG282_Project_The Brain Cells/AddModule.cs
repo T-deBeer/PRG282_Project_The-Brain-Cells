@@ -13,6 +13,7 @@ namespace PRG282_Project_The_Brain_Cells
 {
     public partial class AddModule : MetroSetForm
     {
+        //Declaration of global variables
         DataBaseHandler dh = new DataBaseHandler();
 
         List<Module> modules = new List<Module>();
@@ -21,11 +22,13 @@ namespace PRG282_Project_The_Brain_Cells
         public AddModule()
         {
             InitializeComponent();
+            //Returns a list of modules
             modules = dh.GetModules();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            //Opens the dashboard
             ClearFields();
             Dashboard dashboard = new Dashboard();
             dashboard.Show();
@@ -34,6 +37,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void ClearFields()
         {
+            //Clears the text fields
             txtModuleCode.Text = null;
             txtModuleDescription.Text = null;
             txtModuleName.Text = null;
@@ -44,6 +48,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private bool ValidateInput()
         {
+            //Validates the text inputs
             foreach (var item in modules)
             {
                 if (item.ModuleCode == txtModuleCode.Text || item.ModuleName == txtModuleName.Text)
@@ -67,6 +72,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            //ads a module based on if the validation was returned as true
             if (ValidateInput())
             {
                 Module mod = new Module
@@ -88,6 +94,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
+            //Writes the modules to the database
             if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to add this module's information?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 if (modulesToAdd.Count >= 1)

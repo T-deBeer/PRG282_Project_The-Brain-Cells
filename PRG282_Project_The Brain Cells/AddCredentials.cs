@@ -13,8 +13,10 @@ namespace PRG282_Project_The_Brain_Cells
 {
     public partial class AddCredentials : MetroSetForm
     {
-        DataBaseHandler dh = new DataBaseHandler();
+        //Declaration of global variables
 
+        DataBaseHandler dh = new DataBaseHandler();
+        
         List<Credential> creds = new List<Credential>();
         List<Credential> currentCreds = new List<Credential>();
 
@@ -22,12 +24,15 @@ namespace PRG282_Project_The_Brain_Cells
         {
             InitializeComponent();
 
+            //Returns a list of the credentials
+
             currentCreds = dh.GetCreds();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ClearFields();
+            //Opens the dashboard form
             Dashboard dashboard = new Dashboard();
             dashboard.Show();
             this.Hide();
@@ -35,6 +40,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void ClearFields()
         {
+            //Clears all the text fields
             txtConfirmPassword.Text = null;
             txtPassword.Text = null;
             txtUsername.Text = null;

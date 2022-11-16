@@ -19,7 +19,7 @@ namespace PRG282_Project_The_Brain_Cells
         
         public List<Module> GetModules()
         {
-            
+            //Returns a list of modules from the data base
             List<Module> modules = new List<Module>();
             DataSet dataSet = new DataSet();
 
@@ -45,6 +45,7 @@ namespace PRG282_Project_The_Brain_Cells
         }
         public List<Module> GetStudentModules(int Num)
         {
+            //Returs a list of modules a student has from the database
             List<Module> modules = new List<Module>();
             DataSet dataSet = new DataSet();
 
@@ -71,6 +72,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public List<Student> GetStudents()
         {
+            //Returns a list of students from the database
             List<Student> students = new List<Student>();
             DataSet dataSet = new DataSet();
 
@@ -102,6 +104,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public List<Composite> GetComposite()
         {
+            //Returns a list of composites from the database
             List<Composite> composite = new List<Composite>();
             DataSet dataSet = new DataSet();
 
@@ -126,6 +129,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public List<Credential> GetCreds()
         {
+            //Returns a list of credentials from the database
             List<Credential> creds = new List<Credential>();
             DataSet dataSet = new DataSet();
 
@@ -151,6 +155,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public bool CheckCredential(string Username, string Password)
         {
+            //Method to check the credentials
             DataSet dataSet = new DataSet();
 
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
@@ -186,6 +191,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public List<string> GetTables()
         {
+            //returns a list with the table names
             List<string> tables = new List<string>();
 
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
@@ -218,7 +224,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void AddCredential(Credential cred)
         {
-            
+            //Adds a credential to the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -251,6 +257,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void AddModule(Module mod)
         {
+            //Adds a module to the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -285,6 +292,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void AddStudent(Student stud)
         {
+            //adds a student to the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -322,6 +330,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void UpdateStudent(Student stud)
         {
+            //Updates a student on the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -360,6 +369,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void InsertComposite(Composite comp)
         {
+            //Adds a composite to the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -394,6 +404,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void RemoveComposite(Composite comp)
         {
+            //Removes a composite from the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -427,6 +438,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void UpdateModule(Module mod)
         {
+            //Updates a module on the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -461,6 +473,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void RemoveModule(Module mod)
         {
+            //Removes a module from the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -492,6 +505,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void RemoveCompModule(string ModuleCode)
         {
+            //Removes a module from the composite table in the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -523,6 +537,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void RemoveStudent(Student student)
         {
+            //Removes a student from the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -554,6 +569,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void RemoveCompStudent(int StudentNumber)
         {
+            //Removes a student from the composite table
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";
@@ -585,6 +601,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         public void RemoveCredential(Credential cred)
         {
+            //Removes credentials from the database
             string DBPath = Convert.ToString(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location))
                  + "\\SystemDatabase.mdf";
             string dataSource = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={DBPath};Integrated Security=True";

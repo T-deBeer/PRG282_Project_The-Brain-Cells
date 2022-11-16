@@ -16,17 +16,20 @@ namespace PRG282_Project_The_Brain_Cells
         public LoginForm()
         {
             InitializeComponent();
+            //Calls a method to write the login details to a text file from the database
             DataHandler handler = new DataHandler();
             handler.WriteLogin();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            //Exits the application
             Application.Exit();
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
+            //Shows the hidden text in the password text box
             if (txtPassword.UseSystemPasswordChar)
             {
                 txtPassword.UseSystemPasswordChar = false;
@@ -39,6 +42,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            //validates the login and and opens the main menu
             string UsernameToCheck = txtUsername.Text;
             string PasswordToCheck = txtPassword.Text;
             bool Login = false;
@@ -67,25 +71,12 @@ namespace PRG282_Project_The_Brain_Cells
                 this.Hide();
                 
             }
-            /**
-            DataBaseHandler dh = new DataBaseHandler();
-            if (dh.CheckCredential(txtUsername.Text,txtPassword.Text))
-            {
-                Dashboard form = new Dashboard();
-                form.ShowDialog();
-                this.Hide();
-            }
-            else
-            {
-                MetroSetMessageBox.Show(this,"Your username or password is incorrect.","ERROR",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                txtPassword.Text = null;
-                txtUsername.Text = null;
-            }
-            **/
+           
         }
 
         private void llblCreateAcconunt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            //Opens the sign up form
             SignUpForm form = new SignUpForm();
             form.Show();
             this.Hide();

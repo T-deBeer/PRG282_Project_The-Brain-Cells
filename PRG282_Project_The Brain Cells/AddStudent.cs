@@ -13,6 +13,7 @@ namespace PRG282_Project_The_Brain_Cells
 {
     public partial class AddStudent : MetroSetForm
     {
+        //Global declaration of variables
         DataBaseHandler dh = new DataBaseHandler();
 
         List<Student> students = new List<Student>();
@@ -20,11 +21,13 @@ namespace PRG282_Project_The_Brain_Cells
         public AddStudent()
         {
             InitializeComponent();
+            //Returns a list of students
             students = dh.GetStudents();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            //Returns to the dashboard
             ClearFields();
             Dashboard dashboard = new Dashboard();
             dashboard.Show();
@@ -33,6 +36,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void ClearFields()
         {
+            //Clears text fields
             txtAddress.Text = null;
             txtStudName.Text = null;
             txtStudPhone.Text = null;
@@ -46,7 +50,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private bool ValidateInput()
         {
-
+            //Validates the text input
             if (string.IsNullOrEmpty(txtStudName.Text) || string.IsNullOrEmpty(txtStudSurname.Text)
                 || string.IsNullOrEmpty(txtDOB.Text) || string.IsNullOrEmpty(txtStudPhone.Text) || string.IsNullOrEmpty(txtAddress.Text)
                 || !(cmbGender.SelectedIndex >= 0))
@@ -64,6 +68,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            //Creates a student if validation was returned as true
             if (ValidateInput())
             {
                 Student stud = new Student();
@@ -88,7 +93,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnWrite_Click(object sender, EventArgs e)
         {
-
+            //Writes the students to the database
             if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to add this student's information?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 if (studentsToAdd.Count >= 1)

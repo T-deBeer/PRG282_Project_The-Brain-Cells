@@ -13,6 +13,7 @@ namespace PRG282_Project_The_Brain_Cells
 {
     public partial class UpdateModule : MetroSetForm
     {
+        //Global declaration of variables
         DataBaseHandler dh = new DataBaseHandler();
 
         List<Module> modules = new List<Module>();
@@ -20,7 +21,7 @@ namespace PRG282_Project_The_Brain_Cells
         public UpdateModule()
         {
             InitializeComponent();
-
+            //populates lists
             modules = dh.GetModules();
             foreach (var mod in modules)
             {
@@ -33,6 +34,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void LoadInformation(string code)
         {
+            //adds information to text boxes
             foreach (var mod in modules)
             {
                 if (mod.ModuleCode == code)
@@ -51,6 +53,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            //opens the dashboard
             clearFields();
             Dashboard dash = new Dashboard();
             dash.Show();
@@ -59,6 +62,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void clearFields()
         {
+            //clears the text fields
             txtModuleName.Text = null;
             txtResource.Text = null;
             txtModuleDescription.Text = null;
@@ -66,6 +70,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            //updates the modules on the database
             if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to update this module?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 Module mod = new Module();

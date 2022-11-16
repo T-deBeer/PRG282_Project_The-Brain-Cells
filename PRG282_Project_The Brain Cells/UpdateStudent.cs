@@ -13,6 +13,7 @@ namespace PRG282_Project_The_Brain_Cells
 {
     public partial class UpdateStudent : MetroSetForm
     {
+        //Global declaration of variables
         DataBaseHandler dh = new DataBaseHandler();
 
         List<string> studNumbers = new List<string>();
@@ -27,7 +28,7 @@ namespace PRG282_Project_The_Brain_Cells
         public UpdateStudent()
         {
             InitializeComponent();
-
+            //populates lists
             allStudents = dh.GetStudents();
             allModules = dh.GetModules();
             allComposites = dh.GetComposite();
@@ -42,6 +43,7 @@ namespace PRG282_Project_The_Brain_Cells
         }
         private void LoadStudentInfo(int StudentNum)
         {
+            //adds infor to the text boxes
             lbxCurrent.Items.Clear();
             lbxCurrent.SelectedIndex = -1;
 
@@ -69,6 +71,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             foreach (var comp in allComposites)
             {
+                //Adds composites
                 if (comp.StudentNumber == StudentNum)
                 {
                     studModules.Add(comp.ModuleCode);
@@ -77,6 +80,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             foreach (var comp in compositesToAdd)
             {
+                //also adds composites
                 if (comp.StudentNumber == StudentNum)
                 {
                     studModules.Add(comp.ModuleCode);
@@ -85,6 +89,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             foreach (var comp in compositesToRemove)
             {
+                //moves composites between lists
                 if (studModules.Contains(comp.ModuleCode))
                 {
                     studModules.Remove(comp.ModuleCode);
@@ -97,6 +102,7 @@ namespace PRG282_Project_The_Brain_Cells
 
             foreach (var mod in allModules)
             {
+                //moves composites between lists
                 if (studModules.Contains(mod.ModuleCode))
                 {
                     lbxCurrent.Items.Add($"{mod.ModuleCode} {mod.ModuleName}");
@@ -110,6 +116,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            //Opens the dashboard
             Dashboard dashboard = new Dashboard();
             dashboard.Show();
             this.Hide();
@@ -117,6 +124,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void cmbNumSelect_SelectedValueChanged(object sender, EventArgs e)
         {
+            //Clears text fields and adds new info based on the selected student
             compositesToAdd.Clear();
             compositesToRemove.Clear();
             studModules.Clear();
@@ -125,6 +133,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void lbxToAdd_SelectedIndexChanged(object sender)
         {
+            //Adds composites based on a selection change
             string selectedModCode = lbxToAdd.SelectedItem.ToString().Split(' ')[0];
 
             foreach (var mod in allModules)
@@ -143,6 +152,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            //Updates student on the database
             if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to update this student's information?", "ARE YOU SURE?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 Student student = new Student();
@@ -183,6 +193,7 @@ namespace PRG282_Project_The_Brain_Cells
 
         private void lbxCurrent_SelectedIndexChanged(object sender)
         {
+            //Adds composites based on a selection change
             string selectedModCode = lbxCurrent.SelectedItem.ToString().Split(' ')[0];
 
             foreach (var mod in allModules)
