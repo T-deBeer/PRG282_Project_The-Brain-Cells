@@ -294,7 +294,8 @@
             this.cmbGender.ItemHeight = 20;
             this.cmbGender.Items.AddRange(new object[] {
             "Male",
-            "Female"});
+            "Female",
+            "Other"});
             this.cmbGender.Location = new System.Drawing.Point(40, 224);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.SelectedItemBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));

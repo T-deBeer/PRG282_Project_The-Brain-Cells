@@ -41,9 +41,7 @@ namespace PRG282_Project_The_Brain_Cells
             txtModuleCode.Text = null;
             txtModuleDescription.Text = null;
             txtModuleName.Text = null;
-            txtResource.Text = null;
-            modulesToAdd.Clear();
-            lbxToAdd.Clear();
+            txtResource.Text = null;        
         }
 
         private bool ValidateInput()
@@ -84,6 +82,8 @@ namespace PRG282_Project_The_Brain_Cells
                 };
                 modulesToAdd.Add(mod);
                 lbxToAdd.Items.Add(mod.Display());
+
+                ClearFields();
             }
             else
             {
@@ -111,6 +111,8 @@ namespace PRG282_Project_The_Brain_Cells
                 }
             }
             ClearFields();
+            modulesToAdd.Clear();
+            lbxToAdd.Clear();
         }
     }
 }

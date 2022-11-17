@@ -24,7 +24,11 @@ namespace PRG282_Project_The_Brain_Cells
         private void btnExit_Click(object sender, EventArgs e)
         {
             //Exits the application
-            Application.Exit();
+            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to quit the application?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                Application.Exit();
+            }
         }
 
         private void btnView_Click(object sender, EventArgs e)

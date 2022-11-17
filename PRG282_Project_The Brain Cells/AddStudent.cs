@@ -43,8 +43,7 @@ namespace PRG282_Project_The_Brain_Cells
             txtStudSurname.Text = null;
             txtDOB.Text = null;
             cmbGender.Text = null;
-            studentsToAdd.Clear();
-            lbxToAdd.Clear();
+            cmbGender.SelectedIndex = -1;
         }
 
 
@@ -83,6 +82,8 @@ namespace PRG282_Project_The_Brain_Cells
                 studentsToAdd.Add(stud);
 
                 lbxToAdd.Items.Add($"{stud.StudentName} {stud.StudentSurname}");
+
+                ClearFields();
             }
             else
             {
@@ -110,6 +111,8 @@ namespace PRG282_Project_The_Brain_Cells
                 }
             }
             ClearFields();
+            studentsToAdd.Clear();
+            lbxToAdd.Clear();
         }
     }
 }
