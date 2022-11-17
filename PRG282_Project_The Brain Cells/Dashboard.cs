@@ -170,7 +170,11 @@ namespace PRG282_Project_The_Brain_Cells
         private void btnExit_Click(object sender, EventArgs e)
         {
             //Exits the applicataion
-            Application.Exit();
+            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to quit the application?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                Application.Exit();
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -533,9 +537,13 @@ namespace PRG282_Project_The_Brain_Cells
         private void btnBack_Click(object sender, EventArgs e)
         {
             //Opens the main menu
-            Menu menu = new Menu();
-            menu.Show();
-            this.Hide();
+            if (DialogResult.Yes == MetroSetMessageBox.Show(this, "Are you sure you want to quit to menu?", "ARE YOU SURE?",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            {
+                Menu menu = new Menu();
+                menu.Show();
+                this.Hide();
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
